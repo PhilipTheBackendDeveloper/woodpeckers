@@ -13,20 +13,22 @@
 		}
 	}
 
-	/* Preloader Effect - Safe, guaranteed dismissal */
+	/* Preloader Effect - Smooth, guaranteed dismissal after visible brand display */
 	function dismissPreloader() {
 		var $loader = $(".preloader");
 		if ($loader.length) {
-			$loader.fadeOut(350, function(){
-				$(this).css('display', 'none');
+			$loader.fadeOut(400, function(){
+				$(this).remove();
 			});
 		}
 	}
-	$window.on('load', dismissPreloader);
-	$(document).ready(function() {
-		setTimeout(dismissPreloader, 400);
+	$window.on('load', function() {
+		setTimeout(dismissPreloader, 600);
 	});
-	setTimeout(dismissPreloader, 1200);
+	$(document).ready(function() {
+		setTimeout(dismissPreloader, 900);
+	});
+	setTimeout(dismissPreloader, 2200);
 
 	/* Sticky Header */	
 	if($('.active-sticky-header').length){

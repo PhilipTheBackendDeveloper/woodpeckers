@@ -4,13 +4,24 @@
  */
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const path = window.location.pathname;
-  const page = path.split('/').pop() || 'index.html';
+  const path = window.location.pathname.replace(/\/$/, '');
+  let rawPage = path.split('/').pop() || 'index.html';
+  if (!rawPage.includes('.')) {
+    rawPage = rawPage + '.html';
+  }
+  const page = rawPage.toLowerCase();
+
+  // Robust page matcher that works across clean URLs and DOM structures
+  function isPage(name, selector) {
+    if (page === name) return true;
+    if (selector && document.querySelector(selector)) return true;
+    return false;
+  }
 
   // -------------------------------------------------------------
   // 1. PRODUCT SINGLE PAGE (product-single.html)
   // -------------------------------------------------------------
-  if (page === 'product-single.html') {
+  if (isPage('product-single.html', '.product-single-title')) {
     const params = new URLSearchParams(window.location.search);
     const productId = params.get('id') || 'SNK-001';
 
@@ -166,7 +177,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           ` : ''}
           <div class="product-item-action">
             <ul>
-              <li><a href="account-wishlist.html" title="Save Grail"><img src="images/icon-wishlist-primary.svg" alt=""></a></li>
+              <li><a href="#" class="btn-wishlist-toggle" data-product-id="${p.id}" title="Save Grail"><img src="images/icon-wishlist-primary.svg" alt=""></a></li>
               <li><a href="product-single.html?id=${p.id}" title="View Details"><img src="images/icon-preview-primary.svg" alt=""></a></li>
               <li><a href="#" class="btn-quick-cart" title="Add to Bag" data-product-id="${p.id}"><img src="images/icon-cart-primary.svg" alt=""></a></li>
             </ul>
@@ -195,9 +206,78 @@ document.addEventListener('DOMContentLoaded', async () => {
     `;
   }
 
+  function updateHeaderBadges() {
+    if (!window.Woodpeckers) return;
+
+    // Cart Badges
+    const cartCount = window.Woodpeckers.Cart ? window.Woodpeckers.Cart.getCount() : 0;
+    document.querySelectorAll('.header-cart-badge').forEach(badge => {
+      badge.textContent = cartCount;
+      badge.style.display = cartCount > 0 ? 'inline-block' : 'none';
+    });
+
+    // Wishlist Badges
+    const wishlistItems = window.Woodpeckers.Wishlist ? window.Woodpeckers.Wishlist.getItems() : [];
+    const wishCount = wishlistItems.length;
+    document.querySelectorAll('.header-wishlist-badge').forEach(badge => {
+      badge.textContent = wishCount;
+      badge.style.display = wishCount > 0 ? 'inline-block' : 'none';
+    });
+
+    // Dashboard Counters
+    const dashOrdersEl = document.getElementById('dash-orders-count');
+    const dashWishEl = document.getElementById('dash-wishlist-count');
+    const dashReserveEl = document.getElementById('dash-reserve-count');
+    if (dashOrdersEl && window.Woodpeckers.Orders) {
+      dashOrdersEl.textContent = window.Woodpeckers.Orders.getAll().length;
+    }
+    if (dashWishEl) {
+      dashWishEl.textContent = wishCount;
+    }
+    if (dashReserveEl && window.Woodpeckers.Reserve) {
+      dashReserveEl.textContent = window.Woodpeckers.Reserve.getMyOffers().length;
+    }
+
+    // Toggle button active styling
+    document.querySelectorAll('.btn-wishlist-toggle').forEach(btn => {
+      const pId = btn.getAttribute('data-product-id');
+      const isSaved = wishlistItems.some(it => it.id === pId);
+      if (isSaved) {
+        btn.classList.add('active');
+        btn.style.filter = 'drop-shadow(0 0 6px #008751) brightness(1.2)';
+      } else {
+        btn.classList.remove('active');
+        btn.style.filter = 'none';
+      }
+    });
+  }
+
+  function attachWishlistListeners(container) {
+    (container || document).querySelectorAll('.btn-wishlist-toggle').forEach(btn => {
+      if (btn.dataset.wishlistBound === 'true') return;
+      btn.dataset.wishlistBound = 'true';
+
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const pId = btn.getAttribute('data-product-id');
+        let product = (window.WPK_PRODUCTS_MAP && window.WPK_PRODUCTS_MAP[pId]);
+        if (!product && window.Woodpeckers && window.Woodpeckers.DEFAULT_PRODUCTS) {
+          product = window.Woodpeckers.DEFAULT_PRODUCTS.find(p => p.id === pId);
+        }
+        if (product && window.Woodpeckers && window.Woodpeckers.Wishlist) {
+          window.Woodpeckers.Wishlist.toggle(product);
+          updateHeaderBadges();
+          if (document.querySelector('.wishlist-content-box') && typeof renderWishlistTable === 'function') {
+            renderWishlistTable();
+          }
+        }
+      });
+    });
+  }
+
   function attachQuickCartListeners(container) {
     (container || document).querySelectorAll('.btn-quick-cart').forEach(btn => {
-      // Remove any previous listener by replacing with clone or checking flag
       if (btn.dataset.quickCartBound === 'true') return;
       btn.dataset.quickCartBound = 'true';
 
@@ -211,6 +291,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (product && window.Woodpeckers && window.Woodpeckers.Cart) {
           const defaultSize = product.sizes && product.sizes[0] ? product.sizes[0].size : 'UK 8';
           window.Woodpeckers.Cart.addItem(product, defaultSize, 1);
+          updateHeaderBadges();
         } else {
           console.warn('Product not found for quick cart:', pId);
         }
@@ -236,12 +317,40 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
       });
     });
+
+    attachWishlistListeners(container);
   }
+
+  // Ensure header wishlist and cart badges exist
+  document.querySelectorAll('header a[href*="wishlist"]').forEach(a => {
+    a.style.position = 'relative';
+    if (!a.querySelector('.header-wishlist-badge')) {
+      const badge = document.createElement('span');
+      badge.className = 'header-wishlist-badge';
+      badge.style.cssText = 'display:none;position:absolute;top:-6px;right:-8px;background:#008751;color:#fff;font-size:10px;font-weight:800;border-radius:50%;width:18px;height:18px;text-align:center;line-height:18px;';
+      badge.textContent = '0';
+      a.appendChild(badge);
+    }
+  });
+
+  document.querySelectorAll('header a[href*="cart"]').forEach(a => {
+    a.style.position = 'relative';
+    if (!a.querySelector('.header-cart-badge')) {
+      const badge = document.createElement('span');
+      badge.className = 'header-cart-badge';
+      badge.style.cssText = 'display:none;position:absolute;top:-6px;right:-8px;background:#008751;color:#111;font-size:10px;font-weight:800;border-radius:50%;width:18px;height:18px;text-align:center;line-height:18px;';
+      badge.textContent = '0';
+      a.appendChild(badge);
+    }
+  });
+
+  updateHeaderBadges();
+  attachWishlistListeners(document);
 
   // -------------------------------------------------------------
   // 2. SHOP / CATALOGUE PAGE (products.html)
   // -------------------------------------------------------------
-  if (page === 'products.html') {
+  if (isPage('products.html', '.shop-page-wrapper, .filter-sidebar, .product-item-list')) {
     let allProducts = [];
     try {
       const res = await fetch('/api/products');
@@ -493,7 +602,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // -------------------------------------------------------------
   // 2B. HOMEPAGE HYDRATION (index.html, index-2.html, /)
   // -------------------------------------------------------------
-  if (page === 'index.html' || page === 'index-2.html' || page === '') {
+  if (isPage('index.html', '.hero.parallaxie') || page === 'index-2.html' || page === '') {
     let allProducts = [];
     try {
       const res = await fetch('/api/products');
@@ -527,7 +636,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // -------------------------------------------------------------
   // 3. CART PAGE (cart.html)
   // -------------------------------------------------------------
-  if (page === 'cart.html') {
+  if (isPage('cart.html', '.cart-page-wrapper, table.cart-table')) {
     let appliedDiscountPct = 0;
 
     function renderCartTable() {
@@ -687,7 +796,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // -------------------------------------------------------------
   // 4. CHECKOUT PAGE (checkout.html)
   // -------------------------------------------------------------
-  if (page === 'checkout.html') {
+  if (isPage('checkout.html', '.checkout-page-wrapper, #checkoutForm')) {
     const items = Woodpeckers.Cart.getItems();
     const params = new URLSearchParams(window.location.search);
     const reserveRef = params.get('reserveRef');
@@ -844,7 +953,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // -------------------------------------------------------------
   // 5. ORDER RECEIVED PAGE (order-received.html)
   // -------------------------------------------------------------
-  if (page === 'order-received.html') {
+  if (isPage('order-received.html', '.order-received-box, .order-success-content')) {
     const params = new URLSearchParams(window.location.search);
     const orderNumber = params.get('orderNumber') || 'WPK-ORD-7701';
 
@@ -914,7 +1023,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // -------------------------------------------------------------
   // 6. ACCOUNT ORDERS PAGE (account-order.html)
   // -------------------------------------------------------------
-  if (page === 'account-order.html') {
+  if (isPage('account-order.html', '#account-orders-body, #customer-orders-table-body')) {
     const ordersTbody = document.getElementById('account-orders-body');
     const offersTbody = document.getElementById('my-reserve-offers-body');
     const user = (window.Woodpeckers && window.Woodpeckers.Auth) ? Woodpeckers.Auth.getUser() : null;
@@ -1013,7 +1122,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // -------------------------------------------------------------
   // 6b. ACCOUNT CERTIFICATES PAGE (account-download.html)
   // -------------------------------------------------------------
-  if (page === 'account-download.html') {
+  if (isPage('account-download.html', '.download-content-box')) {
     const certsTbody = document.getElementById('certs-body');
     if (certsTbody) {
       const user = (window.Woodpeckers && window.Woodpeckers.Auth) ? Woodpeckers.Auth.getUser() : null;
@@ -1205,7 +1314,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // -------------------------------------------------------------
   // 6C. ACCOUNT DASHBOARD (account-dashboard.html)
   // -------------------------------------------------------------
-  if (page === 'account-dashboard.html') {
+  if (isPage('account-dashboard.html', '#dash-recent-orders-body, #user-display-name')) {
     const user = Woodpeckers.Auth.getCurrentUser();
     const displayName = user ? user.name : 'Valued Collector';
 
@@ -1268,7 +1377,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // -------------------------------------------------------------
   // 6D. ACCOUNT WISHLIST (account-wishlist.html)
   // -------------------------------------------------------------
-  if (page === 'account-wishlist.html') {
+  if (isPage('account-wishlist.html', '.wishlist-content-box')) {
     function renderWishlistTable() {
       const items = Woodpeckers.Wishlist.getItems();
       const tableBox = document.querySelector('.wishlist-content-box');

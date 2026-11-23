@@ -434,6 +434,21 @@ async function runTests() {
     assert.ok(!res.body.includes('Direct link to Staff Dashboard'), 'Direct link to staff dashboard removed from customer login');
   });
 
+  await test('UI / Preloader: custom.css enables visible preloader without display:none suppression', async () => {
+    const fs = require('fs');
+    const css = fs.readFileSync('css/custom.css', 'utf8');
+    assert.ok(!css.includes('.preloader{\n\tposition: fixed;\n\ttop: 0;\n\tleft: 0;\n\tright: 0;\n\tbottom: 0;\n\tz-index: 1000;\n\tbackground: var(--primary-color);\n\tdisplay: none !important;'), 'Preloader is not forced to display:none !important');
+    assert.ok(css.includes('.preloader{\n\tposition: fixed;\n\ttop: 0;\n\tleft: 0;\n\tright: 0;\n\tbottom: 0;\n\tz-index: 999999;\n\tbackground: #0E100F;\n\tdisplay: flex;'), 'Preloader has active flex styling and z-index');
+  });
+
+  await test('Dynamic Storefront: storefront-app.js normalizes clean URLs and provides interactive wishlist & cart', async () => {
+    const fs = require('fs');
+    const js = fs.readFileSync('js/storefront-app.js', 'utf8');
+    assert.ok(js.includes('isPage'), 'isPage helper present for clean URL routing');
+    assert.ok(js.includes('attachWishlistListeners'), 'Wishlist listener attachment implemented');
+    assert.ok(js.includes('updateHeaderBadges'), 'Header badges update implemented');
+  });
+
   await test('Deployment / Vercel: vercel.json and api/index.js configured for production deployment', async () => {
     const fs = require('fs');
     assert.ok(fs.existsSync('vercel.json'), 'vercel.json configuration exists');

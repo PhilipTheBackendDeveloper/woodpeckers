@@ -364,12 +364,12 @@ a:focus{
 	left: 0;
 	right: 0;
 	bottom: 0;
-	z-index: 1000;
-	background: var(--primary-color);
-	display: none !important;
-	opacity: 0 !important;
-	visibility: hidden !important;
-	pointer-events: none !important;
+	z-index: 999999;
+	background: #0E100F;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: opacity 0.4s ease, visibility 0.4s ease;
 }
 
 .loading-container,
