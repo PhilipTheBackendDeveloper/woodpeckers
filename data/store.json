@@ -1,0 +1,2135 @@
+{
+  "products": [
+    {
+      "id": "SNK-001",
+      "sku": "WPK-AJ1-CHI",
+      "name": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+      "category": "Exclusive Sneakers",
+      "brand": "Nike / Jordan",
+      "price": 3850,
+      "originalPrice": 4200,
+      "description": "The grail colorway returns with vintage-inspired details. Featuring premium cracked leather collars, aged sail midsoles, and classic Chicago red-and-black overlays. Every pair is 100% verified authentic by Woodpeckers Ghana.",
+      "images": [
+        "images/product-image-1.jpg",
+        "images/product-thumbnail-image-1.jpg",
+        "images/product-thumbnail-image-2.jpg",
+        "images/product-thumbnail-image-3.jpg"
+      ],
+      "sizes": [
+        {
+          "size": "UK 7.5",
+          "stock": 2
+        },
+        {
+          "size": "UK 8",
+          "stock": 4
+        },
+        {
+          "size": "UK 8.5",
+          "stock": 3
+        },
+        {
+          "size": "UK 9",
+          "stock": 3
+        },
+        {
+          "size": "UK 10",
+          "stock": 2
+        }
+      ],
+      "reserveEligible": true,
+      "reserveFloor": 3200,
+      "reserveGuidance": "Estimated Reserve: ~GH₵ 3,200 - GH₵ 3,500. Submit your best offer to secure.",
+      "tags": [
+        "Grail",
+        "Hype",
+        "Collector",
+        "Reserve Eligible"
+      ],
+      "rating": 5,
+      "reviewCount": 18
+    },
+    {
+      "id": "SNK-002",
+      "sku": "WPK-TS-MOCHA",
+      "name": "Travis Scott x Air Jordan 1 Low 'Reverse Mocha'",
+      "category": "Exclusive Sneakers",
+      "brand": "Nike / Jordan",
+      "price": 5200,
+      "originalPrice": 5800,
+      "description": "Cactus Jack's signature inverted oversized swoosh paired with premium sail leather and rich earth-toned mocha suede. One of the most sought-after low-tops in global sneaker culture, brought directly to Accra.",
+      "images": [
+        "images/product-image-2.jpg",
+        "images/product-thumbnail-image-2.jpg",
+        "images/product-thumbnail-image-3.jpg",
+        "images/product-thumbnail-image-4.jpg"
+      ],
+      "sizes": [
+        {
+          "size": "UK 8",
+          "stock": 1
+        },
+        {
+          "size": "UK 8.5",
+          "stock": 1
+        },
+        {
+          "size": "UK 9",
+          "stock": 1
+        },
+        {
+          "size": "UK 9.5",
+          "stock": 0
+        }
+      ],
+      "reserveEligible": true,
+      "reserveFloor": 4400,
+      "reserveGuidance": "Estimated Reserve: ~GH₵ 4,400 - GH₵ 4,800. Fast manual or rule-based review.",
+      "tags": [
+        "Collab",
+        "Ultra Rare",
+        "Reserve Eligible"
+      ],
+      "rating": 5,
+      "reviewCount": 24
+    },
+    {
+      "id": "SNK-003",
+      "sku": "WPK-NK-DUNK-PANDA",
+      "name": "Nike Dunk Low Retro 'Panda'",
+      "category": "Everyday Heat",
+      "brand": "Nike",
+      "price": 1650,
+      "originalPrice": 1850,
+      "description": "The quintessential monochrome daily sneaker. Clean black-and-white leather blocking engineered to complement any streetwear fit or casual luxury aesthetic effortlessly.",
+      "images": [
+        "images/product-image-3.jpg",
+        "images/product-thumbnail-image-3.jpg",
+        "images/product-thumbnail-image-1.jpg",
+        "images/product-thumbnail-image-2.jpg"
+      ],
+      "sizes": [
+        {
+          "size": "UK 6",
+          "stock": 2
+        },
+        {
+          "size": "UK 7",
+          "stock": 3
+        },
+        {
+          "size": "UK 8",
+          "stock": 4
+        },
+        {
+          "size": "UK 9",
+          "stock": 3
+        },
+        {
+          "size": "UK 10",
+          "stock": 2
+        }
+      ],
+      "reserveEligible": false,
+      "reserveFloor": 0,
+      "reserveGuidance": "",
+      "tags": [
+        "Essential",
+        "Bestseller",
+        "Daily"
+      ],
+      "rating": 4.8,
+      "reviewCount": 42
+    },
+    {
+      "id": "SNK-004",
+      "sku": "WPK-NB-9060-SEA",
+      "name": "New Balance 9060 'Sea Salt & Rain Cloud'",
+      "category": "Lifestyle Runners",
+      "brand": "New Balance",
+      "price": 2150,
+      "originalPrice": 2400,
+      "description": "Futuristic design meets unmatched Y2K runner cushioning. ABZORB and SBS cushioning pods sculpted with an exaggerated wavy sole and breathable diamond mesh upper.",
+      "images": [
+        "images/product-image-4.jpg",
+        "images/product-thumbnail-image-4.jpg",
+        "images/product-thumbnail-image-1.jpg"
+      ],
+      "sizes": [
+        {
+          "size": "UK 7",
+          "stock": 2
+        },
+        {
+          "size": "UK 8",
+          "stock": 2
+        },
+        {
+          "size": "UK 9",
+          "stock": 2
+        },
+        {
+          "size": "UK 10",
+          "stock": 1
+        }
+      ],
+      "reserveEligible": true,
+      "reserveFloor": 1850,
+      "reserveGuidance": "Estimated Reserve: ~GH₵ 1,850 - GH₵ 2,000. Open for competitive buyer offers.",
+      "tags": [
+        "Comfort",
+        "Trending",
+        "Reserve Eligible"
+      ],
+      "rating": 4.9,
+      "reviewCount": 15
+    },
+    {
+      "id": "SNK-005",
+      "sku": "WPK-YZY-350-BEL",
+      "name": "Yeezy Boost 350 V2 'Carbon Beluga'",
+      "category": "Exclusive Sneakers",
+      "brand": "Adidas / Yeezy",
+      "price": 2900,
+      "originalPrice": 3200,
+      "description": "Full-length BOOST midsole wrapped in Primeknit with bold solar-red SPLY-350 side stripe. Unmistakable streetwear icon engineered for all-day comfort.",
+      "images": [
+        "images/product-image-5.jpg",
+        "images/product-thumbnail-image-1.jpg",
+        "images/product-thumbnail-image-2.jpg"
+      ],
+      "sizes": [
+        {
+          "size": "UK 7.5",
+          "stock": 1
+        },
+        {
+          "size": "UK 8.5",
+          "stock": 2
+        },
+        {
+          "size": "UK 9.5",
+          "stock": 1
+        },
+        {
+          "size": "UK 10.5",
+          "stock": 1
+        }
+      ],
+      "reserveEligible": true,
+      "reserveFloor": 2400,
+      "reserveGuidance": "Estimated Reserve: ~GH₵ 2,400 - GH₵ 2,650. Verified authentics only.",
+      "tags": [
+        "Boost",
+        "Limited",
+        "Reserve Eligible"
+      ],
+      "rating": 4.8,
+      "reviewCount": 29
+    },
+    {
+      "id": "STR-001",
+      "sku": "WPK-TEE-ACCRANIGHT",
+      "name": "Woodpeckers Heavyweight Oversized Tee 'Accra Night'",
+      "category": "Streetwear",
+      "brand": "Woodpeckers",
+      "price": 450,
+      "originalPrice": 520,
+      "description": "Crafted from 280 GSM luxury combed cotton with dropped shoulders, high-density ribbed collar, and minimal subtle tonal Woodpeckers branding on the chest.",
+      "images": [
+        "images/product-image-7.jpg",
+        "images/product-thumbnail-image-2.jpg",
+        "images/product-thumbnail-image-3.jpg"
+      ],
+      "sizes": [
+        {
+          "size": "S",
+          "stock": 4
+        },
+        {
+          "size": "M",
+          "stock": 6
+        },
+        {
+          "size": "L",
+          "stock": 6
+        },
+        {
+          "size": "XL",
+          "stock": 3
+        }
+      ],
+      "reserveEligible": false,
+      "reserveFloor": 0,
+      "reserveGuidance": "",
+      "tags": [
+        "Woodpeckers Original",
+        "Heavyweight",
+        "Oversized"
+      ],
+      "rating": 4.9,
+      "reviewCount": 33
+    },
+    {
+      "id": "STR-002",
+      "sku": "WPK-PNT-OBSIDIAN",
+      "name": "Woodpeckers Tactical Cargo Pants 'Obsidian'",
+      "category": "Streetwear",
+      "brand": "Woodpeckers",
+      "price": 850,
+      "originalPrice": 980,
+      "description": "Structured water-repellent ripstop fabric with adjustable ankle toggles, ergonomic 3D cargo pockets, and industrial matte hardware. Tailored specifically for sneakerhead silhouettes.",
+      "images": [
+        "images/product-image-8.jpg",
+        "images/product-thumbnail-image-3.jpg",
+        "images/product-thumbnail-image-4.jpg"
+      ],
+      "sizes": [
+        {
+          "size": "W30 L32",
+          "stock": 2
+        },
+        {
+          "size": "W32 L32",
+          "stock": 3
+        },
+        {
+          "size": "W34 L32",
+          "stock": 2
+        },
+        {
+          "size": "W36 L32",
+          "stock": 1
+        }
+      ],
+      "reserveEligible": true,
+      "reserveFloor": 700,
+      "reserveGuidance": "Estimated Reserve: ~GH₵ 700 - GH₵ 780. Premium tailored cut.",
+      "tags": [
+        "Technical",
+        "Cargo",
+        "Reserve Eligible"
+      ],
+      "rating": 4.7,
+      "reviewCount": 11
+    },
+    {
+      "id": "STR-003",
+      "sku": "WPK-HD-RAWIVORY",
+      "name": "Woodpeckers Signature Boxy Hoodie 'Raw Ivory'",
+      "category": "Streetwear",
+      "brand": "Woodpeckers",
+      "price": 950,
+      "originalPrice": 1100,
+      "description": "450 GSM French Terry loopback cotton. Pre-shrunk with a double-layered hood without drawstrings for a pure architectural streetwear profile. Warm, bold, and made to last.",
+      "images": [
+        "images/product-image-9.jpg",
+        "images/product-thumbnail-image-4.jpg",
+        "images/product-thumbnail-image-1.jpg"
+      ],
+      "sizes": [
+        {
+          "size": "S",
+          "stock": 2
+        },
+        {
+          "size": "M",
+          "stock": 4
+        },
+        {
+          "size": "L",
+          "stock": 4
+        },
+        {
+          "size": "XL",
+          "stock": 2
+        }
+      ],
+      "reserveEligible": true,
+      "reserveFloor": 780,
+      "reserveGuidance": "Estimated Reserve: ~GH₵ 780 - GH₵ 880. Ultra-heavy French Terry.",
+      "tags": [
+        "Heavyweight",
+        "Luxury Terry",
+        "Reserve Eligible"
+      ],
+      "rating": 5,
+      "reviewCount": 20
+    },
+    {
+      "id": "SNK-006",
+      "sku": "WPK-ASICS-KAY14",
+      "name": "Asics Gel-Kayano 14 'White & Pure Gold'",
+      "category": "Lifestyle Runners",
+      "brand": "Asics",
+      "price": 1950,
+      "originalPrice": 2200,
+      "description": "2000s technical running aesthetic recontextualized for modern lifestyle wear. GEL technology cushioning delivers shock absorption while metallic gold accents bring elevated prestige.",
+      "images": [
+        "images/product-image-6.jpg",
+        "images/product-thumbnail-image-1.jpg",
+        "images/product-thumbnail-image-2.jpg"
+      ],
+      "sizes": [
+        {
+          "size": "UK 7",
+          "stock": 1
+        },
+        {
+          "size": "UK 8",
+          "stock": 2
+        },
+        {
+          "size": "UK 8.5",
+          "stock": 2
+        },
+        {
+          "size": "UK 9",
+          "stock": 1
+        }
+      ],
+      "reserveEligible": false,
+      "reserveFloor": 0,
+      "reserveGuidance": "",
+      "tags": [
+        "Y2K",
+        "Gel Cushioning",
+        "Gold"
+      ],
+      "rating": 4.8,
+      "reviewCount": 16
+    }
+  ],
+  "reserveOffers": [
+    {
+      "reference": "WPK-RSV-2307",
+      "productId": "SNK-001",
+      "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+      "productSku": "WPK-AJ1-CHI",
+      "productImage": "images/product-image-1.jpg",
+      "retailPrice": 3850,
+      "size": "UK 8",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "offerAmount": 3500,
+      "status": "completed",
+      "submittedAt": "2026-11-23T12:33:23.467Z",
+      "validUntil": "2026-11-25T12:33:23.467Z",
+      "counterAmount": 3500,
+      "internalNotes": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation).",
+      "history": [
+        {
+          "timestamp": "2026-11-23T12:33:23.467Z",
+          "action": "submitted",
+          "actor": "Customer",
+          "note": "Offer submitted for GH₵ 3400.00"
+        },
+        {
+          "timestamp": "2026-11-23T12:33:24.467Z",
+          "action": "accepted",
+          "actor": "System",
+          "note": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation)."
+        },
+        {
+          "timestamp": "2026-11-23T12:33:23.469Z",
+          "action": "counteroffered",
+          "actor": "Store Manager",
+          "note": "Special client price"
+        },
+        {
+          "timestamp": "2026-11-23T12:33:23.469Z",
+          "action": "accepted",
+          "actor": "Customer",
+          "note": "Customer agreed to counteroffer price of GH₵ 3500.00!"
+        },
+        {
+          "timestamp": "2026-11-23T12:33:23.471Z",
+          "action": "completed",
+          "actor": "System",
+          "note": "Order WPK-ORD-2871 placed and paid! Offer fulfilled."
+        }
+      ]
+    },
+    {
+      "reference": "WPK-RSV-4870",
+      "productId": "SNK-001",
+      "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+      "productSku": "WPK-AJ1-CHI",
+      "productImage": "images/product-image-1.jpg",
+      "retailPrice": 3850,
+      "size": "UK 8",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "offerAmount": 3500,
+      "status": "completed",
+      "submittedAt": "2026-11-23T12:32:57.429Z",
+      "validUntil": "2026-11-25T12:32:57.429Z",
+      "counterAmount": 3500,
+      "internalNotes": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation).",
+      "history": [
+        {
+          "timestamp": "2026-11-23T12:32:57.429Z",
+          "action": "submitted",
+          "actor": "Customer",
+          "note": "Offer submitted for GH₵ 3400.00"
+        },
+        {
+          "timestamp": "2026-11-23T12:32:58.429Z",
+          "action": "accepted",
+          "actor": "System",
+          "note": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation)."
+        },
+        {
+          "timestamp": "2026-11-23T12:32:57.430Z",
+          "action": "counteroffered",
+          "actor": "Store Manager",
+          "note": "Special client price"
+        },
+        {
+          "timestamp": "2026-11-23T12:32:57.431Z",
+          "action": "accepted",
+          "actor": "Customer",
+          "note": "Customer agreed to counteroffer price of GH₵ 3500.00!"
+        },
+        {
+          "timestamp": "2026-11-23T12:32:57.432Z",
+          "action": "completed",
+          "actor": "System",
+          "note": "Order WPK-ORD-2175 placed and paid! Offer fulfilled."
+        }
+      ]
+    },
+    {
+      "reference": "WPK-RSV-7381",
+      "productId": "SNK-001",
+      "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+      "productSku": "WPK-AJ1-CHI",
+      "productImage": "images/product-image-1.jpg",
+      "retailPrice": 3850,
+      "size": "UK 8",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "offerAmount": 3500,
+      "status": "completed",
+      "submittedAt": "2026-11-23T12:29:23.166Z",
+      "validUntil": "2026-11-25T12:29:23.166Z",
+      "counterAmount": 3500,
+      "internalNotes": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation).",
+      "history": [
+        {
+          "timestamp": "2026-11-23T12:29:23.166Z",
+          "action": "submitted",
+          "actor": "Customer",
+          "note": "Offer submitted for GH₵ 3400.00"
+        },
+        {
+          "timestamp": "2026-11-23T12:29:24.166Z",
+          "action": "accepted",
+          "actor": "System",
+          "note": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation)."
+        },
+        {
+          "timestamp": "2026-11-23T12:29:23.167Z",
+          "action": "counteroffered",
+          "actor": "Store Manager",
+          "note": "Special client price"
+        },
+        {
+          "timestamp": "2026-11-23T12:29:23.168Z",
+          "action": "accepted",
+          "actor": "Customer",
+          "note": "Customer agreed to counteroffer price of GH₵ 3500.00!"
+        },
+        {
+          "timestamp": "2026-11-23T12:29:23.169Z",
+          "action": "completed",
+          "actor": "System",
+          "note": "Order WPK-ORD-7573 placed and paid! Offer fulfilled."
+        }
+      ]
+    },
+    {
+      "reference": "WPK-RSV-5351",
+      "productId": "SNK-001",
+      "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+      "productSku": "WPK-AJ1-CHI",
+      "productImage": "images/product-image-1.jpg",
+      "retailPrice": 3850,
+      "size": "UK 8",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "offerAmount": 3500,
+      "status": "completed",
+      "submittedAt": "2026-11-23T12:24:02.942Z",
+      "validUntil": "2026-11-25T12:24:02.942Z",
+      "counterAmount": 3500,
+      "internalNotes": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation).",
+      "history": [
+        {
+          "timestamp": "2026-11-23T12:24:02.942Z",
+          "action": "submitted",
+          "actor": "Customer",
+          "note": "Offer submitted for GH₵ 3400.00"
+        },
+        {
+          "timestamp": "2026-11-23T12:24:03.942Z",
+          "action": "accepted",
+          "actor": "System",
+          "note": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation)."
+        },
+        {
+          "timestamp": "2026-11-23T12:24:02.944Z",
+          "action": "counteroffered",
+          "actor": "Store Manager",
+          "note": "Special client price"
+        },
+        {
+          "timestamp": "2026-11-23T12:24:02.945Z",
+          "action": "accepted",
+          "actor": "Customer",
+          "note": "Customer agreed to counteroffer price of GH₵ 3500.00!"
+        },
+        {
+          "timestamp": "2026-11-23T12:24:02.945Z",
+          "action": "completed",
+          "actor": "System",
+          "note": "Order WPK-ORD-7036 placed and paid! Offer fulfilled."
+        }
+      ]
+    },
+    {
+      "reference": "WPK-RSV-8688",
+      "productId": "SNK-001",
+      "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+      "productSku": "WPK-AJ1-CHI",
+      "productImage": "images/product-image-1.jpg",
+      "retailPrice": 3850,
+      "size": "UK 8",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "offerAmount": 3500,
+      "status": "completed",
+      "submittedAt": "2026-11-23T12:22:44.442Z",
+      "validUntil": "2026-11-25T12:22:44.442Z",
+      "counterAmount": 3500,
+      "internalNotes": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation).",
+      "history": [
+        {
+          "timestamp": "2026-11-23T12:22:44.442Z",
+          "action": "submitted",
+          "actor": "Customer",
+          "note": "Offer submitted for GH₵ 3400.00"
+        },
+        {
+          "timestamp": "2026-11-23T12:22:45.442Z",
+          "action": "accepted",
+          "actor": "System",
+          "note": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation)."
+        },
+        {
+          "timestamp": "2026-11-23T12:22:44.444Z",
+          "action": "counteroffered",
+          "actor": "Store Manager",
+          "note": "Special client price"
+        },
+        {
+          "timestamp": "2026-11-23T12:22:44.445Z",
+          "action": "accepted",
+          "actor": "Customer",
+          "note": "Customer agreed to counteroffer price of GH₵ 3500.00!"
+        },
+        {
+          "timestamp": "2026-11-23T12:22:44.446Z",
+          "action": "completed",
+          "actor": "System",
+          "note": "Order WPK-ORD-5764 placed and paid! Offer fulfilled."
+        }
+      ]
+    },
+    {
+      "reference": "WPK-RSV-9818",
+      "productId": "SNK-001",
+      "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+      "productSku": "WPK-AJ1-CHI",
+      "productImage": "images/product-image-1.jpg",
+      "retailPrice": 3850,
+      "size": "UK 8",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "offerAmount": 3500,
+      "status": "completed",
+      "submittedAt": "2026-11-23T12:04:39.505Z",
+      "validUntil": "2026-11-25T12:04:39.505Z",
+      "counterAmount": 3500,
+      "internalNotes": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation).",
+      "history": [
+        {
+          "timestamp": "2026-11-23T12:04:39.505Z",
+          "action": "submitted",
+          "actor": "Customer",
+          "note": "Offer submitted for GH₵ 3400.00"
+        },
+        {
+          "timestamp": "2026-11-23T12:04:40.505Z",
+          "action": "accepted",
+          "actor": "System",
+          "note": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation)."
+        },
+        {
+          "timestamp": "2026-11-23T12:04:39.508Z",
+          "action": "counteroffered",
+          "actor": "Store Manager",
+          "note": "Special client price"
+        },
+        {
+          "timestamp": "2026-11-23T12:04:39.509Z",
+          "action": "accepted",
+          "actor": "Customer",
+          "note": "Customer agreed to counteroffer price of GH₵ 3500.00!"
+        },
+        {
+          "timestamp": "2026-11-23T12:04:39.511Z",
+          "action": "completed",
+          "actor": "System",
+          "note": "Order WPK-ORD-3662 placed and paid! Offer fulfilled."
+        }
+      ]
+    },
+    {
+      "reference": "WPK-RSV-8615",
+      "productId": "SNK-001",
+      "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+      "productSku": "WPK-AJ1-CHI",
+      "productImage": "images/product-image-1.jpg",
+      "retailPrice": 3850,
+      "size": "UK 8",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "offerAmount": 3500,
+      "status": "completed",
+      "submittedAt": "2026-11-23T11:25:16.325Z",
+      "validUntil": "2026-11-25T11:25:16.325Z",
+      "counterAmount": 3500,
+      "internalNotes": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation).",
+      "history": [
+        {
+          "timestamp": "2026-11-23T11:25:16.325Z",
+          "action": "submitted",
+          "actor": "Customer",
+          "note": "Offer submitted for GH₵ 3400.00"
+        },
+        {
+          "timestamp": "2026-11-23T11:25:17.325Z",
+          "action": "accepted",
+          "actor": "System",
+          "note": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation)."
+        },
+        {
+          "timestamp": "2026-11-23T11:25:16.327Z",
+          "action": "counteroffered",
+          "actor": "Store Manager",
+          "note": "Special client price"
+        },
+        {
+          "timestamp": "2026-11-23T11:25:16.328Z",
+          "action": "accepted",
+          "actor": "Customer",
+          "note": "Customer agreed to counteroffer price of GH₵ 3500.00!"
+        },
+        {
+          "timestamp": "2026-11-23T11:25:16.329Z",
+          "action": "completed",
+          "actor": "System",
+          "note": "Order WPK-ORD-7796 placed and paid! Offer fulfilled."
+        }
+      ]
+    },
+    {
+      "reference": "WPK-RSV-9855",
+      "productId": "SNK-001",
+      "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+      "productSku": "WPK-AJ1-CHI",
+      "productImage": "images/product-image-1.jpg",
+      "retailPrice": 3850,
+      "size": "UK 8",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "offerAmount": 3500,
+      "status": "completed",
+      "submittedAt": "2026-11-23T11:24:45.340Z",
+      "validUntil": "2026-11-25T11:24:45.340Z",
+      "counterAmount": 3500,
+      "internalNotes": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation).",
+      "history": [
+        {
+          "timestamp": "2026-11-23T11:24:45.340Z",
+          "action": "submitted",
+          "actor": "Customer",
+          "note": "Offer submitted for GH₵ 3400.00"
+        },
+        {
+          "timestamp": "2026-11-23T11:24:46.340Z",
+          "action": "accepted",
+          "actor": "System",
+          "note": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation)."
+        },
+        {
+          "timestamp": "2026-11-23T11:24:45.342Z",
+          "action": "counteroffered",
+          "actor": "Store Manager",
+          "note": "Special client price"
+        },
+        {
+          "timestamp": "2026-11-23T11:24:45.343Z",
+          "action": "accepted",
+          "actor": "Customer",
+          "note": "Customer agreed to counteroffer price of GH₵ 3500.00!"
+        },
+        {
+          "timestamp": "2026-11-23T11:24:45.343Z",
+          "action": "completed",
+          "actor": "System",
+          "note": "Order WPK-ORD-3497 placed and paid! Offer fulfilled."
+        }
+      ]
+    },
+    {
+      "reference": "WPK-RSV-6687",
+      "productId": "SNK-001",
+      "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+      "productSku": "WPK-AJ1-CHI",
+      "productImage": "images/product-image-1.jpg",
+      "retailPrice": 3850,
+      "size": "UK 8",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "offerAmount": 3500,
+      "status": "completed",
+      "submittedAt": "2026-11-23T11:14:45.677Z",
+      "validUntil": "2026-11-25T11:14:45.677Z",
+      "counterAmount": 3500,
+      "internalNotes": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation).",
+      "history": [
+        {
+          "timestamp": "2026-11-23T11:14:45.677Z",
+          "action": "submitted",
+          "actor": "Customer",
+          "note": "Offer submitted for GH₵ 3400.00"
+        },
+        {
+          "timestamp": "2026-11-23T11:14:46.677Z",
+          "action": "accepted",
+          "actor": "System",
+          "note": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation)."
+        },
+        {
+          "timestamp": "2026-11-23T11:14:45.678Z",
+          "action": "counteroffered",
+          "actor": "Store Manager",
+          "note": "Special client price"
+        },
+        {
+          "timestamp": "2026-11-23T11:14:45.679Z",
+          "action": "accepted",
+          "actor": "Customer",
+          "note": "Customer agreed to counteroffer price of GH₵ 3500.00!"
+        },
+        {
+          "timestamp": "2026-11-23T11:14:45.680Z",
+          "action": "completed",
+          "actor": "System",
+          "note": "Order WPK-ORD-4574 placed and paid! Offer fulfilled."
+        }
+      ]
+    },
+    {
+      "reference": "WPK-RSV-8687",
+      "productId": "SNK-001",
+      "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+      "productSku": "WPK-AJ1-CHI",
+      "productImage": "images/product-image-1.jpg",
+      "retailPrice": 3850,
+      "size": "UK 8",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "offerAmount": 3500,
+      "status": "completed",
+      "submittedAt": "2026-11-23T11:09:22.641Z",
+      "validUntil": "2026-11-25T11:09:22.641Z",
+      "counterAmount": 3500,
+      "internalNotes": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation).",
+      "history": [
+        {
+          "timestamp": "2026-11-23T11:09:22.641Z",
+          "action": "submitted",
+          "actor": "Customer",
+          "note": "Offer submitted for GH₵ 3400.00"
+        },
+        {
+          "timestamp": "2026-11-23T11:09:23.641Z",
+          "action": "accepted",
+          "actor": "System",
+          "note": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation)."
+        },
+        {
+          "timestamp": "2026-11-23T11:09:22.643Z",
+          "action": "counteroffered",
+          "actor": "Store Manager",
+          "note": "Special client price"
+        },
+        {
+          "timestamp": "2026-11-23T11:09:22.644Z",
+          "action": "accepted",
+          "actor": "Customer",
+          "note": "Customer agreed to counteroffer price of GH₵ 3500.00!"
+        },
+        {
+          "timestamp": "2026-11-23T11:09:22.645Z",
+          "action": "completed",
+          "actor": "System",
+          "note": "Order WPK-ORD-4738 placed and paid! Offer fulfilled."
+        }
+      ]
+    },
+    {
+      "reference": "WPK-RSV-9332",
+      "productId": "SNK-001",
+      "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+      "productSku": "WPK-AJ1-CHI",
+      "productImage": "images/product-image-1.jpg",
+      "retailPrice": 3850,
+      "size": "UK 8",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "offerAmount": 3500,
+      "status": "completed",
+      "submittedAt": "2026-11-23T10:45:37.109Z",
+      "validUntil": "2026-11-25T10:45:37.109Z",
+      "counterAmount": 3500,
+      "internalNotes": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation).",
+      "history": [
+        {
+          "timestamp": "2026-11-23T10:45:37.109Z",
+          "action": "submitted",
+          "actor": "Customer",
+          "note": "Offer submitted for GH₵ 3400.00"
+        },
+        {
+          "timestamp": "2026-11-23T10:45:38.109Z",
+          "action": "accepted",
+          "actor": "System",
+          "note": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation)."
+        },
+        {
+          "timestamp": "2026-11-23T10:45:37.110Z",
+          "action": "counteroffered",
+          "actor": "Store Manager",
+          "note": "Special client price"
+        },
+        {
+          "timestamp": "2026-11-23T10:45:37.111Z",
+          "action": "accepted",
+          "actor": "Customer",
+          "note": "Customer agreed to counteroffer price of GH₵ 3500.00!"
+        },
+        {
+          "timestamp": "2026-11-23T10:45:37.112Z",
+          "action": "completed",
+          "actor": "System",
+          "note": "Order WPK-ORD-8340 placed and paid! Offer fulfilled."
+        }
+      ]
+    },
+    {
+      "reference": "WPK-RSV-3660",
+      "productId": "SNK-001",
+      "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+      "productSku": "WPK-AJ1-CHI",
+      "productImage": "images/product-image-1.jpg",
+      "retailPrice": 3850,
+      "size": "UK 8",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "offerAmount": 3500,
+      "status": "completed",
+      "submittedAt": "2026-11-23T10:19:27.355Z",
+      "validUntil": "2026-11-25T10:19:27.355Z",
+      "counterAmount": 3500,
+      "internalNotes": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation).",
+      "history": [
+        {
+          "timestamp": "2026-11-23T10:19:27.355Z",
+          "action": "submitted",
+          "actor": "Customer",
+          "note": "Offer submitted for GH₵ 3400.00"
+        },
+        {
+          "timestamp": "2026-11-23T10:19:28.355Z",
+          "action": "accepted",
+          "actor": "System",
+          "note": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation)."
+        },
+        {
+          "timestamp": "2026-11-23T10:19:27.357Z",
+          "action": "counteroffered",
+          "actor": "Store Manager",
+          "note": "Special client price"
+        },
+        {
+          "timestamp": "2026-11-23T10:19:27.357Z",
+          "action": "accepted",
+          "actor": "Customer",
+          "note": "Customer agreed to counteroffer price of GH₵ 3500.00!"
+        },
+        {
+          "timestamp": "2026-11-23T10:19:27.358Z",
+          "action": "completed",
+          "actor": "System",
+          "note": "Order WPK-ORD-8254 placed and paid! Offer fulfilled."
+        }
+      ]
+    },
+    {
+      "reference": "WPK-RSV-2289",
+      "productId": "SNK-001",
+      "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+      "productSku": "WPK-AJ1-CHI",
+      "productImage": "images/product-image-1.jpg",
+      "retailPrice": 3850,
+      "size": "UK 8",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "offerAmount": 3500,
+      "status": "completed",
+      "submittedAt": "2026-11-23T10:17:56.717Z",
+      "validUntil": "2026-11-25T10:17:56.717Z",
+      "counterAmount": 3500,
+      "internalNotes": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation).",
+      "history": [
+        {
+          "timestamp": "2026-11-23T10:17:56.717Z",
+          "action": "submitted",
+          "actor": "Customer",
+          "note": "Offer submitted for GH₵ 3400.00"
+        },
+        {
+          "timestamp": "2026-11-23T10:17:57.717Z",
+          "action": "accepted",
+          "actor": "System",
+          "note": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation)."
+        },
+        {
+          "timestamp": "2026-11-23T10:17:56.718Z",
+          "action": "counteroffered",
+          "actor": "Store Manager",
+          "note": "Special client price"
+        },
+        {
+          "timestamp": "2026-11-23T10:17:56.719Z",
+          "action": "accepted",
+          "actor": "Customer",
+          "note": "Customer agreed to counteroffer price of GH₵ 3500.00!"
+        },
+        {
+          "timestamp": "2026-11-23T10:17:56.720Z",
+          "action": "completed",
+          "actor": "System",
+          "note": "Order WPK-ORD-2532 placed and paid! Offer fulfilled."
+        }
+      ]
+    },
+    {
+      "reference": "WPK-RSV-5146",
+      "productId": "SNK-001",
+      "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+      "productSku": "WPK-AJ1-CHI",
+      "productImage": "images/product-image-1.jpg",
+      "retailPrice": 3850,
+      "size": "UK 8",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "offerAmount": 3500,
+      "status": "completed",
+      "submittedAt": "2026-11-23T06:09:44.050Z",
+      "validUntil": "2026-11-25T06:09:44.050Z",
+      "counterAmount": 3500,
+      "internalNotes": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation).",
+      "history": [
+        {
+          "timestamp": "2026-11-23T06:09:44.050Z",
+          "action": "submitted",
+          "actor": "Customer",
+          "note": "Offer submitted for GH₵ 3400.00"
+        },
+        {
+          "timestamp": "2026-11-23T06:09:45.050Z",
+          "action": "accepted",
+          "actor": "System",
+          "note": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation)."
+        },
+        {
+          "timestamp": "2026-11-23T06:09:44.052Z",
+          "action": "counteroffered",
+          "actor": "Store Manager",
+          "note": "Special client price"
+        },
+        {
+          "timestamp": "2026-11-23T06:09:44.052Z",
+          "action": "accepted",
+          "actor": "Customer",
+          "note": "Customer agreed to counteroffer price of GH₵ 3500.00!"
+        },
+        {
+          "timestamp": "2026-11-23T06:09:44.053Z",
+          "action": "completed",
+          "actor": "System",
+          "note": "Order WPK-ORD-7775 placed and paid! Offer fulfilled."
+        }
+      ]
+    },
+    {
+      "reference": "WPK-RSV-1308",
+      "productId": "SNK-001",
+      "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+      "productSku": "WPK-AJ1-CHI",
+      "productImage": "images/product-image-1.jpg",
+      "retailPrice": 3850,
+      "size": "UK 8",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "offerAmount": 3500,
+      "status": "completed",
+      "submittedAt": "2026-11-23T06:08:18.929Z",
+      "validUntil": "2026-11-25T06:08:18.929Z",
+      "counterAmount": 3500,
+      "internalNotes": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation).",
+      "history": [
+        {
+          "timestamp": "2026-11-23T06:08:18.929Z",
+          "action": "submitted",
+          "actor": "Customer",
+          "note": "Offer submitted for GH₵ 3400.00"
+        },
+        {
+          "timestamp": "2026-11-23T06:08:19.929Z",
+          "action": "accepted",
+          "actor": "System",
+          "note": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation)."
+        },
+        {
+          "timestamp": "2026-11-23T06:08:18.931Z",
+          "action": "counteroffered",
+          "actor": "Store Manager",
+          "note": "Special client price"
+        },
+        {
+          "timestamp": "2026-11-23T06:08:18.931Z",
+          "action": "accepted",
+          "actor": "Customer",
+          "note": "Customer agreed to counteroffer price of GH₵ 3500.00!"
+        },
+        {
+          "timestamp": "2026-11-23T06:08:18.932Z",
+          "action": "completed",
+          "actor": "System",
+          "note": "Order WPK-ORD-7083 placed and paid! Offer fulfilled."
+        }
+      ]
+    },
+    {
+      "reference": "WPK-RSV-8158",
+      "productId": "SNK-001",
+      "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+      "productSku": "WPK-AJ1-CHI",
+      "productImage": "images/product-image-1.jpg",
+      "retailPrice": 3850,
+      "size": "UK 8",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "offerAmount": 3500,
+      "status": "completed",
+      "submittedAt": "2026-11-23T06:04:14.616Z",
+      "validUntil": "2026-11-25T06:04:14.616Z",
+      "counterAmount": 3500,
+      "internalNotes": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation).",
+      "history": [
+        {
+          "timestamp": "2026-11-23T06:04:14.616Z",
+          "action": "submitted",
+          "actor": "Customer",
+          "note": "Offer submitted for GH₵ 3400.00"
+        },
+        {
+          "timestamp": "2026-11-23T06:04:15.616Z",
+          "action": "accepted",
+          "actor": "System",
+          "note": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation)."
+        },
+        {
+          "timestamp": "2026-11-23T06:04:14.617Z",
+          "action": "counteroffered",
+          "actor": "Store Manager",
+          "note": "Special client price"
+        },
+        {
+          "timestamp": "2026-11-23T06:04:14.617Z",
+          "action": "accepted",
+          "actor": "Customer",
+          "note": "Customer agreed to counteroffer price of GH₵ 3500.00!"
+        },
+        {
+          "timestamp": "2026-11-23T06:04:14.618Z",
+          "action": "completed",
+          "actor": "System",
+          "note": "Order WPK-ORD-3188 placed and paid! Offer fulfilled."
+        }
+      ]
+    },
+    {
+      "reference": "WPK-RSV-4076",
+      "productId": "SNK-001",
+      "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+      "productSku": "WPK-AJ1-CHI",
+      "productImage": "images/product-image-1.jpg",
+      "retailPrice": 3850,
+      "size": "UK 8",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "offerAmount": 3500,
+      "status": "accepted",
+      "submittedAt": "2026-11-23T05:28:15.618Z",
+      "validUntil": "2026-11-25T05:28:15.618Z",
+      "counterAmount": 3500,
+      "internalNotes": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation).",
+      "history": [
+        {
+          "timestamp": "2026-11-23T05:28:15.618Z",
+          "action": "submitted",
+          "actor": "Customer",
+          "note": "Offer submitted for GH₵ 3400.00"
+        },
+        {
+          "timestamp": "2026-11-23T05:28:16.618Z",
+          "action": "accepted",
+          "actor": "System",
+          "note": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation)."
+        },
+        {
+          "timestamp": "2026-11-23T05:28:15.619Z",
+          "action": "counteroffered",
+          "actor": "Store Manager",
+          "note": "Special client price"
+        },
+        {
+          "timestamp": "2026-11-23T05:28:15.620Z",
+          "action": "accepted",
+          "actor": "Customer",
+          "note": "Customer agreed to counteroffer price of GH₵ 3500.00!"
+        }
+      ]
+    },
+    {
+      "reference": "WPK-RSV-4721",
+      "productId": "SNK-001",
+      "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+      "productSku": "WPK-AJ1-CHI",
+      "productImage": "images/product-image-1.jpg",
+      "retailPrice": 3850,
+      "size": "UK 8",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "offerAmount": 3500,
+      "status": "completed",
+      "submittedAt": "2026-11-23T05:27:33.664Z",
+      "validUntil": "2026-11-25T05:27:33.664Z",
+      "counterAmount": 3500,
+      "internalNotes": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation).",
+      "history": [
+        {
+          "timestamp": "2026-11-23T05:27:33.664Z",
+          "action": "submitted",
+          "actor": "Customer",
+          "note": "Offer submitted for GH₵ 3400.00"
+        },
+        {
+          "timestamp": "2026-11-23T05:27:34.664Z",
+          "action": "accepted",
+          "actor": "System",
+          "note": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation)."
+        },
+        {
+          "timestamp": "2026-11-23T05:27:33.672Z",
+          "action": "counteroffered",
+          "actor": "Store Manager",
+          "note": "Special client price"
+        },
+        {
+          "timestamp": "2026-11-23T05:27:33.676Z",
+          "action": "accepted",
+          "actor": "Customer",
+          "note": "Customer agreed to counteroffer price of GH₵ 3500.00!"
+        },
+        {
+          "timestamp": "2026-11-23T05:27:33.682Z",
+          "action": "completed",
+          "actor": "System",
+          "note": "Order WPK-ORD-5215 placed and paid! Offer fulfilled."
+        }
+      ]
+    },
+    {
+      "reference": "WPK-RSV-5676",
+      "productId": "SNK-001",
+      "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+      "productSku": "WPK-AJ1-CHI",
+      "productImage": "images/product-image-1.jpg",
+      "retailPrice": 3850,
+      "size": "UK 8",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "offerAmount": 3500,
+      "status": "completed",
+      "submittedAt": "2026-11-23T05:25:53.900Z",
+      "validUntil": "2026-11-25T05:25:53.900Z",
+      "counterAmount": 3500,
+      "internalNotes": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation).",
+      "history": [
+        {
+          "timestamp": "2026-11-23T05:25:53.900Z",
+          "action": "submitted",
+          "actor": "Customer",
+          "note": "Offer submitted for GH₵ 3400.00"
+        },
+        {
+          "timestamp": "2026-11-23T05:25:54.900Z",
+          "action": "accepted",
+          "actor": "System",
+          "note": "Auto-accepted by Meet the Reserve rule (Offer met reserve expectation)."
+        },
+        {
+          "timestamp": "2026-11-23T05:25:53.901Z",
+          "action": "counteroffered",
+          "actor": "Store Manager",
+          "note": "Special client price"
+        },
+        {
+          "timestamp": "2026-11-23T05:25:53.902Z",
+          "action": "accepted",
+          "actor": "Customer",
+          "note": "Customer agreed to counteroffer price of GH₵ 3500.00!"
+        },
+        {
+          "timestamp": "2026-11-23T05:25:53.903Z",
+          "action": "completed",
+          "actor": "System",
+          "note": "Order WPK-ORD-6055 placed and paid! Offer fulfilled."
+        }
+      ]
+    },
+    {
+      "reference": "WPK-RSV-8419",
+      "productId": "SNK-001",
+      "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+      "productSku": "WPK-AJ1-CHI",
+      "productImage": "images/product-image-1.jpg",
+      "retailPrice": 3850,
+      "size": "UK 8",
+      "customerName": "Kwame Mensah",
+      "customerEmail": "kwame.mensah@gmail.com",
+      "customerPhone": "+233 24 456 7890",
+      "offerAmount": 3300,
+      "status": "under_review",
+      "submittedAt": "2026-11-23T02:15:00Z",
+      "validUntil": "2026-11-25T02:15:00Z",
+      "counterAmount": null,
+      "internalNotes": "Offer is above floor (3,200). Ready for admin approval.",
+      "history": [
+        {
+          "timestamp": "2026-11-23T02:15:00Z",
+          "action": "submitted",
+          "actor": "Customer",
+          "note": "Offer submitted for GH₵ 3,300.00"
+        },
+        {
+          "timestamp": "2026-11-23T02:15:05Z",
+          "action": "under_review",
+          "actor": "System",
+          "note": "Queued for store manager review"
+        }
+      ]
+    },
+    {
+      "reference": "WPK-RSV-6120",
+      "productId": "SNK-002",
+      "productName": "Travis Scott x Air Jordan 1 Low 'Reverse Mocha'",
+      "productSku": "WPK-TS-MOCHA",
+      "productImage": "images/product-image-2.jpg",
+      "retailPrice": 5200,
+      "size": "UK 9",
+      "customerName": "Abena Osei",
+      "customerEmail": "abena.osei@outlook.com",
+      "customerPhone": "+233 50 123 4567",
+      "offerAmount": 4600,
+      "status": "under_review",
+      "submittedAt": "2026-11-23T03:30:00Z",
+      "validUntil": "2026-11-25T03:30:00Z",
+      "counterAmount": null,
+      "internalNotes": "Competitive offer on high-demand grail.",
+      "history": [
+        {
+          "timestamp": "2026-11-23T03:30:00Z",
+          "action": "submitted",
+          "actor": "Customer",
+          "note": "Offer submitted for GH₵ 4,600.00"
+        }
+      ]
+    },
+    {
+      "reference": "WPK-RSV-5091",
+      "productId": "SNK-005",
+      "productName": "Yeezy Boost 350 V2 'Carbon Beluga'",
+      "productSku": "WPK-YZY-350-BEL",
+      "productImage": "images/product-image-5.jpg",
+      "retailPrice": 2900,
+      "size": "UK 8.5",
+      "customerName": "Kojo Boateng",
+      "customerEmail": "k.boateng@gmail.com",
+      "customerPhone": "+233 27 789 0123",
+      "offerAmount": 2200,
+      "status": "counteroffered",
+      "submittedAt": "2026-11-22T19:00:00Z",
+      "validUntil": "2026-11-24T19:00:00Z",
+      "counterAmount": 2450,
+      "internalNotes": "Counteroffer sent at GH₵ 2,450.00. Awaiting customer confirmation.",
+      "history": [
+        {
+          "timestamp": "2026-11-22T19:00:00Z",
+          "action": "submitted",
+          "actor": "Customer",
+          "note": "Offer submitted for GH₵ 2,200.00"
+        },
+        {
+          "timestamp": "2026-11-22T20:10:00Z",
+          "action": "counteroffered",
+          "actor": "Store Manager",
+          "note": "Counteroffer proposed at GH₵ 2,450.00 (Customer can accept or decline)"
+        }
+      ]
+    },
+    {
+      "reference": "WPK-RSV-4182",
+      "productId": "STR-003",
+      "productName": "Woodpeckers Signature Boxy Hoodie 'Raw Ivory'",
+      "productSku": "WPK-HD-RAWIVORY",
+      "productImage": "images/product-image-8.jpg",
+      "retailPrice": 950,
+      "size": "L",
+      "customerName": "Nana Darko",
+      "customerEmail": "nana.darko@yahoo.com",
+      "customerPhone": "+233 24 333 4444",
+      "offerAmount": 820,
+      "status": "accepted",
+      "submittedAt": "2026-11-22T14:20:00Z",
+      "validUntil": "2026-11-24T14:20:00Z",
+      "counterAmount": null,
+      "internalNotes": "Offer accepted. Customer notified to complete checkout.",
+      "history": [
+        {
+          "timestamp": "2026-11-22T14:20:00Z",
+          "action": "submitted",
+          "actor": "Customer",
+          "note": "Offer submitted for GH₵ 820.00"
+        },
+        {
+          "timestamp": "2026-11-22T15:00:00Z",
+          "action": "accepted",
+          "actor": "Store Manager",
+          "note": "Reserve met! Offer accepted at GH₵ 820.00. Checkout link unlocked."
+        }
+      ]
+    }
+  ],
+  "orders": [
+    {
+      "orderNumber": "WPK-ORD-2871",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "shippingAddress": {
+        "street": "24 Blohum Rd Area",
+        "city": "Accra",
+        "region": "Greater Accra",
+        "country": "Ghana"
+      },
+      "items": [
+        {
+          "productId": "SNK-001",
+          "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+          "size": "UK 8",
+          "quantity": 1,
+          "price": 3500
+        }
+      ],
+      "subtotal": 3500,
+      "deliveryFee": 35,
+      "total": 3535,
+      "deliveryMethod": "Accra Metro Delivery",
+      "paymentMethod": "MTN Mobile Money",
+      "paymentStatus": "paid",
+      "fulfilmentStatus": "dispatched",
+      "reserveOfferRef": "WPK-RSV-2307",
+      "notes": "",
+      "createdAt": "2026-11-23T12:33:23.471Z"
+    },
+    {
+      "orderNumber": "WPK-ORD-2175",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "shippingAddress": {
+        "street": "24 Blohum Rd Area",
+        "city": "Accra",
+        "region": "Greater Accra",
+        "country": "Ghana"
+      },
+      "items": [
+        {
+          "productId": "SNK-001",
+          "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+          "size": "UK 8",
+          "quantity": 1,
+          "price": 3500
+        }
+      ],
+      "subtotal": 3500,
+      "deliveryFee": 35,
+      "total": 3535,
+      "deliveryMethod": "Accra Metro Delivery",
+      "paymentMethod": "MTN Mobile Money",
+      "paymentStatus": "paid",
+      "fulfilmentStatus": "dispatched",
+      "reserveOfferRef": "WPK-RSV-4870",
+      "notes": "",
+      "createdAt": "2026-11-23T12:32:57.432Z"
+    },
+    {
+      "orderNumber": "WPK-ORD-7573",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "shippingAddress": {
+        "street": "24 Blohum Rd Area",
+        "city": "Accra",
+        "region": "Greater Accra",
+        "country": "Ghana"
+      },
+      "items": [
+        {
+          "productId": "SNK-001",
+          "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+          "size": "UK 8",
+          "quantity": 1,
+          "price": 3500
+        }
+      ],
+      "subtotal": 3500,
+      "deliveryFee": 35,
+      "total": 3535,
+      "deliveryMethod": "Accra Metro Delivery",
+      "paymentMethod": "MTN Mobile Money",
+      "paymentStatus": "paid",
+      "fulfilmentStatus": "dispatched",
+      "reserveOfferRef": "WPK-RSV-7381",
+      "notes": "",
+      "createdAt": "2026-11-23T12:29:23.169Z"
+    },
+    {
+      "orderNumber": "WPK-ORD-7036",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "shippingAddress": {
+        "street": "24 Blohum Rd Area",
+        "city": "Accra",
+        "region": "Greater Accra",
+        "country": "Ghana"
+      },
+      "items": [
+        {
+          "productId": "SNK-001",
+          "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+          "size": "UK 8",
+          "quantity": 1,
+          "price": 3500
+        }
+      ],
+      "subtotal": 3500,
+      "deliveryFee": 35,
+      "total": 3535,
+      "deliveryMethod": "Accra Metro Delivery",
+      "paymentMethod": "MTN Mobile Money",
+      "paymentStatus": "paid",
+      "fulfilmentStatus": "dispatched",
+      "reserveOfferRef": "WPK-RSV-5351",
+      "notes": "",
+      "createdAt": "2026-11-23T12:24:02.945Z"
+    },
+    {
+      "orderNumber": "WPK-ORD-5764",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "shippingAddress": {
+        "street": "24 Blohum Rd Area",
+        "city": "Accra",
+        "region": "Greater Accra",
+        "country": "Ghana"
+      },
+      "items": [
+        {
+          "productId": "SNK-001",
+          "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+          "size": "UK 8",
+          "quantity": 1,
+          "price": 3500
+        }
+      ],
+      "subtotal": 3500,
+      "deliveryFee": 35,
+      "total": 3535,
+      "deliveryMethod": "Accra Metro Delivery",
+      "paymentMethod": "MTN Mobile Money",
+      "paymentStatus": "paid",
+      "fulfilmentStatus": "dispatched",
+      "reserveOfferRef": "WPK-RSV-8688",
+      "notes": "",
+      "createdAt": "2026-11-23T12:22:44.446Z"
+    },
+    {
+      "orderNumber": "WPK-ORD-3662",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "shippingAddress": {
+        "street": "24 Blohum Rd Area",
+        "city": "Accra",
+        "region": "Greater Accra",
+        "country": "Ghana"
+      },
+      "items": [
+        {
+          "productId": "SNK-001",
+          "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+          "size": "UK 8",
+          "quantity": 1,
+          "price": 3500
+        }
+      ],
+      "subtotal": 3500,
+      "deliveryFee": 35,
+      "total": 3535,
+      "deliveryMethod": "Accra Metro Delivery",
+      "paymentMethod": "MTN Mobile Money",
+      "paymentStatus": "paid",
+      "fulfilmentStatus": "dispatched",
+      "reserveOfferRef": "WPK-RSV-9818",
+      "notes": "",
+      "createdAt": "2026-11-23T12:04:39.511Z"
+    },
+    {
+      "orderNumber": "WPK-ORD-7796",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "shippingAddress": {
+        "street": "24 Blohum Rd Area",
+        "city": "Accra",
+        "region": "Greater Accra",
+        "country": "Ghana"
+      },
+      "items": [
+        {
+          "productId": "SNK-001",
+          "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+          "size": "UK 8",
+          "quantity": 1,
+          "price": 3500
+        }
+      ],
+      "subtotal": 3500,
+      "deliveryFee": 35,
+      "total": 3535,
+      "deliveryMethod": "Accra Metro Delivery",
+      "paymentMethod": "MTN Mobile Money",
+      "paymentStatus": "paid",
+      "fulfilmentStatus": "dispatched",
+      "reserveOfferRef": "WPK-RSV-8615",
+      "notes": "",
+      "createdAt": "2026-11-23T11:25:16.329Z"
+    },
+    {
+      "orderNumber": "WPK-ORD-3497",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "shippingAddress": {
+        "street": "24 Blohum Rd Area",
+        "city": "Accra",
+        "region": "Greater Accra",
+        "country": "Ghana"
+      },
+      "items": [
+        {
+          "productId": "SNK-001",
+          "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+          "size": "UK 8",
+          "quantity": 1,
+          "price": 3500
+        }
+      ],
+      "subtotal": 3500,
+      "deliveryFee": 35,
+      "total": 3535,
+      "deliveryMethod": "Accra Metro Delivery",
+      "paymentMethod": "MTN Mobile Money",
+      "paymentStatus": "paid",
+      "fulfilmentStatus": "dispatched",
+      "reserveOfferRef": "WPK-RSV-9855",
+      "notes": "",
+      "createdAt": "2026-11-23T11:24:45.343Z"
+    },
+    {
+      "orderNumber": "WPK-ORD-4574",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "shippingAddress": {
+        "street": "24 Blohum Rd Area",
+        "city": "Accra",
+        "region": "Greater Accra",
+        "country": "Ghana"
+      },
+      "items": [
+        {
+          "productId": "SNK-001",
+          "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+          "size": "UK 8",
+          "quantity": 1,
+          "price": 3500
+        }
+      ],
+      "subtotal": 3500,
+      "deliveryFee": 35,
+      "total": 3535,
+      "deliveryMethod": "Accra Metro Delivery",
+      "paymentMethod": "MTN Mobile Money",
+      "paymentStatus": "paid",
+      "fulfilmentStatus": "dispatched",
+      "reserveOfferRef": "WPK-RSV-6687",
+      "notes": "",
+      "createdAt": "2026-11-23T11:14:45.680Z"
+    },
+    {
+      "orderNumber": "WPK-ORD-4738",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "shippingAddress": {
+        "street": "24 Blohum Rd Area",
+        "city": "Accra",
+        "region": "Greater Accra",
+        "country": "Ghana"
+      },
+      "items": [
+        {
+          "productId": "SNK-001",
+          "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+          "size": "UK 8",
+          "quantity": 1,
+          "price": 3500
+        }
+      ],
+      "subtotal": 3500,
+      "deliveryFee": 35,
+      "total": 3535,
+      "deliveryMethod": "Accra Metro Delivery",
+      "paymentMethod": "MTN Mobile Money",
+      "paymentStatus": "paid",
+      "fulfilmentStatus": "dispatched",
+      "reserveOfferRef": "WPK-RSV-8687",
+      "notes": "",
+      "createdAt": "2026-11-23T11:09:22.645Z"
+    },
+    {
+      "orderNumber": "WPK-ORD-8340",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "shippingAddress": {
+        "street": "24 Blohum Rd Area",
+        "city": "Accra",
+        "region": "Greater Accra",
+        "country": "Ghana"
+      },
+      "items": [
+        {
+          "productId": "SNK-001",
+          "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+          "size": "UK 8",
+          "quantity": 1,
+          "price": 3500
+        }
+      ],
+      "subtotal": 3500,
+      "deliveryFee": 35,
+      "total": 3535,
+      "deliveryMethod": "Accra Metro Delivery",
+      "paymentMethod": "MTN Mobile Money",
+      "paymentStatus": "paid",
+      "fulfilmentStatus": "dispatched",
+      "reserveOfferRef": "WPK-RSV-9332",
+      "notes": "",
+      "createdAt": "2026-11-23T10:45:37.112Z"
+    },
+    {
+      "orderNumber": "WPK-ORD-8254",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "shippingAddress": {
+        "street": "24 Blohum Rd Area",
+        "city": "Accra",
+        "region": "Greater Accra",
+        "country": "Ghana"
+      },
+      "items": [
+        {
+          "productId": "SNK-001",
+          "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+          "size": "UK 8",
+          "quantity": 1,
+          "price": 3500
+        }
+      ],
+      "subtotal": 3500,
+      "deliveryFee": 35,
+      "total": 3535,
+      "deliveryMethod": "Accra Metro Delivery",
+      "paymentMethod": "MTN Mobile Money",
+      "paymentStatus": "paid",
+      "fulfilmentStatus": "dispatched",
+      "reserveOfferRef": "WPK-RSV-3660",
+      "notes": "",
+      "createdAt": "2026-11-23T10:19:27.358Z"
+    },
+    {
+      "orderNumber": "WPK-ORD-2532",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "shippingAddress": {
+        "street": "24 Blohum Rd Area",
+        "city": "Accra",
+        "region": "Greater Accra",
+        "country": "Ghana"
+      },
+      "items": [
+        {
+          "productId": "SNK-001",
+          "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+          "size": "UK 8",
+          "quantity": 1,
+          "price": 3500
+        }
+      ],
+      "subtotal": 3500,
+      "deliveryFee": 35,
+      "total": 3535,
+      "deliveryMethod": "Accra Metro Delivery",
+      "paymentMethod": "MTN Mobile Money",
+      "paymentStatus": "paid",
+      "fulfilmentStatus": "dispatched",
+      "reserveOfferRef": "WPK-RSV-2289",
+      "notes": "",
+      "createdAt": "2026-11-23T10:17:56.720Z"
+    },
+    {
+      "orderNumber": "WPK-ORD-7775",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "shippingAddress": {
+        "street": "24 Blohum Rd Area",
+        "city": "Accra",
+        "region": "Greater Accra",
+        "country": "Ghana"
+      },
+      "items": [
+        {
+          "productId": "SNK-001",
+          "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+          "size": "UK 8",
+          "quantity": 1,
+          "price": 3500
+        }
+      ],
+      "subtotal": 3500,
+      "deliveryFee": 35,
+      "total": 3535,
+      "deliveryMethod": "Accra Metro Delivery",
+      "paymentMethod": "MTN Mobile Money",
+      "paymentStatus": "paid",
+      "fulfilmentStatus": "dispatched",
+      "reserveOfferRef": "WPK-RSV-5146",
+      "notes": "",
+      "createdAt": "2026-11-23T06:09:44.053Z"
+    },
+    {
+      "orderNumber": "WPK-ORD-7083",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "shippingAddress": {
+        "street": "24 Blohum Rd Area",
+        "city": "Accra",
+        "region": "Greater Accra",
+        "country": "Ghana"
+      },
+      "items": [
+        {
+          "productId": "SNK-001",
+          "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+          "size": "UK 8",
+          "quantity": 1,
+          "price": 3500
+        }
+      ],
+      "subtotal": 3500,
+      "deliveryFee": 35,
+      "total": 3535,
+      "deliveryMethod": "Accra Metro Delivery",
+      "paymentMethod": "MTN Mobile Money",
+      "paymentStatus": "paid",
+      "fulfilmentStatus": "dispatched",
+      "reserveOfferRef": "WPK-RSV-1308",
+      "notes": "",
+      "createdAt": "2026-11-23T06:08:18.932Z"
+    },
+    {
+      "orderNumber": "WPK-ORD-3188",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "shippingAddress": {
+        "street": "24 Blohum Rd Area",
+        "city": "Accra",
+        "region": "Greater Accra",
+        "country": "Ghana"
+      },
+      "items": [
+        {
+          "productId": "SNK-001",
+          "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+          "size": "UK 8",
+          "quantity": 1,
+          "price": 3500
+        }
+      ],
+      "subtotal": 3500,
+      "deliveryFee": 35,
+      "total": 3535,
+      "deliveryMethod": "Accra Metro Delivery",
+      "paymentMethod": "MTN Mobile Money",
+      "paymentStatus": "paid",
+      "fulfilmentStatus": "dispatched",
+      "reserveOfferRef": "WPK-RSV-8158",
+      "notes": "",
+      "createdAt": "2026-11-23T06:04:14.618Z"
+    },
+    {
+      "orderNumber": "WPK-ORD-5215",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "shippingAddress": {
+        "street": "24 Blohum Rd Area",
+        "city": "Accra",
+        "region": "Greater Accra",
+        "country": "Ghana"
+      },
+      "items": [
+        {
+          "productId": "SNK-001",
+          "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+          "size": "UK 8",
+          "quantity": 1,
+          "price": 3500
+        }
+      ],
+      "subtotal": 3500,
+      "deliveryFee": 35,
+      "total": 3535,
+      "deliveryMethod": "Accra Metro Delivery",
+      "paymentMethod": "MTN Mobile Money",
+      "paymentStatus": "paid",
+      "fulfilmentStatus": "dispatched",
+      "reserveOfferRef": "WPK-RSV-4721",
+      "notes": "",
+      "createdAt": "2026-11-23T05:27:33.682Z"
+    },
+    {
+      "orderNumber": "WPK-ORD-6055",
+      "customerName": "Philip Ayesu",
+      "customerEmail": "philip@test.com",
+      "customerPhone": "+233 55 000 1122",
+      "shippingAddress": {
+        "street": "24 Blohum Rd Area",
+        "city": "Accra",
+        "region": "Greater Accra",
+        "country": "Ghana"
+      },
+      "items": [
+        {
+          "productId": "SNK-001",
+          "productName": "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+          "size": "UK 8",
+          "quantity": 1,
+          "price": 3500
+        }
+      ],
+      "subtotal": 3500,
+      "deliveryFee": 35,
+      "total": 3535,
+      "deliveryMethod": "Accra Metro Delivery",
+      "paymentMethod": "MTN Mobile Money",
+      "paymentStatus": "paid",
+      "fulfilmentStatus": "dispatched",
+      "reserveOfferRef": "WPK-RSV-5676",
+      "notes": "",
+      "createdAt": "2026-11-23T05:25:53.903Z"
+    },
+    {
+      "orderNumber": "WPK-ORD-7701",
+      "customerName": "Kwame Mensah",
+      "customerEmail": "kwame.mensah@gmail.com",
+      "customerPhone": "+233 24 456 7890",
+      "shippingAddress": {
+        "street": "House 14, Ringway Estates",
+        "city": "Osu, Accra",
+        "region": "Greater Accra",
+        "country": "Ghana"
+      },
+      "items": [
+        {
+          "productId": "SNK-003",
+          "productName": "Nike Dunk Low Retro 'Panda'",
+          "productImage": "images/product-image-3.jpg",
+          "size": "UK 8",
+          "quantity": 1,
+          "price": 1650
+        }
+      ],
+      "subtotal": 1650,
+      "deliveryFee": 35,
+      "total": 1685,
+      "deliveryMethod": "Accra Metro Delivery (1-2 Days)",
+      "paymentMethod": "MTN Mobile Money",
+      "paymentStatus": "paid",
+      "fulfilmentStatus": "processing",
+      "reserveOfferRef": null,
+      "createdAt": "2026-11-22T16:45:00Z"
+    },
+    {
+      "orderNumber": "WPK-ORD-7702",
+      "customerName": "Ama Serwaa",
+      "customerEmail": "ama.serwaa@gmail.com",
+      "customerPhone": "+233 55 987 6543",
+      "shippingAddress": {
+        "street": "Plot 8, Ahodwo Extension",
+        "city": "Kumasi",
+        "region": "Ashanti Region",
+        "country": "Ghana"
+      },
+      "items": [
+        {
+          "productId": "STR-002",
+          "productName": "Woodpeckers Tactical Cargo Pants 'Obsidian'",
+          "productImage": "images/product-image-7.jpg",
+          "size": "W32 L32",
+          "quantity": 1,
+          "price": 850
+        }
+      ],
+      "subtotal": 850,
+      "deliveryFee": 80,
+      "total": 930,
+      "deliveryMethod": "Nationwide Courier (Kumasi VIP/Intercity)",
+      "paymentMethod": "Debit/Credit Card (Paystack Demo)",
+      "paymentStatus": "paid",
+      "fulfilmentStatus": "dispatched",
+      "reserveOfferRef": null,
+      "createdAt": "2026-11-22T11:10:00Z"
+    }
+  ],
+  "settings": {
+    "storeName": "Woodpeckers",
+    "businessTitle": "Woodpeckers Sneakers and Streetwear",
+    "tagline": "Affordable Luxury, Bold & Innovative",
+    "currency": "GH₵",
+    "currencyCode": "GHS",
+    "location": "24 Blohum Road, near Fidelity Bank, Dzorwulu, Accra, Ghana",
+    "phone": "+233 55 392 1612",
+    "whatsapp": "+233553921612",
+    "email": "contact@woodpeckersgh.com",
+    "instagram": "https://www.instagram.com/woodpeckers_gh/",
+    "deliveryRates": {
+      "accra_metro": {
+        "name": "Accra Metro Delivery (Same Day / Next Day)",
+        "fee": 35
+      },
+      "greater_accra_express": {
+        "name": "Greater Accra Express (Tema, Kasoa, Adenta)",
+        "fee": 60
+      },
+      "nationwide": {
+        "name": "Nationwide Delivery (Kumasi, Takoradi, Sunyani, Tamale)",
+        "fee": 80
+      },
+      "pickup": {
+        "name": "Showroom Pickup (24 Blohum Rd, Dzorwulu)",
+        "fee": 0
+      }
+    },
+    "reserveRules": {
+      "autoEvaluate": true,
+      "autoAcceptRatio": 0.95,
+      "autoCounterRatio": 0.85,
+      "offerValidityHours": 48,
+      "minimumOfferRatio": 0.5
+    }
+  },
+  "adminUser": {
+    "username": "admin",
+    "password": "woodpeckers2026",
+    "name": "Philip / Woodpeckers Admin"
+  }
+}

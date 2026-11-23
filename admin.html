@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Staff Operations &amp; Reserve Management | Woodpeckers Ghana</title>
+	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+	<!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+	<!-- Bootstrap Css -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+	<link href="css/all.min.css" rel="stylesheet">
+
+    <style>
+      :root {
+        --wpk-gold: #008751;
+        --wpk-dark: #0e0e0e;
+        --wpk-card: #161616;
+        --wpk-border: #262626;
+        --wpk-text: #e0e0e0;
+        --wpk-muted: #888888;
+      }
+      body {
+        background-color: var(--wpk-dark);
+        color: var(--wpk-text);
+        font-family: 'Stack Sans Text', -apple-system, BlinkMacSystemFont, sans-serif;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+      }
+      .admin-sidebar {
+        width: 260px;
+        background: #111;
+        border-right: 1px solid var(--wpk-border);
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        padding: 24px 16px;
+        display: flex;
+        flex-direction: column;
+        z-index: 100;
+      }
+      .admin-main {
+        margin-left: 260px;
+        padding: 30px 40px;
+        min-height: 100vh;
+      }
+      .nav-tab-btn {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 16px;
+        color: #999;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: 600;
+        font-size: 14px;
+        margin-bottom: 6px;
+        transition: all 0.2s ease;
+        border: 1px solid transparent;
+      }
+      .nav-tab-btn:hover {
+        color: #fff;
+        background: #1a1a1a;
+      }
+      .nav-tab-btn.active {
+        color: #fff;
+        background: var(--wpk-gold);
+        font-weight: 700;
+      }
+      .stat-card {
+        background: var(--wpk-card);
+        border: 1px solid var(--wpk-border);
+        border-radius: 8px;
+        padding: 22px;
+        position: relative;
+        overflow: hidden;
+      }
+      .stat-card-title {
+        font-size: 12px;
+        color: var(--wpk-muted);
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+      .stat-card-val {
+        font-size: 28px;
+        font-weight: 800;
+        color: #fff;
+        font-family: 'Stack Sans Headline', sans-serif;
+      }
+      .stat-card-icon {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 24px;
+        color: rgba(0, 135, 81, 0.4);
+      }
+      .admin-panel {
+        background: var(--wpk-card);
+        border: 1px solid var(--wpk-border);
+        border-radius: 8px;
+        padding: 24px;
+        margin-bottom: 30px;
+      }
+      .admin-table {
+        width: 100%;
+        color: #ddd;
+        font-size: 13px;
+        border-collapse: separate;
+        border-spacing: 0;
+      }
+      .admin-table th {
+        background: #1c1c1c;
+        color: var(--wpk-muted);
+        text-transform: uppercase;
+        font-size: 11px;
+        letter-spacing: 1px;
+        padding: 12px 14px;
+        border-bottom: 1px solid var(--wpk-border);
+      }
+      .admin-table td {
+        padding: 14px;
+        border-bottom: 1px solid #202020;
+        vertical-align: middle;
+      }
+      .admin-table tr:hover td {
+        background: #191919;
+      }
+      .badge-status {
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .badge-under_review { background: rgba(255, 193, 7, 0.15); color: #ffc107; border: 1px solid #ffc107; }
+      .badge-accepted { background: rgba(40, 167, 69, 0.15); color: #28a745; border: 1px solid #28a745; }
+      .badge-counteroffered { background: rgba(23, 162, 184, 0.15); color: #17a2b8; border: 1px solid #17a2b8; }
+      .badge-rejected { background: rgba(220, 53, 69, 0.15); color: #dc3545; border: 1px solid #dc3545; }
+      .badge-completed { background: rgba(0, 135, 81, 0.15); color: #008751; border: 1px solid #008751; }
+      .badge-processing { background: rgba(255, 193, 7, 0.15); color: #ffc107; }
+      .badge-dispatched { background: rgba(23, 162, 184, 0.15); color: #17a2b8; }
+      .badge-delivered { background: rgba(40, 167, 69, 0.15); color: #28a745; }
+
+      .form-control-dark {
+        background: #202020;
+        border: 1px solid #333;
+        color: #fff;
+        font-size: 13px;
+        border-radius: 4px;
+        padding: 9px 12px;
+      }
+      .form-control-dark:focus {
+        background: #252525;
+        border-color: var(--wpk-gold);
+        color: #fff;
+        box-shadow: none;
+      }
+      @media (max-width: 991px) {
+        .admin-sidebar { width: 100%; position: relative; height: auto; }
+        .admin-main { margin-left: 0; padding: 20px; }
+      }
+    </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="admin-sidebar">
+    <div style="margin-bottom: 30px;">
+      <a href="index.html">
+        <img src="images/logo-white.svg" alt="Woodpeckers" style="height: 38px;">
+      </a>
+      <div style="font-size: 11px; color: var(--wpk-gold); font-weight: 700; letter-spacing: 1.5px; margin-top: 6px;">
+        STAFF OPERATIONS CONSOLE
+      </div>
+    </div>
+
+    <nav style="flex: 1;">
+      <a href="#dashboard" class="nav-tab-btn active" data-tab="dashboard">
+        <i class="fa-solid fa-chart-line"></i> Dashboard &amp; KPIs
+      </a>
+      <a href="#reserve" class="nav-tab-btn" data-tab="reserve">
+        <i class="fa-solid fa-gavel"></i> Meet The Reserve <span id="badge-pending-offers" class="badge bg-warning text-dark ms-auto" style="display:none;">0</span>
+      </a>
+      <a href="#orders" class="nav-tab-btn" data-tab="orders">
+        <i class="fa-solid fa-box-open"></i> Orders &amp; Fulfilment <span id="badge-pending-orders" class="badge bg-light text-dark ms-auto" style="display:none;">0</span>
+      </a>
+      <a href="#products" class="nav-tab-btn" data-tab="products">
+        <i class="fa-solid fa-shoe-prints"></i> Inventory &amp; Grails
+      </a>
+      <a href="#settings" class="nav-tab-btn" data-tab="settings">
+        <i class="fa-solid fa-sliders"></i> Store Configuration
+      </a>
+    </nav>
+
+    <div style="padding-top: 20px; border-top: 1px solid var(--wpk-border); font-size: 12px; color: #777;">
+      <div style="color: #bbb; font-weight: 600; margin-bottom: 4px;">Logged in as:</div>
+      <div id="admin-user-display">Philip (Store Manager)</div>
+      <div class="mt-3">
+        <a href="index.html" class="btn btn-outline-secondary btn-sm w-100" style="font-size: 11px;">
+          <i class="fa-solid fa-arrow-left me-1"></i> Return to Storefront
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content Area -->
+  <main class="admin-main">
+    
+    <!-- Top Bar -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; border-bottom: 1px solid var(--wpk-border); padding-bottom: 16px;">
+      <div>
+        <h2 id="section-title" style="margin: 0; font-size: 24px; font-weight: 800; color: #fff;">Operations Dashboard</h2>
+        <span style="font-size: 13px; color: var(--wpk-muted);">Woodpeckers Showroom • 24 Blohum Road, Dzorwulu, Accra</span>
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <button id="btn-refresh-data" class="btn btn-outline-light btn-sm" style="border-color:#444;">
+          <i class="fa-solid fa-rotate me-1"></i> Sync Live Data
+        </button>
+        <a href="reserve.html" target="_blank" class="btn btn-sm btn-primary" style="background:var(--wpk-gold);border-color:var(--wpk-gold);color:#111;font-weight:700;">
+          <i class="fa-solid fa-fire me-1"></i> View Live Reserve Page
+        </a>
+      </div>
+    </div>
+
+    <!-- 1. DASHBOARD VIEW -->
+    <div id="tab-dashboard" class="tab-pane-content">
+      <!-- KPI Stats Grid -->
+      <div class="row g-4 mb-4">
+        <div class="col-sm-6 col-xl-3">
+          <div class="stat-card">
+            <div class="stat-card-title">Recorded Sales</div>
+            <div class="stat-card-val" id="metric-sales">GH₵ 0.00</div>
+            <i class="fa-solid fa-money-bill-wave stat-card-icon"></i>
+          </div>
+        </div>
+        <div class="col-sm-6 col-xl-3">
+          <div class="stat-card">
+            <div class="stat-card-title">Active Orders</div>
+            <div class="stat-card-val" id="metric-orders">0</div>
+            <i class="fa-solid fa-bag-shopping stat-card-icon"></i>
+          </div>
+        </div>
+        <div class="col-sm-6 col-xl-3">
+          <div class="stat-card">
+            <div class="stat-card-title">Pending Reserve Offers</div>
+            <div class="stat-card-val text-warning" id="metric-pending-offers">0</div>
+            <i class="fa-solid fa-gavel stat-card-icon"></i>
+          </div>
+        </div>
+        <div class="col-sm-6 col-xl-3">
+          <div class="stat-card">
+            <div class="stat-card-title">Reserve Grails Listed</div>
+            <div class="stat-card-val text-info" id="metric-reserve-products">0</div>
+            <i class="fa-solid fa-fire stat-card-icon"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Action / Attention Panel -->
+      <div class="row g-4">
+        <!-- Recent Offers Requiring Decision -->
+        <div class="col-lg-7">
+          <div class="admin-panel h-100">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+              <h5 style="margin: 0; font-size: 16px; font-weight: 700; color: #fff;">
+                <i class="fa-solid fa-bell text-warning me-2"></i> Offers Needing Action
+              </h5>
+              <a href="#reserve" class="nav-link-switch text-decoration-none" style="font-size: 12px; color: var(--wpk-gold);" data-target="reserve">View All Offers &rarr;</a>
+            </div>
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Ref</th>
+                    <th>Product</th>
+                    <th>Customer</th>
+                    <th>Offer</th>
+                    <th>Decision</th>
+                  </tr>
+                </thead>
+                <tbody id="dashboard-pending-offers-table">
+                  <tr><td colspan="5" class="text-center py-4 text-muted">Loading pending offers...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Inventory / Stock Alerts -->
+        <div class="col-lg-5">
+          <div class="admin-panel h-100">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+              <h5 style="margin: 0; font-size: 16px; font-weight: 700; color: #fff;">
+                <i class="fa-solid fa-triangle-exclamation text-warning me-2"></i> Low Stock Warnings
+              </h5>
+              <a href="#products" class="nav-link-switch text-decoration-none" style="font-size: 12px; color: var(--wpk-gold);" data-target="products">Manage Inventory &rarr;</a>
+            </div>
+            <div id="low-stock-list" style="font-size: 13px;">
+              <!-- Populated via JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. MEET THE RESERVE MANAGEMENT -->
+    <div id="tab-reserve" class="tab-pane-content" style="display: none;">
+      <div class="admin-panel">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; margin-bottom: 20px;">
+          <div>
+            <h4 style="margin: 0; font-size: 18px; font-weight: 800; color: #fff;">Reserve Offer Center</h4>
+            <p style="margin: 4px 0 0; font-size: 12px; color: var(--wpk-muted);">
+              Review incoming customer price proposals, issue counteroffers, accept winning bids, and review history.
+            </p>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <select id="filter-reserve-status" class="form-control-dark">
+              <option value="all">All Statuses</option>
+              <option value="under_review" selected>Under Review (Needs Action)</option>
+              <option value="counteroffered">Counteroffered</option>
+              <option value="accepted">Accepted (Checkout Open)</option>
+              <option value="completed">Completed / Paid</option>
+              <option value="rejected">Rejected</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Reference</th>
+                <th>Grail / Variant</th>
+                <th>Customer &amp; Contact</th>
+                <th>Offer vs Retail</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="reserve-offers-table">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. ORDERS MANAGEMENT -->
+    <div id="tab-orders" class="tab-pane-content" style="display: none;">
+      <div class="admin-panel">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <div>
+            <h4 style="margin: 0; font-size: 18px; font-weight: 800; color: #fff;">Order Fulfilment Console</h4>
+            <p style="margin: 4px 0 0; font-size: 12px; color: var(--wpk-muted);">
+              Manage store orders, delivery dispatches across Accra and Ghana, and payment confirmations.
+            </p>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Order #</th>
+                <th>Date</th>
+                <th>Customer</th>
+                <th>Items Ordered</th>
+                <th>Total (GHS)</th>
+                <th>Payment</th>
+                <th>Fulfilment</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="orders-table">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. PRODUCTS & INVENTORY -->
+    <div id="tab-products" class="tab-pane-content" style="display: none;">
+      <div class="admin-panel">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; margin-bottom: 20px;">
+          <div>
+            <h4 style="margin: 0; font-size: 18px; font-weight: 800; color: #fff;">Product Catalogue &amp; Stock</h4>
+            <p style="margin: 4px 0 0; font-size: 12px; color: var(--wpk-muted);">
+              Configure prices, variant stock quantities, and toggle Meet the Reserve eligibility and floor prices.
+            </p>
+          </div>
+          <button class="btn btn-primary btn-sm" id="btn-add-product" style="background:var(--wpk-gold);border-color:var(--wpk-gold);color:#111;font-weight:700;">
+            <i class="fa-solid fa-plus me-1"></i> Add New Product
+          </button>
+        </div>
+
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Category</th>
+                <th>Retail Price</th>
+                <th>Reserve Status</th>
+                <th>Target Floor</th>
+                <th>Variant Stock</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="inventory-table">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. STORE SETTINGS -->
+    <div id="tab-settings" class="tab-pane-content" style="display: none;">
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <div class="admin-panel">
+            <h4 style="font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 16px;">
+              <i class="fa-solid fa-store me-2" style="color:var(--wpk-gold);"></i> Business &amp; Location Details
+            </h4>
+            <form id="settings-business-form">
+              <div class="mb-3">
+                <label class="form-label text-muted" style="font-size: 12px;">Store Name</label>
+                <input type="text" id="set-store-name" class="form-control-dark w-100">
+              </div>
+              <div class="mb-3">
+                <label class="form-label text-muted" style="font-size: 12px;">Tagline / Positioning</label>
+                <input type="text" id="set-tagline" class="form-control-dark w-100">
+              </div>
+              <div class="mb-3">
+                <label class="form-label text-muted" style="font-size: 12px;">Physical Showroom Address</label>
+                <input type="text" id="set-location" class="form-control-dark w-100">
+              </div>
+              <div class="row g-2 mb-3">
+                <div class="col-sm-6">
+                  <label class="form-label text-muted" style="font-size: 12px;">Phone / Voice</label>
+                  <input type="text" id="set-phone" class="form-control-dark w-100">
+                </div>
+                <div class="col-sm-6">
+                  <label class="form-label text-muted" style="font-size: 12px;">WhatsApp Direct</label>
+                  <input type="text" id="set-whatsapp" class="form-control-dark w-100">
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label text-muted" style="font-size: 12px;">Official Instagram</label>
+                <input type="text" id="set-instagram" class="form-control-dark w-100">
+              </div>
+              <button type="submit" class="btn btn-primary btn-sm" style="background:var(--wpk-gold);border-color:var(--wpk-gold);color:#111;font-weight:700;">
+                Save Business Profile
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="admin-panel">
+            <h4 style="font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 16px;">
+              <i class="fa-solid fa-gavel me-2" style="color:var(--wpk-gold);"></i> Meet The Reserve Engine Rules
+            </h4>
+            <form id="settings-reserve-form">
+              <div class="form-check form-switch mb-3">
+                <input class="form-check-input" type="checkbox" id="set-auto-eval" checked>
+                <label class="form-check-label text-white" for="set-auto-eval" style="font-size: 13px;">Enable Rule-Based Evaluation</label>
+                <div style="font-size: 11px; color: var(--wpk-muted);">Automatically accept or counteroffer bids matching floor rules.</div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label text-muted" style="font-size: 12px;">Auto-Accept Threshold (% of target floor)</label>
+                <input type="number" id="set-auto-accept-ratio" class="form-control-dark w-100" value="95" min="50" max="100">
+                <div style="font-size: 11px; color: #888;">If customer offers >= 95% of target floor, status automatically transitions to Accepted.</div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label text-muted" style="font-size: 12px;">Auto-Counteroffer Threshold (% of target floor)</label>
+                <input type="number" id="set-auto-counter-ratio" class="form-control-dark w-100" value="85" min="50" max="100">
+                <div style="font-size: 11px; color: #888;">If offer is between 85% and 94% of floor, customer automatically receives counteroffer at reserve floor.</div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label text-muted" style="font-size: 12px;">Offer Checkout Validity (Hours)</label>
+                <input type="number" id="set-validity-hours" class="form-control-dark w-100" value="48" min="1" max="168">
+              </div>
+              <button type="submit" class="btn btn-primary btn-sm" style="background:var(--wpk-gold);border-color:var(--wpk-gold);color:#111;font-weight:700;">
+                Update Reserve Engine Settings
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Offer Decision Action Modal -->
+  <div class="modal fade" id="admin-offer-modal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content" style="background:#1a1a1a;color:#fff;border:1px solid #333;">
+        <div class="modal-header" style="border-bottom:1px solid #282828;">
+          <h5 class="modal-title" id="admin-offer-title" style="font-size:16px;font-weight:700;">Review Reserve Offer</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" id="admin-offer-body" style="padding:20px;">
+          <!-- Content loaded via JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/bootstrap.min.js"></script>
+  <script>
+    // State
+    let adminData = {
+      products: [],
+      offers: [],
+      orders: [],
+      settings: {}
+    };
+
+    // Tab Navigation
+    document.querySelectorAll('.nav-tab-btn, .nav-link-switch').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const tab = btn.getAttribute('data-tab') || btn.getAttribute('data-target');
+        
+        document.querySelectorAll('.nav-tab-btn').forEach(b => b.classList.remove('active'));
+        const activeNav = document.querySelector(`.nav-tab-btn[data-tab="${tab}"]`);
+        if (activeNav) activeNav.classList.add('active');
+
+        document.querySelectorAll('.tab-pane-content').forEach(p => p.style.display = 'none');
+        const activePane = document.getElementById(`tab-${tab}`);
+        if (activePane) activePane.style.display = 'block';
+
+        const titles = {
+          dashboard: 'Operations Dashboard',
+          reserve: 'Meet The Reserve Management',
+          orders: 'Orders & Fulfilment Console',
+          products: 'Catalogue & Inventory Management',
+          settings: 'Store Configuration & Rules'
+        };
+        document.getElementById('section-title').textContent = titles[tab] || 'Operations Console';
+      });
+    });
+
+    // Fetch and render data
+    async function loadAdminData() {
+      try {
+        const [prodRes, offRes, ordRes, setRes] = await Promise.all([
+          fetch('/api/products'),
+          fetch('/api/reserve/offers'),
+          fetch('/api/orders'),
+          fetch('/api/settings')
+        ]);
+
+        if (prodRes.ok) adminData.products = await prodRes.json();
+        if (offRes.ok) adminData.offers = await offRes.json();
+        if (ordRes.ok) adminData.orders = await ordRes.json();
+        if (setRes.ok) adminData.settings = await setRes.json();
+
+        renderDashboard();
+        renderReserveOffers();
+        renderOrders();
+        renderInventory();
+        populateSettings();
+      } catch (err) {
+        console.error('Failed to load admin data:', err);
+      }
+    }
+
+    function formatGHS(num) {
+      return 'GH₵ ' + (parseFloat(num) || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function renderDashboard() {
+      const totalSales = adminData.orders.reduce((sum, o) => sum + (o.paymentStatus === 'paid' ? o.total : 0), 0);
+      const pendingOrders = adminData.orders.filter(o => o.fulfilmentStatus === 'processing').length;
+      const pendingOffers = adminData.offers.filter(o => o.status === 'under_review').length;
+      const reserveProducts = adminData.products.filter(p => p.reserveEligible).length;
+
+      document.getElementById('metric-sales').textContent = formatGHS(totalSales);
+      document.getElementById('metric-orders').textContent = adminData.orders.length;
+      document.getElementById('metric-pending-offers').textContent = pendingOffers;
+      document.getElementById('metric-reserve-products').textContent = reserveProducts;
+
+      // Update badge counts in sidebar
+      const badgeOffers = document.getElementById('badge-pending-offers');
+      if (pendingOffers > 0) {
+        badgeOffers.textContent = pendingOffers;
+        badgeOffers.style.display = 'inline-block';
+      } else {
+        badgeOffers.style.display = 'none';
+      }
+
+      const badgeOrders = document.getElementById('badge-pending-orders');
+      if (pendingOrders > 0) {
+        badgeOrders.textContent = pendingOrders;
+        badgeOrders.style.display = 'inline-block';
+      } else {
+        badgeOrders.style.display = 'none';
+      }
+
+      // Dashboard pending table
+      const pendingTable = document.getElementById('dashboard-pending-offers-table');
+      const reviewOffers = adminData.offers.filter(o => o.status === 'under_review').slice(0, 5);
+      if (reviewOffers.length === 0) {
+        pendingTable.innerHTML = '<tr><td colspan="5" class="text-center py-4 text-muted"><i class="fa-solid fa-check-circle text-success me-1"></i> All incoming offers have been reviewed!</td></tr>';
+      } else {
+        pendingTable.innerHTML = reviewOffers.map(o => `
+          <tr>
+            <td><code style="color:var(--wpk-gold);">${o.reference}</code></td>
+            <td><strong>${o.productName}</strong><br><small class="text-muted">Size: ${o.size}</small></td>
+            <td>${o.customerName}<br><small class="text-muted">${o.customerPhone}</small></td>
+            <td><strong style="color:var(--wpk-gold);">${formatGHS(o.offerAmount)}</strong><br><small class="text-muted">Retail: ${formatGHS(o.retailPrice)}</small></td>
+            <td>
+              <button class="btn btn-sm btn-outline-warning" onclick="openOfferDecisionModal('${o.reference}')">
+                Review &rarr;
+              </button>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      // Low stock alerts
+      const stockList = document.getElementById('low-stock-list');
+      const alerts = [];
+      adminData.products.forEach(p => {
+        if (p.sizes) {
+          p.sizes.forEach(s => {
+            if (s.stock <= 1) alerts.push({ name: p.name, size: s.size, stock: s.stock });
+          });
+        }
+      });
+
+      if (alerts.length === 0) {
+        stockList.innerHTML = '<div class="text-muted py-2"><i class="fa-solid fa-circle-check text-success me-1"></i> Inventory levels are healthy across all sizes.</div>';
+      } else {
+        stockList.innerHTML = alerts.slice(0, 6).map(a => `
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #222;">
+            <div><strong>${a.name}</strong> <span class="text-muted">(${a.size})</span></div>
+            <span class="badge ${a.stock === 0 ? 'bg-danger' : 'bg-warning text-dark'}">${a.stock === 0 ? 'Sold Out' : a.stock + ' remaining'}</span>
+          </div>
+        `).join('');
+      }
+    }
+
+    function renderReserveOffers() {
+      const filter = document.getElementById('filter-reserve-status').value;
+      const tbody = document.getElementById('reserve-offers-table');
+      let list = [...adminData.offers];
+
+      if (filter !== 'all') {
+        list = list.filter(o => o.status === filter);
+      }
+
+      if (list.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="text-center py-4 text-muted">No offers matching filter.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = list.map(o => `
+        <tr>
+          <td><code style="color:var(--wpk-gold);font-weight:700;">${o.reference}</code><br><small class="text-muted">${new Date(o.submittedAt).toLocaleDateString()}</small></td>
+          <td>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <img src="${o.productImage}" alt="" style="width:40px;height:40px;object-fit:contain;background:#202020;border-radius:4px;padding:2px;">
+              <div>
+                <strong>${o.productName}</strong><br>
+                <small class="text-muted">Size: ${o.size} &bull; ${o.productSku}</small>
+              </div>
+            </div>
+          </td>
+          <td>
+            <strong>${o.customerName}</strong><br>
+            <small class="text-muted"><i class="fa-brands fa-whatsapp text-success me-1"></i>${o.customerPhone}</small><br>
+            <small class="text-muted">${o.customerEmail}</small>
+          </td>
+          <td>
+            <div style="font-size:14px;font-weight:700;color:var(--wpk-gold);">${formatGHS(o.offerAmount)}</div>
+            <small class="text-muted">Retail: ${formatGHS(o.retailPrice)}</small>
+            ${o.counterAmount ? `<br><small class="text-info font-weight-bold">Counter: ${formatGHS(o.counterAmount)}</small>` : ''}
+          </td>
+          <td>
+            <span class="badge-status badge-${o.status}">${o.status.replace('_', ' ')}</span>
+          </td>
+          <td>
+            <button class="btn btn-sm btn-outline-light" onclick="openOfferDecisionModal('${o.reference}')" style="border-color:#444;">
+              <i class="fa-solid fa-sliders me-1"></i> Manage
+            </button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function renderOrders() {
+      const tbody = document.getElementById('orders-table');
+      if (adminData.orders.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="8" class="text-center py-4 text-muted">No orders placed yet.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = adminData.orders.map(o => `
+        <tr>
+          <td><code style="color:var(--wpk-gold);font-weight:700;">${o.orderNumber}</code></td>
+          <td>${new Date(o.createdAt).toLocaleDateString()}</td>
+          <td><strong>${o.customerName}</strong><br><small class="text-muted">${o.customerPhone}</small></td>
+          <td>
+            ${o.items.map(it => `<div>${it.quantity}x ${it.productName} (${it.size})</div>`).join('')}
+          </td>
+          <td><strong>${formatGHS(o.total)}</strong><br><small class="text-muted">${o.deliveryMethod}</small></td>
+          <td><span class="badge bg-success">${o.paymentMethod}</span></td>
+          <td>
+            <select class="form-control-dark py-1 px-2" style="font-size:12px;" onchange="updateOrderStatus('${o.orderNumber}', this.value)">
+              <option value="processing" ${o.fulfilmentStatus === 'processing' ? 'selected' : ''}>Processing</option>
+              <option value="dispatched" ${o.fulfilmentStatus === 'dispatched' ? 'selected' : ''}>Dispatched</option>
+              <option value="delivered" ${o.fulfilmentStatus === 'delivered' ? 'selected' : ''}>Delivered</option>
+              <option value="cancelled" ${o.fulfilmentStatus === 'cancelled' ? 'selected' : ''}>Cancelled</option>
+            </select>
+          </td>
+          <td>
+            <a href="order-received.html?orderNumber=${o.orderNumber}" target="_blank" class="btn btn-sm btn-link text-decoration-none" style="color:var(--wpk-gold);">
+              <i class="fa-solid fa-receipt me-1"></i> Receipt
+            </a>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function renderInventory() {
+      const tbody = document.getElementById('inventory-table');
+      tbody.innerHTML = adminData.products.map(p => `
+        <tr>
+          <td>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <img src="${p.images[0]}" alt="" style="width:48px;height:48px;object-fit:contain;background:#202020;border-radius:4px;padding:3px;">
+              <div>
+                <strong>${p.name}</strong><br>
+                <small class="text-muted">${p.sku} &bull; ${p.brand}</small>
+              </div>
+            </div>
+          </td>
+          <td>${p.category}</td>
+          <td><strong>${formatGHS(p.price)}</strong></td>
+          <td>
+            <span class="badge ${p.reserveEligible ? 'bg-warning text-dark' : 'bg-secondary'}">
+              ${p.reserveEligible ? 'Active Reserve' : 'Standard'}
+            </span>
+          </td>
+          <td>${p.reserveEligible ? formatGHS(p.reserveFloor) : '&mdash;'}</td>
+          <td>
+            ${(p.sizes || []).map(s => `
+              <span class="badge ${s.stock > 0 ? 'bg-dark border border-secondary' : 'bg-danger'}" style="margin:2px;">
+                ${s.size}: ${s.stock}
+              </span>
+            `).join('')}
+          </td>
+          <td>
+            <button class="btn btn-sm btn-outline-light" onclick="toggleReserveEligibility('${p.id}')">
+              ${p.reserveEligible ? 'Disable Reserve' : 'Enable Reserve'}
+            </button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function populateSettings() {
+      const s = adminData.settings;
+      if (!s) return;
+      document.getElementById('set-store-name').value = s.storeName || '';
+      document.getElementById('set-tagline').value = s.tagline || '';
+      document.getElementById('set-location').value = s.location || '';
+      document.getElementById('set-phone').value = s.phone || '';
+      document.getElementById('set-whatsapp').value = s.whatsapp || '';
+      document.getElementById('set-instagram').value = s.instagram || '';
+
+      if (s.reserveRules) {
+        document.getElementById('set-auto-eval').checked = Boolean(s.reserveRules.autoEvaluate);
+        document.getElementById('set-auto-accept-ratio').value = Math.round((s.reserveRules.autoAcceptRatio || 0.95) * 100);
+        document.getElementById('set-auto-counter-ratio').value = Math.round((s.reserveRules.autoCounterRatio || 0.85) * 100);
+        document.getElementById('set-validity-hours').value = s.reserveRules.offerValidityHours || 48;
+      }
+    }
+
+    // Modal action handlers
+    window.openOfferDecisionModal = function(reference) {
+      const offer = adminData.offers.find(o => o.reference === reference);
+      if (!offer) return;
+
+      const body = document.getElementById('admin-offer-body');
+      body.innerHTML = `
+        <div style="background:#222;border:1px solid #333;border-radius:6px;padding:14px;margin-bottom:16px;">
+          <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+            <span class="text-muted">Offer Ref:</span>
+            <code style="color:var(--wpk-gold);font-weight:700;">${offer.reference}</code>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+            <span class="text-muted">Grail:</span>
+            <strong>${offer.productName} (${offer.size})</strong>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+            <span class="text-muted">Customer:</span>
+            <span>${offer.customerName} (${offer.customerPhone})</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+            <span class="text-muted">Customer Offer:</span>
+            <strong style="color:var(--wpk-gold);font-size:16px;">${formatGHS(offer.offerAmount)}</strong>
+          </div>
+          <div style="display:flex;justify-content:space-between;">
+            <span class="text-muted">Retail Price:</span>
+            <span>${formatGHS(offer.retailPrice)}</span>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label text-muted" style="font-size:12px;">Counteroffer Amount (Optional)</label>
+          <div class="input-group">
+            <span class="input-group-text" style="background:#282828;color:var(--wpk-gold);border-color:#333;">GH₵</span>
+            <input type="number" id="modal-counter-amount" class="form-control-dark" placeholder="e.g. 3400" value="${offer.counterAmount || ''}">
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label text-muted" style="font-size:12px;">Staff Internal Note</label>
+          <textarea id="modal-note" class="form-control-dark w-100" rows="2" placeholder="Add decision rationale or customer communication note...">${offer.internalNotes || ''}</textarea>
+        </div>
+
+        <div style="display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap;border-top:1px solid #282828;padding-top:16px;">
+          <button class="btn btn-success btn-sm font-weight-bold" onclick="executeOfferAction('${offer.reference}', 'accept')">
+            <i class="fa-solid fa-check me-1"></i> Accept Offer (${formatGHS(offer.offerAmount)})
+          </button>
+          <button class="btn btn-info btn-sm font-weight-bold" onclick="executeOfferCounter('${offer.reference}')">
+            <i class="fa-solid fa-scale-balanced me-1"></i> Send Counteroffer
+          </button>
+          <button class="btn btn-outline-danger btn-sm" onclick="executeOfferAction('${offer.reference}', 'reject')">
+            <i class="fa-solid fa-xmark me-1"></i> Reject
+          </button>
+        </div>
+      `;
+
+      const modal = new bootstrap.Modal(document.getElementById('admin-offer-modal'));
+      modal.show();
+    };
+
+    window.executeOfferAction = async function(reference, action) {
+      const note = document.getElementById('modal-note') ? document.getElementById('modal-note').value : '';
+      try {
+        const res = await fetch(`/api/reserve/offers/${reference}/action`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action, note, actor: 'Store Manager' })
+        });
+        if (res.ok) {
+          bootstrap.Modal.getInstance(document.getElementById('admin-offer-modal')).hide();
+          await loadAdminData();
+        }
+      } catch (err) {
+        alert('Action error: ' + err.message);
+      }
+    };
+
+    window.executeOfferCounter = async function(reference) {
+      const counterAmount = parseFloat(document.getElementById('modal-counter-amount').value);
+      if (!counterAmount || counterAmount <= 0) {
+        alert('Please specify a valid counteroffer amount in GH₵');
+        return;
+      }
+      const note = document.getElementById('modal-note').value;
+      try {
+        const res = await fetch(`/api/reserve/offers/${reference}/action`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'counteroffer', counterAmount, note, actor: 'Store Manager' })
+        });
+        if (res.ok) {
+          bootstrap.Modal.getInstance(document.getElementById('admin-offer-modal')).hide();
+          await loadAdminData();
+        }
+      } catch (err) {
+        alert('Action error: ' + err.message);
+      }
+    };
+
+    window.updateOrderStatus = async function(orderNumber, fulfilmentStatus) {
+      try {
+        const res = await fetch(`/api/orders/${orderNumber}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ fulfilmentStatus })
+        });
+        if (res.ok) {
+          await loadAdminData();
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    window.toggleReserveEligibility = async function(productId) {
+      const prod = adminData.products.find(p => p.id === productId);
+      if (!prod) return;
+      const newStatus = !prod.reserveEligible;
+      const floor = newStatus && !prod.reserveFloor ? Math.round(prod.price * 0.85) : prod.reserveFloor;
+
+      try {
+        const res = await fetch(`/api/products/${productId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ reserveEligible: newStatus, reserveFloor: floor })
+        });
+        if (res.ok) {
+          await loadAdminData();
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    // Filter change
+    document.getElementById('filter-reserve-status').addEventListener('change', renderReserveOffers);
+    document.getElementById('btn-refresh-data').addEventListener('click', loadAdminData);
+
+    // Initial load
+    document.addEventListener('DOMContentLoaded', loadAdminData);
+  </script>
+</body>
+</html>

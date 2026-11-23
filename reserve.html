@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Meta -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+	<meta name="description" content="Meet the Reserve by Woodpeckers Sneakers and Streetwear Ghana. Name your price on exclusive sneakers, Jordans, Yeezys and luxury streetwear in Accra.">
+	<meta name="keywords" content="Woodpeckers Ghana, Meet the Reserve, sneakers Accra, streetwear Ghana, Nike Jordans Ghana, Yeezy Accra">
+	<meta name="author" content="Woodpeckers Ghana">
+	<!-- Page Title -->
+    <title>Meet the Reserve | Woodpeckers Sneakers &amp; Streetwear Ghana</title>
+	<!-- Favicon Icon -->
+	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <!-- Google Fonts Css-->
+        <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+	<!-- Bootstrap Css -->
+	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<!-- SlickNav Css -->
+	<link href="css/slicknav.min.css" rel="stylesheet">
+	<!-- Swiper Css -->
+	<link rel="stylesheet" href="css/swiper-bundle.min.css">
+	<!-- Font Awesome Icon Css-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+	<link href="css/all.min.css" rel="stylesheet" media="screen">
+	<!-- Animated Css -->
+	<link href="css/animate.css" rel="stylesheet">
+    <!-- Magnific Popup Core Css File -->
+	<link rel="stylesheet" href="css/magnific-popup.css">
+	<!-- Mouse Cursor Css File -->
+	<link rel="stylesheet" href="css/mousecursor.css">
+	<!-- Main Custom Css -->
+	<link href="css/custom.css" rel="stylesheet" media="screen">
+
+    <style>
+      .reserve-hero {
+        background: linear-gradient(180deg, #0d0d0d 0%, #161616 100%);
+        padding: 90px 0 60px;
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+        border-bottom: 1px solid #222;
+      }
+      .reserve-hero::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -10%;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(0, 135, 81, 0.15) 0%, rgba(0,0,0,0) 70%);
+        pointer-events: none;
+      }
+      .reserve-badge-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(0, 135, 81, 0.15);
+        border: 1px solid #008751;
+        color: #008751;
+        padding: 6px 14px;
+        border-radius: 50px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+      }
+      .reserve-step-card {
+        background: #141414;
+        border: 1px solid #252525;
+        border-radius: 8px;
+        padding: 28px 24px;
+        height: 100%;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+      .reserve-step-card:hover {
+        border-color: #008751;
+        transform: translateY(-4px);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+      }
+      .reserve-step-number {
+        font-size: 38px;
+        font-weight: 900;
+        color: rgba(0, 135, 81, 0.3);
+        line-height: 1;
+        margin-bottom: 12px;
+      }
+      .reserve-tracker-box {
+        background: #181818;
+        border: 1px solid #333;
+        border-radius: 8px;
+        padding: 30px;
+        margin-top: 40px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+      }
+      .grail-card {
+        background: #fff;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+      .grail-card:hover {
+        border-color: #008751;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+        transform: translateY(-4px);
+      }
+      .grail-tag {
+        position: absolute;
+        top: 14px;
+        left: 14px;
+        background: #111;
+        color: #008751;
+        padding: 4px 10px;
+        font-size: 11px;
+        font-weight: 800;
+        border-radius: 3px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        z-index: 2;
+      }
+      .btn-make-offer {
+        background: #111;
+        color: #fff;
+        border: 1px solid #111;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        padding: 10px 18px;
+        border-radius: 4px;
+        transition: all 0.25s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-size: 13px;
+      }
+      .btn-make-offer:hover {
+        background: #008751;
+        border-color: #008751;
+        color: #111;
+      }
+      .header-cart-badge {
+        position: absolute;
+        top: -6px;
+        right: -8px;
+        background: #008751;
+        color: #111;
+        font-size: 10px;
+        font-weight: 800;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+</head>
+<body>
+
+    <!-- Preloader Start -->
+	<div class="preloader">
+		<div class="loading-container">
+			<div class="loading"></div>
+			<div id="loading-icon"><img src="images/loader.svg" alt="Woodpeckers"></div>
+		</div>
+	</div>
+	<!-- Preloader End -->
+
+        <!-- Topbar Section Start -->
+    <div class="topbar" style="background:#0a0a0a;border-bottom:1px solid #1a1a1a;padding:8px 0;font-size:12px;letter-spacing:0.8px;">
+        <div class="container text-center">
+            <span style="color:#00D084;font-weight:800;text-transform:uppercase;">Meet The Reserve Drops Every Thu, Fri &amp; Sat</span>
+            <span class="d-none d-md-inline" style="color:#666;margin:0 10px;">&bull;</span>
+            <span class="d-none d-md-inline" style="color:#bbb;">24 Blohum Road, Dzorwulu, Accra</span>
+            <a href="reserve.html" style="color:#fff;font-weight:700;margin-left:10px;text-transform:uppercase;letter-spacing:1px;text-decoration:underline;">Name Your Price &rarr;</a>
+        </div>
+    </div>
+    <!-- Topbar Section End -->
+
+    <!-- Header Start -->
+	<header class="main-header active-sticky-header">
+		<div class="header-sticky">
+			<nav class="navbar navbar-expand-lg">
+                <div class="container">
+                    <!-- Logo Start -->
+                    <a class="navbar-brand" href="index.html">
+                        <img src="images/logo.svg" alt="Woodpeckers Logo" style="height:44px;">
+                    </a>
+                    <!-- Logo End -->
+
+                    <!-- Main Menu Start -->
+                    <div class="main-menu">
+                        <div class="collapse navbar-collapse">
+                            <div class="nav-menu-wrapper">
+                                <ul class="navbar-nav mr-auto" id="menu">
+                                    <li class="nav-item"><a class="nav-link" href="products.html">Drops</a></li>                                
+                                    <li class="nav-item"><a class="nav-link" href="products.html?category=Exclusive%20Sneakers">Sneakers</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="products.html?category=Streetwear">Streetwear</a></li>
+                                    <li class="nav-item reserve-nav-item"><a class="nav-link reserve-badge-link" href="reserve.html">Meet The Reserve</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="contact.html">Showroom</a></li>
+                                    <li class="nav-item mobile-nav-item"><a class="nav-link" href="account-dashboard.html">My Account &amp; Orders</a></li>
+                                    <li class="nav-item mobile-nav-item"><a class="nav-link" href="faqs.html">FAQs &amp; Help</a></li>
+                                </ul>
+                            </div><!-- Responsive Menu Container Start -->
+						<div class="responsive-menu"></div>
+						<!-- Responsive Menu Container End -->
+                    </div>
+                    <!-- Main Menu End -->
+
+                    <!-- Header Action Start -->
+                    <div class="header-action-details">
+                        <ul>
+                            <li>
+                                <a href="reserve.html#offer-tracker" title="Track Reserve Offer" style="color:#111;font-size:17px;">
+                                    <i class="fa-solid fa-gavel"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="account-order.html" title="My Account">
+                                    <img src="images/icon-user-primary.svg" alt="Account">
+                                </a>
+                            </li>
+                            <li style="position:relative;">
+                                <a href="cart.html" title="Shopping Cart">
+                                    <img src="images/icon-cart-primary.svg" alt="Cart">
+                                    <span class="header-cart-badge" style="display:none;">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Header Action End -->
+                </div>
+            </nav>
+		</div>
+	</header>
+	<!-- Header End -->
+
+    <!-- Meet The Reserve Hero Section Start -->
+    <section class="reserve-hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <span class="reserve-badge-pill">
+                        <i class="fa-solid fa-bolt"></i> Ghana's First Interactive Sneaker Offer Experience
+                    </span>
+                    <h1 style="font-size:clamp(36px, 5vw, 56px);font-weight:900;line-height:1.1;letter-spacing:-1px;margin-bottom:18px;">
+                        NAME YOUR PRICE.<br><span style="color:#008751;">MEET THE RESERVE.</span>
+                    </h1>
+                    <p style="font-size:16px;color:#bbb;max-width:620px;line-height:1.6;margin-bottom:28px;">
+                        Why pay fixed retail when you can negotiate like an insider? Discover rare grails, limited deadstock Jordans, and archival streetwear. Make your serious offer. When your offer meets our reserve target, the pair is yours.
+                    </p>
+                    <div style="display:flex;gap:14px;flex-wrap:wrap;">
+                        <a href="#reserve-catalog" class="btn btn-primary" style="background:#008751;border-color:#008751;color:#fff;font-weight:800;padding:14px 28px;text-transform:uppercase;letter-spacing:1px;border-radius:4px;">
+                            <i class="fa-solid fa-fire me-2"></i> Browse Eligible Grails
+                        </a>
+                        <a href="#offer-tracker" class="btn btn-outline-light" style="font-weight:700;padding:14px 28px;text-transform:uppercase;letter-spacing:1px;border-radius:4px;border-color:#444;">
+                            <i class="fa-solid fa-magnifying-glass me-2"></i> Track Your Offer
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 d-none d-lg-block text-center">
+                    <div style="position:relative;display:inline-block;">
+                        <img src="images/product-image-1.jpg" alt="Air Jordan 1 Chicago" style="max-height:300px;object-fit:contain;filter:drop-shadow(0 20px 40px rgba(0,0,0,0.8));">
+                        <div style="position:absolute;bottom:0;right:0;background:rgba(20,20,20,0.9);border:1px solid #008751;padding:10px 16px;border-radius:6px;text-align:left;">
+                            <span style="font-size:11px;color:#888;display:block;">Latest Accepted Offer:</span>
+                            <span style="color:#008751;font-weight:800;font-size:15px;">GH₵ 3,300.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Meet The Reserve Hero Section End -->
+
+    <!-- How It Works Section Start -->
+    <section style="background:#0a0a0a;padding:80px 0;color:#fff;border-bottom:1px solid #1f1f1f;">
+        <div class="container">
+            <div class="text-center mb-5">
+                <span style="color:#008751;font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;">Simple. Transparent. Exclusive.</span>
+                <h2 style="font-size:32px;font-weight:800;color:#fff;margin-top:6px;">How Meet The Reserve Works</h2>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="reserve-step-card">
+                        <div class="reserve-step-number">01</div>
+                        <h4 style="font-size:18px;font-weight:700;color:#fff;margin-bottom:10px;">Select Your Grail</h4>
+                        <p style="font-size:13px;color:#999;line-height:1.6;margin:0;">
+                            Browse curated, authenticated footwear and streetwear marked with the Meet the Reserve badge.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="reserve-step-card">
+                        <div class="reserve-step-number">02</div>
+                        <h4 style="font-size:18px;font-weight:700;color:#fff;margin-bottom:10px;">Name Your Price</h4>
+                        <p style="font-size:13px;color:#999;line-height:1.6;margin:0;">
+                            Choose your size and submit your offer in Ghana Cedis (GH₵). Provide your WhatsApp &amp; Email for instant updates.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="reserve-step-card">
+                        <div class="reserve-step-number">03</div>
+                        <h4 style="font-size:18px;font-weight:700;color:#fff;margin-bottom:10px;">The Evaluation</h4>
+                        <p style="font-size:13px;color:#999;line-height:1.6;margin:0;">
+                            Offers are evaluated against the product's reserve target. Qualifying offers are accepted or counteroffered promptly.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="reserve-step-card">
+                        <div class="reserve-step-number">04</div>
+                        <h4 style="font-size:18px;font-weight:700;color:#fff;margin-bottom:10px;">Secure Your Pair</h4>
+                        <p style="font-size:13px;color:#999;line-height:1.6;margin:0;">
+                            Once accepted, unlock a private 48-hour checkout link to pay via MoMo, Card, or reserve for showroom pickup!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- How It Works Section End -->
+
+    <!-- Live Offer Tracker Box Start -->
+    <section id="offer-tracker" style="background:#111;padding:60px 0;border-bottom:1px solid #222;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="reserve-tracker-box">
+                        <div class="text-center mb-4">
+                            <h3 style="font-size:22px;font-weight:800;color:#fff;margin-bottom:6px;">
+                                <i class="fa-solid fa-magnifying-glass me-2" style="color:#008751;"></i> Track Your Reserve Offer
+                            </h3>
+                            <p style="font-size:13px;color:#888;margin:0;">
+                                Enter your unique reference code (e.g., <code style="color:#008751;background:#222;padding:2px 6px;">WPK-RSV-8419</code>) to see live review status.
+                            </p>
+                        </div>
+
+                        <form id="tracker-form" style="display:flex;gap:10px;flex-wrap:wrap;">
+                            <input type="text" id="tracker-input" class="form-control" placeholder="Enter Reference Code (e.g. WPK-RSV-8419)" required style="flex:1;min-width:260px;background:#202020;border:1px solid #3a3a3a;color:#fff;padding:12px 16px;font-family:monospace;letter-spacing:1px;font-size:15px;">
+                            <button type="submit" class="btn btn-primary" style="background:#008751;border-color:#008751;color:#fff;font-weight:800;padding:12px 24px;text-transform:uppercase;letter-spacing:1px;">
+                                Check Status
+                            </button>
+                        </form>
+
+                        <div id="tracker-result" style="display:none;margin-top:24px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Live Offer Tracker Box End -->
+
+    <!-- Eligible Grails Catalogue Start -->
+    <section id="reserve-catalog" style="padding:80px 0;background:#f9f9f9;">
+        <div class="container">
+            <div class="row align-items-end mb-4">
+                <div class="col-md-7">
+                    <span style="color:#008751;font-weight:800;font-size:12px;letter-spacing:2px;text-transform:uppercase;">Curated Drops &amp; Grails</span>
+                    <h2 style="font-size:32px;font-weight:900;color:#111;margin-top:4px;">Eligible For Meet The Reserve</h2>
+                </div>
+                <div class="col-md-5 text-md-end mt-3 mt-md-0">
+                    <span style="font-size:13px;color:#666;">
+                        Showing verified authentic products available for customer price offers.
+                    </span>
+                </div>
+            </div>
+
+            <!-- Grails Grid -->
+            <div class="row g-4" id="reserve-products-grid">
+                <!-- Dynamically populated or rendered via server/JS -->
+            </div>
+        </div>
+    </section>
+    <!-- Eligible Grails Catalogue End -->
+
+    <!-- Reserve Transparency & FAQ Start -->
+    <section style="padding:70px 0;background:#fff;border-top:1px solid #eee;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 mb-4 mb-lg-0">
+                    <span style="color:#008751;font-weight:800;font-size:12px;letter-spacing:2px;text-transform:uppercase;">Store Policy</span>
+                    <h2 style="font-size:30px;font-weight:900;color:#111;margin-top:4px;">Meet The Reserve Rules &amp; FAQ</h2>
+                    <p style="font-size:14px;color:#666;line-height:1.6;margin-top:14px;">
+                        Woodpeckers Sneakers &amp; Streetwear is committed to genuine culture and fair pricing. Here is everything you need to know about participating in the campaign.
+                    </p>
+                    <div style="background:#141414;color:#fff;padding:20px;border-radius:6px;margin-top:20px;">
+                        <h5 style="color:#008751;font-size:15px;font-weight:700;margin-bottom:6px;"><i class="fa-solid fa-location-dot me-2"></i> Visit In-Store</h5>
+                        <p style="font-size:12px;color:#aaa;margin-bottom:10px;">Prefer to make your offer in person or inspect the shoes firsthand?</p>
+                        <div style="font-size:13px;color:#fff;font-weight:600;">24 Blohum Road, near Fidelity Bank, Dzorwulu, Accra</div>
+                        <div style="font-size:12px;color:#008751;margin-top:4px;">WhatsApp / Call: +233 55 392 1612</div>
+                    </div>
+                </div>
+
+                <div class="col-lg-7">
+                    <div class="accordion" id="reserveFaqAccordion">
+                        <div class="accordion-item" style="border:1px solid #e5e5e5;margin-bottom:12px;border-radius:6px;overflow:hidden;">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="font-weight:700;font-size:15px;color:#111;">
+                                    How is the reserve price determined?
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#reserveFaqAccordion">
+                                <div class="accordion-body" style="font-size:13px;color:#666;line-height:1.6;">
+                                    Each participating item has a hidden minimum reserve threshold based on rarity, condition, and market deadstock value. When your offer meets or exceeds this threshold, the deal is automatically unlocked or rapidly approved by our team.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item" style="border:1px solid #e5e5e5;margin-bottom:12px;border-radius:6px;overflow:hidden;">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="font-weight:700;font-size:15px;color:#111;">
+                                    What happens if my offer is below the reserve?
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#reserveFaqAccordion">
+                                <div class="accordion-body" style="font-size:13px;color:#666;line-height:1.6;">
+                                    If your offer is close to the reserve floor, our team will send you a counteroffer. You can accept the counteroffer with one click or politely decline. If an offer is far below realistic market value, it will be declined with an opportunity to resubmit.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item" style="border:1px solid #e5e5e5;margin-bottom:12px;border-radius:6px;overflow:hidden;">
+                            <h2 class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="font-weight:700;font-size:15px;color:#111;">
+                                    How long do I have to complete purchase once accepted?
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#reserveFaqAccordion">
+                                <div class="accordion-body" style="font-size:13px;color:#666;line-height:1.6;">
+                                    Accepted offers are reserved exclusively for you for <strong>48 hours</strong>. During this window, your private checkout link lets you complete payment via MTN Mobile Money, Telecel Cash, Card, or reserve for showroom pickup.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item" style="border:1px solid #e5e5e5;margin-bottom:12px;border-radius:6px;overflow:hidden;">
+                            <h2 class="accordion-header" id="headingFour">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" style="font-weight:700;font-size:15px;color:#111;">
+                                    Are all pairs authentic?
+                                </button>
+                            </h2>
+                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#reserveFaqAccordion">
+                                <div class="accordion-body" style="font-size:13px;color:#666;line-height:1.6;">
+                                    100% guaranteed. Every sneaker and streetwear piece in our collection goes through rigorous physical verification for materials, stitching, labels, packaging, and provenance before being listed.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Reserve Transparency & FAQ End -->
+
+    <!-- Footer Start -->
+	<footer class="main-footer" style="background:#111;color:#aaa;padding:60px 0 20px;border-top:1px solid #222;">
+		<div class="container">
+			<div class="row g-4">
+				<div class="col-lg-4 col-md-6">
+					<div class="footer-about">
+						<img src="images/logo-white.svg" alt="Woodpeckers" style="height:44px;margin-bottom:18px;">
+						<p style="font-size:13px;line-height:1.7;color:#888;">
+							Woodpeckers Sneakers &amp; Streetwear. Ghana's premier destination for exclusive kicks, collectible deadstock, and contemporary streetwear. Affordable Luxury, Bold &amp; Innovative.
+						</p>
+                        <div style="margin-top:14px;color:#008751;font-size:13px;font-weight:600;">
+                            <i class="fa-brands fa-instagram me-1"></i> <a href="https://www.instagram.com/woodpeckers_gh/" target="_blank" style="color:#008751;">@woodpeckers_gh</a>
+                        </div>
+					</div>
+				</div>
+
+				<div class="col-lg-2 col-md-3 col-6">
+					<h5 style="color:#fff;font-size:15px;font-weight:700;margin-bottom:16px;">Quick Links</h5>
+					<ul style="list-style:none;padding:0;font-size:13px;line-height:2.2;">
+						<li><a href="index.html" style="color:#888;">Home</a></li>
+						<li><a href="products.html" style="color:#888;">Shop All</a></li>
+						<li><a href="reserve.html" style="color:#008751;font-weight:700;">Meet The Reserve</a></li>
+						<li><a href="about.html" style="color:#888;">About Us</a></li>
+						<li><a href="contact.html" style="color:#888;">Contact</a></li>
+					</ul>
+				</div>
+
+				<div class="col-lg-3 col-md-3 col-6">
+					<h5 style="color:#fff;font-size:15px;font-weight:700;margin-bottom:16px;">Customer Care</h5>
+					<ul style="list-style:none;padding:0;font-size:13px;line-height:2.2;">
+						<li><a href="account-order.html" style="color:#888;">Track Order</a></li>
+						<li><a href="delivery-policy.html" style="color:#888;">Delivery Policy</a></li>
+						<li><a href="refund-return.html" style="color:#888;">Returns &amp; Exchanges</a></li>
+						<li><a href="faqs.html" style="color:#888;">FAQs</a></li>
+						<li><a href="admin.html" style="color:#666;">Staff Admin</a></li>
+					</ul>
+				</div>
+
+				<div class="col-lg-3 col-md-6">
+					<h5 style="color:#fff;font-size:15px;font-weight:700;margin-bottom:16px;">Accra Showroom</h5>
+					<p style="font-size:13px;line-height:1.6;color:#888;">
+						24 Blohum Road, near Fidelity Bank, Dzorwulu, Accra, Ghana
+					</p>
+					<p style="font-size:13px;color:#aaa;">
+						<strong>Call / WhatsApp:</strong><br>+233 55 392 1612
+					</p>
+					<div style="font-size:11px;color:#666;margin-top:10px;">
+						Mon - Sat: 9:00 AM - 8:00 PM<br>Sunday: 12:00 PM - 6:00 PM
+					</div>
+				</div>
+			</div>
+
+			<div style="border-top:1px solid #222;margin-top:40px;padding-top:20px;text-align:center;font-size:12px;color:#666;">
+				&copy; 2026 Woodpeckers Sneakers and Streetwear. All rights reserved. Built for Woodpeckers Ghana.
+			</div>
+		</div>
+	</footer>
+	<!-- Footer End -->
+
+    <!-- Jquery Library File -->
+    <script src="js/jquery.min.js"></script>
+    <!-- Bootstrap js file -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Main Custom js file -->
+    <script src="js/function.js"></script>
+    <!-- Woodpeckers Commerce & Reserve Engine -->
+    <script src="js/woodpeckers-commerce.js"></script>
+    <script src="js/storefront-app.js"></script>
+
+    <script>
+      // Load Reserve Products and setup Tracker
+      document.addEventListener('DOMContentLoaded', async () => {
+        const grid = document.getElementById('reserve-products-grid');
+        let products = [];
+
+        try {
+          const res = await fetch('/api/products?reserveOnly=true');
+          if (res.ok) {
+            products = await res.json();
+          }
+        } catch (e) {
+          console.warn('API error, fallback to initial products');
+        }
+
+        // Cache products globally for modal quick access
+        window.WPK_PRODUCTS_MAP = {};
+        products.forEach(p => { window.WPK_PRODUCTS_MAP[p.id] = p; });
+
+        if (products.length === 0) {
+          grid.innerHTML = '<div class="col-12 text-center py-5"><h4>No Reserve Drops Active Right Now</h4></div>';
+        } else {
+          grid.innerHTML = products.map(p => `
+            <div class="col-lg-4 col-md-6">
+              <div class="grail-card">
+                <div style="position:relative;background:#f5f5f5;padding:24px;text-align:center;">
+                  <span class="grail-tag"><i class="fa-solid fa-fire me-1"></i> Reserve Eligible</span>
+                  <a href="product-single.html?id=${p.id}">
+                    <img src="${p.images[0]}" alt="${p.name}" style="height:210px;width:100%;object-fit:contain;transition:transform 0.3s ease;" class="product-thumb">
+                  </a>
+                </div>
+                <div style="padding:22px;display:flex;flex-direction:column;flex-grow:1;">
+                  <div style="font-size:11px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">
+                    ${p.brand} &bull; ${p.category}
+                  </div>
+                  <h4 style="font-size:16px;font-weight:800;color:#111;margin-bottom:12px;min-height:40px;">
+                    <a href="product-single.html?id=${p.id}" style="color:inherit;">${p.name}</a>
+                  </h4>
+                  
+                  <div style="background:#fcf8f4;border:1px dashed #e8d7c8;padding:10px 14px;border-radius:4px;margin-bottom:16px;">
+                    <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;">
+                      <span style="color:#777;">Display Price:</span>
+                      <strong style="color:#111;">${Woodpeckers.formatGHS(p.price)}</strong>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;font-size:12px;">
+                      <span style="color:#008751;font-weight:700;">Target Reserve:</span>
+                      <strong style="color:#008751;">${p.reserveFloor ? Woodpeckers.formatGHS(p.reserveFloor) : '~Negotiable'}</strong>
+                    </div>
+                  </div>
+
+                  <div style="margin-top:auto;display:flex;gap:8px;">
+                    <button class="btn-make-offer w-100" data-open-reserve-modal data-product-id="${p.id}">
+                      <i class="fa-solid fa-gavel"></i> Name Your Price
+                    </button>
+                    <a href="product-single.html?id=${p.id}" class="btn btn-outline-dark" title="View Details" style="padding:10px 14px;border-radius:4px;">
+                      <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `).join('');
+        }
+
+        // Handle URL parameters (e.g. ?track=WPK-RSV-8419 or ?offer=SNK-001)
+        const params = new URLSearchParams(window.location.search);
+        const trackRef = params.get('track');
+        if (trackRef) {
+          const trackerInput = document.getElementById('tracker-input');
+          trackerInput.value = trackRef;
+          document.getElementById('tracker-form').dispatchEvent(new Event('submit'));
+          document.getElementById('offer-tracker').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        const offerProductId = params.get('offer');
+        if (offerProductId && window.WPK_PRODUCTS_MAP[offerProductId]) {
+          setTimeout(() => {
+            Woodpeckers.openOfferModal(window.WPK_PRODUCTS_MAP[offerProductId]);
+          }, 400);
+        }
+
+        // Tracker Form Submit
+        const trackerForm = document.getElementById('tracker-form');
+        const trackerResult = document.getElementById('tracker-result');
+
+        trackerForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const ref = document.getElementById('tracker-input').value.trim();
+          trackerResult.style.display = 'block';
+          trackerResult.innerHTML = '<div class="text-center py-4"><i class="fa-solid fa-spinner fa-spin fa-2x text-warning"></i><div class="mt-2 text-white">Searching Reserve Records...</div></div>';
+
+          const offer = await Woodpeckers.ReserveEngine.getOffer(ref);
+          if (!offer) {
+            trackerResult.innerHTML = `
+              <div class="alert alert-danger" style="background:#2a1111;border-color:#5a1f1f;color:#ff9999;">
+                <i class="fa-solid fa-circle-xmark me-2"></i> No active offer found for reference <strong>${ref}</strong>. Please verify the code and try again.
+              </div>
+            `;
+            return;
+          }
+
+          let badgeColor = 'warning';
+          let statusLabel = 'Under Review';
+          if (offer.status === 'accepted') { badgeColor = 'success'; statusLabel = 'Reserve Met (Accepted)'; }
+          if (offer.status === 'counteroffered') { badgeColor = 'info'; statusLabel = 'Counteroffer Proposed'; }
+          if (offer.status === 'rejected') { badgeColor = 'danger'; statusLabel = 'Offer Declined'; }
+          if (offer.status === 'completed') { badgeColor = 'secondary'; statusLabel = 'Completed &amp; Dispatched'; }
+
+          trackerResult.innerHTML = `
+            <div style="background:#202020;border:1px solid #333;border-radius:6px;padding:20px;color:#fff;">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px solid #333;padding-bottom:14px;margin-bottom:14px;">
+                <div>
+                  <span style="font-size:12px;color:#888;">Reference:</span>
+                  <div style="font-family:monospace;font-size:18px;font-weight:700;color:#008751;">${offer.reference}</div>
+                </div>
+                <span class="badge bg-${badgeColor}" style="font-size:13px;padding:8px 12px;">${statusLabel}</span>
+              </div>
+
+              <div class="row align-items-center">
+                <div class="col-sm-3 text-center mb-3 mb-sm-0">
+                  <img src="${offer.productImage}" alt="${offer.productName}" style="max-height:100px;border-radius:4px;background:#111;padding:8px;">
+                </div>
+                <div class="col-sm-9">
+                  <h5 style="color:#fff;font-size:16px;margin-bottom:4px;">${offer.productName}</h5>
+                  <div style="font-size:13px;color:#aaa;margin-bottom:6px;">Size: <strong style="color:#fff;">${offer.size}</strong> &bull; Customer: ${offer.customerName}</div>
+                  <div style="font-size:13px;color:#aaa;">Your Offer: <strong style="color:#008751;font-size:15px;">${Woodpeckers.formatGHS(offer.offerAmount)}</strong> (Retail: ${Woodpeckers.formatGHS(offer.retailPrice)})</div>
+                  ${offer.counterAmount ? `<div style="margin-top:6px;color:#17a2b8;font-weight:700;">Counteroffer Amount: ${Woodpeckers.formatGHS(offer.counterAmount)}</div>` : ''}
+                </div>
+              </div>
+
+              <!-- History trail -->
+              <div style="margin-top:16px;padding-top:14px;border-top:1px solid #2d2d2d;font-size:12px;color:#888;">
+                <div style="font-weight:700;color:#ccc;margin-bottom:6px;">Offer Trail:</div>
+                ${(offer.history || []).map(h => `
+                  <div style="margin-bottom:4px;">
+                    <span style="color:#666;">[${new Date(h.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}]</span> 
+                    <strong style="color:#bbb;">${h.actor}:</strong> ${h.note}
+                  </div>
+                `).join('')}
+              </div>
+
+              ${offer.status === 'accepted' ? `
+                <div class="mt-3 text-center">
+                  <button id="track-checkout-btn" class="btn btn-primary" style="background:#008751;border-color:#008751;color:#fff;font-weight:800;padding:10px 22px;border-radius:4px;text-transform:uppercase;">
+                    <i class="fa-solid fa-lock-open me-2"></i> Proceed to Checkout at ${Woodpeckers.formatGHS(offer.offerAmount)}
+                  </button>
+                </div>
+              ` : ''}
+
+              ${offer.status === 'counteroffered' ? `
+                <div class="mt-3 text-center" style="display:flex;gap:10px;justify-content:center;">
+                  <button id="track-accept-counter-btn" class="btn btn-success btn-sm px-3 py-2 font-weight-bold">
+                    <i class="fa-solid fa-check me-1"></i> Accept Counteroffer (${Woodpeckers.formatGHS(offer.counterAmount)})
+                  </button>
+                  <button id="track-decline-counter-btn" class="btn btn-outline-danger btn-sm px-3 py-2">
+                    <i class="fa-solid fa-xmark me-1"></i> Decline
+                  </button>
+                </div>
+              ` : ''}
+            </div>
+          `;
+
+          // Handle button clicks in tracker result
+          const checkoutBtn = document.getElementById('track-checkout-btn');
+          if (checkoutBtn) {
+            checkoutBtn.addEventListener('click', () => {
+              Woodpeckers.Cart.addItem(
+                { id: offer.productId, name: offer.productName, sku: offer.productSku, images: [offer.productImage], price: offer.offerAmount },
+                offer.size, 1, offer.offerAmount, offer.reference
+              );
+              window.location.href = 'checkout.html?reserveRef=' + encodeURIComponent(offer.reference);
+            });
+          }
+
+          const acceptCounterBtn = document.getElementById('track-accept-counter-btn');
+          if (acceptCounterBtn) {
+            acceptCounterBtn.addEventListener('click', async () => {
+              await Woodpeckers.ReserveEngine.actOnOffer(offer.reference, 'customer_accept_counter');
+              Woodpeckers.Cart.addItem(
+                { id: offer.productId, name: offer.productName, sku: offer.productSku, images: [offer.productImage], price: offer.counterAmount },
+                offer.size, 1, offer.counterAmount, offer.reference
+              );
+              window.location.href = 'checkout.html?reserveRef=' + encodeURIComponent(offer.reference);
+            });
+          }
+
+          const declineCounterBtn = document.getElementById('track-decline-counter-btn');
+          if (declineCounterBtn) {
+            declineCounterBtn.addEventListener('click', async () => {
+              await Woodpeckers.ReserveEngine.actOnOffer(offer.reference, 'customer_decline_counter');
+              trackerForm.dispatchEvent(new Event('submit'));
+            });
+          }
+        });
+      });
+    </script>
+</body>
+</html>

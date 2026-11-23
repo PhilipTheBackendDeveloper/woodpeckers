@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+	<!-- Meta -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="AwaikenThemes">
+	<!-- Page Title -->
+    <title>Customer & Staff Login | Woodpeckers Ghana</title>
+	<!-- Favicon Icon -->
+	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <!-- Google Fonts Css-->
+        <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+	<!-- Bootstrap Css -->
+	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<!-- SlickNav Css -->
+	<link href="css/slicknav.min.css" rel="stylesheet">
+	<!-- Swiper Css -->
+	<link rel="stylesheet" href="css/swiper-bundle.min.css">
+	<!-- Font Awesome Icon Css-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+	<link href="css/all.min.css" rel="stylesheet" media="screen">
+	<!-- Animated Css -->
+	<link href="css/animate.css" rel="stylesheet">
+    <!-- Magnific Popup Core Css File -->
+	<link rel="stylesheet" href="css/magnific-popup.css">
+	<!-- Mouse Cursor Css File -->
+	<link rel="stylesheet" href="css/mousecursor.css">
+	<!-- Main Custom Css -->
+	<link href="css/custom.css" rel="stylesheet" media="screen">
+</head>
+<body>
+
+    <!-- Preloader Start -->
+	<div class="preloader">
+		<div class="loading-container">
+			<div class="loading"></div>
+			<div id="loading-icon"><img src="images/loader.svg" alt=""></div>
+		</div>
+	</div>
+	<!-- Preloader End -->
+
+        <!-- Topbar Section Start -->
+    <div class="topbar" style="background:#0a0a0a;border-bottom:1px solid #1a1a1a;padding:8px 0;font-size:12px;letter-spacing:0.8px;">
+        <div class="container text-center">
+            <span style="color:#00D084;font-weight:800;text-transform:uppercase;">Meet The Reserve Drops Every Thu, Fri &amp; Sat</span>
+            <span class="d-none d-md-inline" style="color:#666;margin:0 10px;">&bull;</span>
+            <span class="d-none d-md-inline" style="color:#bbb;">24 Blohum Road, Dzorwulu, Accra</span>
+            <a href="reserve.html" style="color:#fff;font-weight:700;margin-left:10px;text-transform:uppercase;letter-spacing:1px;text-decoration:underline;">Name Your Price &rarr;</a>
+        </div>
+    </div>
+    <!-- Topbar Section End -->
+
+    <!-- Header Start -->
+	<header class="main-header">
+		<div class="header-sticky">
+			<nav class="navbar navbar-expand-lg">
+                <div class="container">
+                    <!-- Logo Start -->
+                    <a class="navbar-brand" href="index.html">
+                        <img src="images/logo.svg" alt="Logo">
+                    </a>
+                    <!-- Logo End -->
+
+                    <!-- Main Menu Start -->
+                    <div class="main-menu">
+                        <!-- Navbar Collapse Start -->
+                        <div class="collapse navbar-collapse">
+                            <div class="nav-menu-wrapper">
+                                <ul class="navbar-nav mr-auto" id="menu">
+                                    <li class="nav-item"><a class="nav-link" href="products.html">Drops</a></li>                                
+                                    <li class="nav-item"><a class="nav-link" href="products.html?category=Exclusive%20Sneakers">Sneakers</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="products.html?category=Streetwear">Streetwear</a></li>
+                                    <li class="nav-item reserve-nav-item"><a class="nav-link reserve-badge-link" href="reserve.html">Meet The Reserve</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="contact.html">Showroom</a></li>
+                                    <li class="nav-item mobile-nav-item"><a class="nav-link" href="account-dashboard.html">My Account &amp; Orders</a></li>
+                                    <li class="nav-item mobile-nav-item"><a class="nav-link" href="faqs.html">FAQs &amp; Help</a></li>
+                                </ul>
+                            </div></div>                
+                        <div class="navbar-toggle"></div>
+                        <!-- Navbar Collapse End -->
+                        
+                        <!-- Header Action Details Start -->
+                        <div class="header-action-details">
+                            <ul>
+                                <li>
+                                    <!-- Header Search Form Start -->
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        <img src="images/icon-search-primary.svg" alt="">
+                                    </button>
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                    <i class="fa-solid fa-xmark"></i>
+                                                </button>
+                                                <div class="modal-search-form">
+                                                    <input type="text" name="search" class="form-control" id="search" placeholder="Search Your Product">
+                                                    <button type="submit" class="modal-search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Header Search Form End -->
+                                </li>
+                                <li><a href="account-wishlist.html"><img src="images/icon-wishlist-primary.svg" alt=""></a></li>
+                                <li><a href="account-dashboard.html"><img src="images/icon-user-primary.svg" alt=""></a></li>
+                                <li><a href="cart.html"><img src="images/icon-cart-primary.svg" alt=""><span class="header-cart-badge" style="display:none;position:absolute;top:-6px;right:-8px;background:#008751;color:#111;font-size:10px;font-weight:800;border-radius:50%;width:18px;height:18px;text-align:center;line-height:18px;">0</span></a></li>
+                            </ul>
+                        </div>
+                        <!-- Header Action Details End -->
+                    </div>
+                    <!-- Main Menu End -->
+                </div>
+            </nav>
+			<div class="responsive-menu"></div>
+		</div>
+	</header>
+	<!-- Header End -->
+
+    <!-- Page Header Start -->
+    <div class="page-header parallaxie">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-8">
+                    <!-- Page Header Box Start -->
+                    <div class="page-header-box">
+                        <h1 class="text-anime-style-3" data-cursor="-opaque">Login & Sign Up</h1>
+                        <nav class="wow fadeInUp" >
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Login & Sign Up</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <!-- Page Header Box End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+    <!-- Pgae Login Start -->
+    <div class="page-login">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <!-- Login Content Box Start -->
+                    <div class="login-content-box">
+                        <!-- Login Content Form Item Start -->
+                        <div class="login-content-form-item">
+                            <form id="LoginForm" action="#" method="POST" data-toggle="validator">
+                                <!-- Login Form Content Start -->
+                                <div class="login-form-content">
+                                    <!-- Section Title Start -->
+                                    <div class="section-title">
+                                        <h2 class="text-anime-style-3" data-cursor="-opaque">Login Your Account</h2>
+                                        <p class="wow fadeInUp">Access your account to explore our latest collections, track your orders shopping experience. Enter your details below to continue your journey  </p>
+                                    </div>
+                                    <!-- Section Title End -->
+    
+                                    <!-- Checkout Login Form Start -->
+                                    <div class="checkout-login-form wow fadeInUp" data-wow-delay="0.2s">
+                                        <div class="form-group">
+                                            <label>Username or email address *</label>
+                                            <input type="text" name="name" class="form-control" id="name" placeholder="Enter user name" required>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+    
+                                        <div class="form-group">
+                                            <label>Password *</label>
+                                            <input type="password" name="loginpassword" class="form-control" id="loginpassword" placeholder="Enter password" required>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+    
+                                        <!-- Checkout Login Form Footer Start -->
+                                        <div class="checkout-login-form-footer">
+                                            <div class="checkout-login-btn">
+                                                <button type="submit" class="btn-default btn-accent"><span>Login</span></button>
+                                            </div>
+                                            <div class="checkout-form-checkbox">
+                                                <input type="checkbox" id="remember" name="#">
+                                                <label for="remember">Remember Me</label>
+                                            </div>
+                                        </div>
+                                        <!-- Checkout Login Form Footer End -->
+    
+                                        <!-- Login Content Form Button Start -->
+                                        <div class="login-content-form-btn">
+                                            <a href="forgot-password.html">Forgot your password?</a>
+                                        </div>
+                                        <!-- Login Content Form Button End -->
+
+                                        <!-- Demo Credentials Helper Start -->
+                                        <div style="background:#161616;border:1px solid #008751;border-radius:6px;padding:14px 18px;margin-top:24px;font-size:13px;color:#ddd;text-align:left;">
+                                            <div style="color:#008751;font-weight:800;font-size:12px;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">
+                                                <i class="fa-solid fa-key me-1"></i> Demonstration Access
+                                            </div>
+                                            <div style="margin-bottom:6px;font-size:12px;">
+                                                <strong>Store Manager / Staff:</strong><br>
+                                                Username: <code style="color:#008751;background:#222;padding:2px 5px;">admin</code> &bull; Password: <code style="color:#008751;background:#222;padding:2px 5px;">woodpeckers2026</code>
+                                                <div class="mt-1"><a href="admin.html" style="color:#008751;font-weight:700;font-size:12px;">Direct link to Staff Dashboard &rarr;</a></div>
+                                            </div>
+                                        </div>
+                                        <!-- Demo Credentials Helper End -->
+                                    </div>
+                                    <!-- Checkout Login Form End -->
+                                </div>
+                                <!-- Login Form Content End -->
+                            </form>
+                        </div>
+                        <!-- Login Content Form Item End -->
+                        
+                        <!-- Login Content Form Item Start -->
+                        <div class="login-content-form-item">
+                            <form id="SignupForm" action="#" method="POST" data-toggle="validator">
+                                <!-- Login Form Content Start -->
+                                <div class="login-form-content">
+                                    <!-- Section Title Start -->
+                                    <div class="section-title">
+                                        <h2 class="text-anime-style-3" data-cursor="-opaque">Sign Up Your Account</h2>
+                                        <p class="wow fadeInUp">Sign up to explore our exclusive Footwear collections, track your orders  experience. Create your account in just a few steps and stay updated .</p>
+                                    </div>
+                                    <!-- Section Title End -->
+    
+                                    <!-- Checkout Login Form Start -->
+                                    <div class="checkout-login-form wow fadeInUp" data-wow-delay="0.2s">
+                                        <div class="form-group">
+                                            <label>Email address *</label>
+                                            <input type="email" name="email" class="form-control" id="email" placeholder="Enter your e-mail" required>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+    
+                                        <div class="form-group">
+                                            <label>Password *</label>
+                                            <input type="password" name="signuppassword" class="form-control" id="signuppassword" placeholder="Enter password" required>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+    
+                                        <!-- Login Form Info Start -->
+                                        <div class="login-form-info">
+                                            <p>Your personal data will be used to support your experience throughout this access to your account & for other purposes as in our <a href="privacy-policy.html">privacy policy.</a></p>
+                                        </div>
+                                        <!-- Login Form Info End -->
+    
+                                        <!-- Checkout Login Button Start -->
+                                        <div class="checkout-login-btn signup-form-btn">
+                                            <button type="submit" class="btn-default btn-accent">Register</button>
+                                        </div>
+                                        <!-- Checkout Login Button End -->
+                                    </div>
+                                    <!-- Checkout Login Form End -->
+                                </div>
+                                <!-- Login Form Content End -->
+                            </form>
+                        </div>
+                        <!-- Login Content Form Item End -->
+                    </div>
+                    <!-- Login Content Box End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Pgae Login End -->
+
+
+    <!-- Main Footer Start -->
+    <footer class="main-footer dark-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-4">
+                    <!-- About Footer Start -->
+                    <div class="about-footer">
+                        <!-- Footer Logo Start -->
+                        <div class="footer-logo">
+                            <img src="images/logo-white.svg" alt="">
+                        </div>
+                        <!-- Footer Logo End -->
+
+                        <!-- About Footer Content Start -->
+                        <div class="about-footer-content">
+                            <p><img src="images/icon-location-white.svg" alt="" style="width:14px;height:14px;margin-right:6px;vertical-align:middle;"> 24 Blohum Road, near Fidelity Bank, Dzorwulu, Accra, Ghana</p>
+                            <p><img src="images/icon-phone-white.svg" alt="" style="width:14px;height:14px;margin-right:6px;vertical-align:middle;"> +233 55 392 1612 &bull; <img src="images/icon-instagram-white.svg" alt="" style="width:14px;height:14px;margin-right:6px;vertical-align:middle;"> <a href="https://www.instagram.com/woodpeckers_gh/" target="_blank" style="color:#008751;font-weight:600;">@woodpeckers_gh</a></p>
+                        </div>
+                        <!-- About Footer Content End -->
+                    </div>
+                    <!-- About Footer End -->
+                </div>
+
+                <div class="col-xl-8">
+                    <!-- Footer Links Box Start -->
+                    <div class="footer-links-box">
+                        <!-- Footer Links Start -->
+                        <div class="footer-links">
+                            <h2>Quick Links</h2>
+                            <ul>
+                                <li><a href="index-2.html">Home</a></li>
+                                <li><a href="about.html">About Us</a></li>
+                                <li><a href="products.html">New Arrivals</a></li>
+                                <li><a href="products.html">Best Sellers</a></li>
+                                <li><a href="blog.html">Latest Blog</a></li>
+                                <li><a href="contact.html">Contact Us</a></li>
+                            </ul>
+                        </div>
+                        <!-- Footer Links End -->
+
+                        <!-- Footer Links Start -->
+                        <div class="footer-links">
+                            <h2>Customer Support</h2>
+                            <ul>
+                                <li><a href="account-dashboard.html">My Account</a></li>
+                                <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                                <li><a href="refund-return.html">Return & Exchange</a></li>
+                                <li><a href="faqs.html">FAQs</a></li>
+                                <li><a href="order-received.html">Track Order</a></li>
+                                <li><a href="term-condition.html">Terms & Conditions</a></li>
+                            </ul>
+                        </div>
+                        <!-- Footer Links End -->
+
+                        <!-- Footer Links Start -->
+                        <div class="footer-links footer-newsletter-form">
+                            <h2>Subscribe Newsletter</h2>
+                            <!-- Footer Newsletter Form Start -->
+                            <div class="footer-newsletter-form">
+                                <form id="newslettersForm" action="#" method="POST">
+                                    <div class="form-group">
+                                        <input type="email" name="mail" class="form-control" id="mail" placeholder="Enter email address" required>
+                                        <button type="submit" class="btn-default btn-highlighted btn-accent">Subscribe</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- Footer Newsletter Form End -->
+            
+                            <!-- Footer Payment Options Start -->
+                            <div class="footer-payment-options">
+                                <ul>
+                                    <li><a href="#"><img src="images/icon-payment-option-1.svg" alt=""></a></li>
+                                    <li><a href="#"><img src="images/icon-payment-option-2.svg" alt=""></a></li>
+                                    <li><a href="#"><img src="images/icon-payment-option-3.svg" alt=""></a></li>
+                                    <li><a href="#"><img src="images/icon-payment-option-4.svg" alt=""></a></li>
+                                    <li><a href="#"><img src="images/icon-payment-option-5.svg" alt=""></a></li>
+                                    <li><a href="#"><img src="images/icon-payment-option-6.svg" alt=""></a></li>
+                                </ul>
+                            </div>
+                            <!-- Footer Payment Options End -->
+                        </div>
+                        <!-- Footer Links End -->
+                    </div>
+                    <!-- Footer Links Box End -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Copyright Start -->
+        <div class="footer-copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <!-- Footer Copyright Text Start -->
+                        <div class="footer-copyright-text">
+                            <p>&copy; 2026 Woodpeckers Sneakers and Streetwear Ghana. All Rights Reserved.</p>
+                        </div>
+                        <!-- Footer Copyright Text End -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer Copyright End -->
+    </footer>
+    <!-- Main Footer End -->
+
+    <!-- Jquery Library File -->
+    <script src="js/jquery.min.js"></script>
+    <!-- Bootstrap js file -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Validator js file -->
+    <script src="js/validator.min.js"></script>
+    <!-- SlickNav js file -->
+    <script src="js/jquery.slicknav.js"></script>
+    <!-- Swiper js file -->
+    <script src="js/swiper-bundle.min.js"></script>
+    <!-- Counter js file -->
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/counter.min.js"></script>
+    <!-- Magnific js file -->
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <!-- SmoothScroll -->
+    <script src="js/lenis.min.js"></script>
+    <!-- Parallax js -->
+    <script src="js/parallaxie.js"></script>
+    <!-- MagicCursor js file -->
+    <script src="js/gsap.min.js"></script>
+    <script src="js/magiccursor.js"></script>
+    <!-- Text Effect js file -->
+    <script src="js/SplitText.min.js"></script>
+    <script src="js/ScrollTrigger.min.js"></script>
+    <!-- YTPlayer js File -->
+    <script src="js/jquery.mb.YTPlayer.min.js"></script>
+    <!-- Wow js file -->
+    <script src="js/wow.min.js"></script>
+    <!-- Main Custom js file -->
+    <script src="js/function.js"></script>
+    <!-- Woodpeckers Commerce & Reserve Engine -->
+    <script src="js/woodpeckers-commerce.js"></script>
+    <script src="js/storefront-app.js"></script>
+</body>
+</html>
