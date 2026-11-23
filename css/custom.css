@@ -550,30 +550,44 @@ a:focus{
 	max-width: 20px;
 }
 
+/* ===== GLASSMORPHISM STICKY NAV ===== */
 header.main-header{
-	position: relative;
-	z-index: 100;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 9999;
+	/* liquid glass look on load — slightly opaque */
+	background: rgba(255, 255, 255, 0.72);
+	backdrop-filter: saturate(180%) blur(22px);
+	-webkit-backdrop-filter: saturate(180%) blur(22px);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+	box-shadow: 0 2px 32px rgba(0,0,0,0.08);
+	transition: background 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* When user has scrolled — deeper glass */
+header.main-header.scrolled{
+	background: rgba(255, 255, 255, 0.88);
+	box-shadow: 0 4px 40px rgba(0,0,0,0.13);
 }
 
 header.main-header .header-sticky{
 	position: relative;
 	top: 0;
-	background-color: var(--bg-color);
-	box-shadow: inset 0 -1px 0px 0 var(--divider-color);
+	background: transparent;
+	box-shadow: none;
 	z-index: 100;
 }
 
 header.main-header .header-sticky.hide{
-	transform: translateY(-100%);
-	transition: transform 0.3s ease-in-out;
+	/* Keep hidden class only for JS compat but do NOT hide the header */
+	transform: none;
 }
 
 header.main-header .header-sticky.active{
-	position: fixed;
+	position: relative;
 	top: 0;
-	right: 0;
-	left: 0;
-    transform: translateY(0);
 }
 
 .navbar{
@@ -2480,7 +2494,8 @@ header.main-header .header-sticky.active{
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-size: cover;
-	padding: 110px 0 100px;
+	/* Extra top padding to clear the fixed glass nav */
+	padding: 155px 0 100px;
 	overflow: hidden;
 }
 
@@ -6655,14 +6670,16 @@ ul.view-order-product-info-list li span{
 		min-height: 600px;
 	}
 
+	/* OLD heavy overlay removed — handled by per-breakpoint rules in Woodpeckers glass section */
 	.hero::before{
 		content: '';
 		position: absolute;
 		inset: 0;
 		width: 100%;
 		height: 100%;
-		background: var(--secondary-color);
-		opacity: 70%;
+		/* Lighter gradient — the inline style already supplies the main overlay */
+		background: transparent;
+		opacity: 1;
 	}
 
 	.hero-offer-tag{
@@ -6967,7 +6984,7 @@ ul.view-order-product-info-list li span{
 	}
 
 	.hero{
-		padding: 50px 0;
+		padding: 110px 0 60px;
 	}
 
 	.hero-content-btn{
@@ -8008,7 +8025,8 @@ ul.view-order-product-info-list li span{
 	}
 
 	.hero{
-		min-height: 520px;
+		min-height: 580px;
+		padding: 100px 0 55px;
 	}
 
 	.hero-offer-tag-box{
@@ -9207,4 +9225,141 @@ h1, h2, h3, h4, h5, h6,
 #videoSoundBtn:hover {
     transform: scale(1.08);
     box-shadow: 0 0 0 18px rgba(0,135,81,0.3), 0 15px 40px rgba(0,0,0,0.7) !important;
+}
+
+
+/* ================================================================
+   WOODPECKERS — GLASSMORPHISM NAV & MOBILE HERO FIX
+   ================================================================ */
+
+/* Body offset so fixed header doesn't cover page content */
+body {
+    padding-top: 0 !important; /* topbar + hero padding handle clearance */
+}
+
+/* Topbar is in normal flow — it scrolls away first; nav sticks above */
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 9998; /* just below header */
+}
+
+/* ---- Glassmorphism nav colour tokens ---- */
+/* On the homepage hero (dark bg), nav text should stay legible */
+header.main-header .navbar-brand img,
+header.main-header .header-action-details ul li a img,
+header.main-header .header-action-details ul li button img {
+    filter: none;
+}
+
+/* When scrolled (JS adds .scrolled class): slightly more solid so text remains crisp */
+header.main-header.scrolled .main-menu ul#menu > li > a {
+    color: #111111;
+}
+
+/* Nav text colour on glass (light glass default) */
+.main-menu ul#menu > li > a {
+    color: #111111 !important;
+}
+
+/* ---- Mobile SlickNav — glass dark variant ---- */
+@media (max-width: 991px) {
+    /* Glass overlay on mobile menu */
+    .slicknav_menu {
+        background: rgba(10, 10, 10, 0.92) !important;
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+        border-top: 1px solid rgba(255,255,255,0.08) !important;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.5) !important;
+    }
+
+    /* Keep hamburger button visible on glass header */
+    .slicknav_btn {
+        background: transparent !important;
+    }
+    .slicknav_icon-bar {
+        background-color: #111111 !important;
+    }
+}
+
+/* ---- Hero Section: Body padding to clear fixed topbar + header ---- */
+/* The hero has its own top-padding — boost it to clear the navbar */
+.hero.parallaxie,
+.hero {
+    padding-top: 130px !important;
+}
+
+/* ---- MOBILE HERO FIX: brighter, cleaner image ---- */
+/* On tablet and below the dark overlay was 70% — way too heavy */
+@media only screen and (max-width: 1024px) {
+    .hero::before {
+        /* Lighter vignette — image is vivid, text still readable */
+        background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.18) 0%,
+            rgba(0, 0, 0, 0.30) 60%,
+            rgba(0, 0, 0, 0.72) 100%
+        ) !important;
+        opacity: 1 !important;
+    }
+
+    /* Inline style gradient override for the Nike-style hero div */
+    .hero.parallaxie {
+        background-image:
+            linear-gradient(
+                180deg,
+                rgba(14,16,15,0.12) 0%,
+                rgba(14,16,15,0.22) 50%,
+                rgba(14,16,15,0.78) 100%
+            ),
+            url('../images/hero-bg-image.jpg') !important;
+        background-size: cover !important;
+        background-position: center center !important;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    /* Even lighter on small phones so the sneaker is vivid */
+    .hero::before {
+        background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.08) 0%,
+            rgba(0, 0, 0, 0.22) 55%,
+            rgba(0, 0, 0, 0.78) 100%
+        ) !important;
+        opacity: 1 !important;
+    }
+
+    .hero.parallaxie {
+        min-height: 580px !important;
+        padding-top: 110px !important;
+        background-image:
+            linear-gradient(
+                180deg,
+                rgba(14,16,15,0.08) 0%,
+                rgba(14,16,15,0.18) 48%,
+                rgba(14,16,15,0.82) 100%
+            ),
+            url('../images/hero-bg-image.jpg') !important;
+        /* On mobile show the subject centred */
+        background-position: 60% center !important;
+    }
+
+    /* Slightly smaller hero heading on small phones */
+    .hero-content h1,
+    .hero h1 {
+        font-size: clamp(36px, 9vw, 52px) !important;
+        line-height: 0.98 !important;
+    }
+}
+
+/* ---- Header icon tint adjustment on glass ---- */
+/* Ensure icons stay crisp & dark against light glass header */
+header.main-header .header-action-details img {
+    filter: brightness(0) saturate(100%); /* force black icons */
+}
+
+/* Reserve badge stays white-on-green */
+header.main-header .reserve-badge-link img {
+    filter: none;
 }

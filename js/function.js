@@ -30,24 +30,25 @@
 	});
 	setTimeout(dismissPreloader, 2200);
 
-	/* Sticky Header */	
-	if($('.active-sticky-header').length){
-		$window.on('resize', function(){
-			setHeaderHeight();
-		});
+	/* Sticky Header — Glassmorphism variant */
+	// Header is always fixed (CSS). JS just adds .scrolled for deeper glass depth.
+	function updateGlassHeader() {
+		var fromTop = $(window).scrollTop();
+		// Add .scrolled after any scroll for deeper glass
+		$('header.main-header').toggleClass('scrolled', fromTop > 10);
+	}
 
-		function setHeaderHeight(){
-	 		$("header.active-sticky-header").css("height", $('header.active-sticky-header .header-sticky').outerHeight());
-		}	
-	
-		$window.on("scroll", function() {
-			var fromTop = $(window).scrollTop();
-			setHeaderHeight();
-			var headerHeight = $('header.active-sticky-header .header-sticky').outerHeight()
-			$("header.active-sticky-header .header-sticky").toggleClass("hide", (fromTop > headerHeight + 100));
-			$("header.active-sticky-header .header-sticky").toggleClass("active", (fromTop > 600));
+	// Run immediately and on scroll
+	updateGlassHeader();
+	$window.on('scroll', updateGlassHeader);
+
+	// Legacy compat: keep active-sticky-header logic without breaking layout
+	if($('.active-sticky-header').length){
+		$window.on('resize scroll', function(){
+			// No-op: header is always fixed via CSS.
+			// Just keep the .scrolled class updated (already handled above).
 		});
-	}	
+	}
 	
 	/* Slick Menu JS */
 	if (typeof $.fn.slicknav !== 'undefined' && $('#menu').length) {
