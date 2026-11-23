@@ -6,7 +6,7 @@
 const { PassThrough } = require('stream');
 const http = require('http');
 const assert = require('assert');
-const server = require('../server.js');
+const server = require('../server/server.js');
 
 function request(method, url, body = null) {
   return new Promise((resolve, reject) => {

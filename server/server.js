@@ -11,7 +11,8 @@ const url = require('url');
 const crypto = require('crypto');
 
 const PORT = process.env.PORT || 3000;
-const STORE_PATH = path.join(__dirname, 'data', 'store.json');
+const ROOT_DIR = path.join(__dirname, '..');
+const STORE_PATH = path.join(ROOT_DIR, 'data', 'store.json');
 
 // MIME types dictionary
 const MIME_TYPES = {
@@ -741,7 +742,7 @@ const server = http.createServer(async (req, res) => {
   if (safePath === '/reserve' || safePath === '/reserve/') safePath = '/reserve.html';
   if (safePath === '/shop' || safePath === '/shop/') safePath = '/products.html';
 
-  let filePath = path.join(__dirname, safePath);
+  let filePath = path.join(ROOT_DIR, safePath);
 
   // If path has no extension, check if an html file exists
   if (!path.extname(filePath)) {
@@ -753,7 +754,7 @@ const server = http.createServer(async (req, res) => {
   fs.stat(filePath, (err, stats) => {
     if (err || !stats.isFile()) {
       // 404 fallback
-      const notFoundPath = path.join(__dirname, '404.html');
+      const notFoundPath = path.join(ROOT_DIR, '404.html');
       if (fs.existsSync(notFoundPath)) {
         res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
         fs.createReadStream(notFoundPath).pipe(res);
