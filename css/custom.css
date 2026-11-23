@@ -366,9 +366,10 @@ a:focus{
 	bottom: 0;
 	z-index: 1000;
 	background: var(--primary-color);
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	display: none !important;
+	opacity: 0 !important;
+	visibility: hidden !important;
+	pointer-events: none !important;
 }
 
 .loading-container,
@@ -451,20 +452,12 @@ a:focus{
 	margin-bottom: 40px;
 }
 
-.section-title .section-sub-title{
-	position: relative;
-	display: inline-block;
-	font-size: 14px;
-	font-weight: 500;
-	line-height: 1em;
-	text-transform: capitalize;
-	color: var(--primary-color);
-	border: 1px solid var(--divider-color);
-	backdrop-filter: blur(20px);
-	-webkit-backdrop-filter: blur(20px);
-	border-radius: 100px;
-	padding: 9px 16px 9px 32px;
-    margin-bottom: 15px;
+.section-title .section-sub-title,
+.section-sub-title,
+.sub-title,
+.hero-tag-badge,
+.pill-badge{
+	display: none !important;
 }
 
 .section-title .section-sub-title::before{

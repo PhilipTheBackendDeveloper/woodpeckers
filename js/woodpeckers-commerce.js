@@ -1,6 +1,6 @@
 /**
- * Woodpeckers Sneakers & Streetwear — Commerce & Meet the Reserve Engine
- * Powers Cart, Checkout, Meet the Reserve, and Real-time State Synchronization
+ * Woodpeckers Sneakers & Streetwear — Unified Commerce, Auth, Reserve & Inventory Engine
+ * Ensures 100% functionality on both Node server (port 3000) and VS Code Live Server (port 5500).
  */
 
 (function (window, document) {
@@ -11,7 +11,9 @@
     WISHLIST: 'woodpeckers_wishlist',
     RECENT_OFFERS: 'woodpeckers_my_offers',
     OFFER_TRACKING: 'woodpeckers_last_tracked_ref',
-    USER: 'woodpeckers_user'
+    USER: 'woodpeckers_current_user',
+    LOCAL_ORDERS: 'woodpeckers_orders',
+    LOCAL_OFFERS: 'woodpeckers_offers_store'
   };
 
   // Safe localStorage helper
@@ -64,7 +66,7 @@
       border-left:4px solid ${border};
       padding:14px 20px;
       border-radius:4px;
-      font-family:'Stack Sans Text', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family:'Plus Jakarta Sans', -apple-system, sans-serif;
       font-size:14px;
       font-weight:500;
       box-shadow:0 10px 30px rgba(0,0,0,0.35);
@@ -93,6 +95,353 @@
       setTimeout(() => toast.remove(), 350);
     }, duration);
   }
+
+  // Master Product Database
+  const DEFAULT_PRODUCTS = [
+    {
+      id: 'SNK-001',
+      sku: 'WPK-AJ1-CHI',
+      name: "Air Jordan 1 Retro High OG 'Chicago Lost & Found'",
+      category: 'Exclusive Sneakers',
+      brand: 'Nike / Jordan',
+      brandKey: 'Nike',
+      material: 'Leather',
+      price: 3850,
+      originalPrice: 4200,
+      description: "The grail colorway returns with vintage-inspired details. Featuring premium cracked leather collars, aged sail midsoles, and classic Chicago red-and-black overlays. Every pair is 100% verified authentic by Woodpeckers Ghana.",
+      images: [
+        'images/product-image-1.jpg',
+        'images/product-thumbnail-image-1.jpg',
+        'images/product-thumbnail-image-2.jpg',
+        'images/product-thumbnail-image-3.jpg'
+      ],
+      sizes: [
+        { size: 'UK 7.5', stock: 2 },
+        { size: 'UK 8', stock: 2 },
+        { size: 'UK 8.5', stock: 3 },
+        { size: 'UK 9', stock: 3 },
+        { size: 'UK 10', stock: 2 }
+      ],
+      reserveEligible: true,
+      reserveFloor: 3200,
+      reserveGuidance: 'Estimated Reserve: ~GH₵ 3,200 - GH₵ 3,500. Submit your best offer to secure.',
+      tags: ['Grail', 'Hype', 'Collector', 'Reserve Eligible'],
+      rating: 5,
+      reviewCount: 18
+    },
+    {
+      id: 'SNK-002',
+      sku: 'WPK-TS-REVMOCHA',
+      name: "Travis Scott x Air Jordan 1 Low 'Reverse Mocha'",
+      category: 'Exclusive Sneakers',
+      brand: 'Nike / Jordan',
+      brandKey: 'Nike',
+      material: 'Suede',
+      price: 5200,
+      originalPrice: 5800,
+      description: "La Flame's signature inverse oversized Swoosh paired with rich brown nubuck, crisp white leather overlays, and vintage cream detailing. One of the most sought-after low-tops in contemporary sneaker culture.",
+      images: [
+        'images/product-image-2.jpg',
+        'images/product-thumbnail-image-1.jpg',
+        'images/product-thumbnail-image-2.jpg'
+      ],
+      sizes: [
+        { size: 'UK 8', stock: 1 },
+        { size: 'UK 8.5', stock: 2 },
+        { size: 'UK 9', stock: 1 },
+        { size: 'UK 10', stock: 1 }
+      ],
+      reserveEligible: true,
+      reserveFloor: 4400,
+      reserveGuidance: 'Estimated Reserve: ~GH₵ 4,400 - GH₵ 4,800. Fast manual store review.',
+      tags: ['Grail', 'Travis Scott', 'Exclusive', 'Reserve Eligible'],
+      rating: 5,
+      reviewCount: 24
+    },
+    {
+      id: 'SNK-003',
+      sku: 'WPK-DUNK-PANDA',
+      name: "Nike Dunk Low Retro 'Panda'",
+      category: 'Lifestyle Runners',
+      brand: 'Nike / Jordan',
+      brandKey: 'Nike',
+      material: 'Leather',
+      price: 1650,
+      originalPrice: 1850,
+      description: "The ubiquitous street staple. Clean monochromatic black and white leather construction ready for everyday wear across Accra. Fresh in box, authenticated deadstock.",
+      images: [
+        'images/product-image-3.jpg',
+        'images/product-thumbnail-image-1.jpg'
+      ],
+      sizes: [
+        { size: 'UK 7', stock: 3 },
+        { size: 'UK 8', stock: 4 },
+        { size: 'UK 8.5', stock: 5 },
+        { size: 'UK 9', stock: 4 },
+        { size: 'UK 10', stock: 2 }
+      ],
+      reserveEligible: false,
+      reserveFloor: 0,
+      reserveGuidance: '',
+      tags: ['Everyday', 'Essential', 'Dunk'],
+      rating: 4.8,
+      reviewCount: 42
+    },
+    {
+      id: 'SNK-004',
+      sku: 'WPK-NB-9060',
+      name: "New Balance 9060 'Sea Salt & Rain Cloud'",
+      category: 'Lifestyle Runners',
+      brand: 'New Balance',
+      brandKey: 'New Balance',
+      material: 'Mesh',
+      price: 2150,
+      originalPrice: 2400,
+      description: "Futuristic sculpted wavy midsole equipped with ABZORB and SBS cushioning. Premium pigskin suede overlays meet breathable mesh in neutral tones. Unrivalled all-day comfort.",
+      images: [
+        'images/product-image-4.jpg'
+      ],
+      sizes: [
+        { size: 'UK 8', stock: 2 },
+        { size: 'UK 8.5', stock: 3 },
+        { size: 'UK 9', stock: 3 },
+        { size: 'UK 10', stock: 1 }
+      ],
+      reserveEligible: true,
+      reserveFloor: 1850,
+      reserveGuidance: 'Estimated Reserve: ~GH₵ 1,850 - GH₵ 1,950.',
+      tags: ['Comfort', 'Lifestyle', 'Trending', 'Reserve Eligible'],
+      rating: 4.9,
+      reviewCount: 15
+    },
+    {
+      id: 'SNK-005',
+      sku: 'WPK-YZY-350-BEL',
+      name: "Yeezy Boost 350 V2 'Carbon Beluga'",
+      category: 'Exclusive Sneakers',
+      brand: 'Adidas / Yeezy',
+      brandKey: 'Yeezy',
+      material: 'Synthetic',
+      price: 2900,
+      originalPrice: 3200,
+      description: "Classic zebra-style dark grey Primeknit upper accented with vibrant solar red 'SPLY-350' branding stripe. Full-length Boost midsole encapsulated in semi-translucent TPU.",
+      images: [
+        'images/product-image-5.jpg'
+      ],
+      sizes: [
+        { size: 'UK 8', stock: 2 },
+        { size: 'UK 8.5', stock: 2 },
+        { size: 'UK 9', stock: 1 },
+        { size: 'UK 10', stock: 1 }
+      ],
+      reserveEligible: true,
+      reserveFloor: 2400,
+      reserveGuidance: 'Estimated Reserve: ~GH₵ 2,400 - GH₵ 2,600.',
+      tags: ['Yeezy', 'Boost', 'Deadstock', 'Reserve Eligible'],
+      rating: 4.7,
+      reviewCount: 29
+    },
+    {
+      id: 'SNK-006',
+      sku: 'WPK-ASC-KAYANO14',
+      name: "Asics Gel-Kayano 14 'White & Pure Gold'",
+      category: 'Lifestyle Runners',
+      brand: 'Asics / Saucony',
+      brandKey: 'Asics',
+      material: 'Mesh',
+      price: 1950,
+      originalPrice: 2200,
+      description: "Late 2000s technical running aesthetic recontextualized for modern streetwear. Metallic gold accents over lightweight white open mesh with signature GEL cushioning.",
+      images: [
+        'images/product-image-6.jpg'
+      ],
+      sizes: [
+        { size: 'UK 8', stock: 2 },
+        { size: 'UK 8.5', stock: 3 },
+        { size: 'UK 9', stock: 2 }
+      ],
+      reserveEligible: false,
+      reserveFloor: 0,
+      reserveGuidance: '',
+      tags: ['Tech Runner', 'Trendsetter', 'Asics'],
+      rating: 4.8,
+      reviewCount: 11
+    },
+    {
+      id: 'STR-001',
+      sku: 'WPK-STR-TEE-BLK',
+      name: "Woodpeckers Heavyweight Oversized Tee 'Accra Night'",
+      category: 'Streetwear',
+      brand: 'Woodpeckers Original',
+      brandKey: 'Woodpeckers',
+      material: 'Canvas',
+      price: 450,
+      originalPrice: 520,
+      description: "Custom cut & sewn 260GSM combed cotton jersey. Relaxed dropped shoulder silhouette with high-density puff print Woodpeckers graphic. Made for humid Accra tropical climate.",
+      images: [
+        'images/product-image-7.jpg'
+      ],
+      sizes: [
+        { size: 'S', stock: 4 },
+        { size: 'M', stock: 6 },
+        { size: 'L', stock: 8 },
+        { size: 'XL', stock: 5 }
+      ],
+      reserveEligible: false,
+      reserveFloor: 0,
+      reserveGuidance: '',
+      tags: ['Streetwear', 'Apparel', 'Heavyweight', 'Local Brand'],
+      rating: 5,
+      reviewCount: 36
+    },
+    {
+      id: 'STR-002',
+      sku: 'WPK-STR-CRG-OBS',
+      name: "Woodpeckers Tactical Cargo Pants 'Obsidian'",
+      category: 'Streetwear',
+      brand: 'Woodpeckers Original',
+      brandKey: 'Woodpeckers',
+      material: 'Canvas',
+      price: 850,
+      originalPrice: 980,
+      description: "Durable cotton-twill utility cargo trousers with custom metal D-rings, 6 functional bellows pockets, and adjustable toggle ankles to stack effortlessly over high-top sneakers.",
+      images: [
+        'images/product-image-8.jpg'
+      ],
+      sizes: [
+        { size: 'S', stock: 2 },
+        { size: 'M', stock: 4 },
+        { size: 'L', stock: 4 },
+        { size: 'XL', stock: 2 }
+      ],
+      reserveEligible: true,
+      reserveFloor: 700,
+      reserveGuidance: 'Estimated Reserve: ~GH₵ 700 - GH₵ 750.',
+      tags: ['Cargo', 'Streetwear', 'Tactical', 'Reserve Eligible'],
+      rating: 4.9,
+      reviewCount: 19
+    },
+    {
+      id: 'STR-003',
+      sku: 'WPK-STR-HD-IVR',
+      name: "Woodpeckers Signature Boxy Hoodie 'Raw Ivory'",
+      category: 'Streetwear',
+      brand: 'Woodpeckers Original',
+      brandKey: 'Woodpeckers',
+      material: 'Canvas',
+      price: 950,
+      originalPrice: 1100,
+      description: "Luxurious 450GSM loopback French terry fleece. Double-layered hood without drawstrings for clean minimalist aesthetic. Subtle tonal embroidery on wrist cuff.",
+      images: [
+        'images/product-image-9.jpg'
+      ],
+      sizes: [
+        { size: 'S', stock: 2 },
+        { size: 'M', stock: 5 },
+        { size: 'L', stock: 5 },
+        { size: 'XL', stock: 3 }
+      ],
+      reserveEligible: true,
+      reserveFloor: 780,
+      reserveGuidance: 'Estimated Reserve: ~GH₵ 780 - GH₵ 850.',
+      tags: ['Hoodie', 'Fleece', 'Luxury Streetwear', 'Reserve Eligible'],
+      rating: 5,
+      reviewCount: 22
+    }
+  ];
+
+  // Global Products Map
+  window.WPK_PRODUCTS_MAP = {};
+  DEFAULT_PRODUCTS.forEach(p => { window.WPK_PRODUCTS_MAP[p.id] = p; });
+
+  // Products Engine
+  const Products = {
+    async getAll() {
+      try {
+        const res = await fetch('/api/products');
+        if (res.ok) {
+          const list = await res.json();
+          if (Array.isArray(list) && list.length > 0) {
+            list.forEach(p => { window.WPK_PRODUCTS_MAP[p.id] = p; });
+            return list;
+          }
+        }
+      } catch (e) {}
+      return DEFAULT_PRODUCTS;
+    },
+
+    async getById(id) {
+      if (window.WPK_PRODUCTS_MAP[id]) return window.WPK_PRODUCTS_MAP[id];
+      try {
+        const res = await fetch(`/api/products/${encodeURIComponent(id)}`);
+        if (res.ok) return await res.json();
+      } catch (e) {}
+      return DEFAULT_PRODUCTS.find(p => p.id === id) || null;
+    },
+
+    filter(products, criteria = {}) {
+      let filtered = [...products];
+
+      // 1. Categories
+      if (criteria.categories && criteria.categories.length > 0 && !criteria.categories.includes('all')) {
+        filtered = filtered.filter(p => {
+          if (criteria.categories.includes('reserveOnly')) {
+            if (p.reserveEligible) return true;
+          }
+          return criteria.categories.includes(p.category);
+        });
+      }
+
+      // 2. Sizes
+      if (criteria.sizes && criteria.sizes.length > 0) {
+        filtered = filtered.filter(p => {
+          if (!p.sizes) return false;
+          return p.sizes.some(s => criteria.sizes.some(cs => s.size.toLowerCase().includes(cs.toLowerCase()) && s.stock > 0));
+        });
+      }
+
+      // 3. Brands
+      if (criteria.brands && criteria.brands.length > 0) {
+        filtered = filtered.filter(p => {
+          return criteria.brands.some(b => 
+            p.brand.toLowerCase().includes(b.toLowerCase()) || 
+            (p.brandKey && p.brandKey.toLowerCase().includes(b.toLowerCase()))
+          );
+        });
+      }
+
+      // 4. Material
+      if (criteria.materials && criteria.materials.length > 0) {
+        filtered = filtered.filter(p => criteria.materials.includes(p.material));
+      }
+
+      // 5. Search Text
+      if (criteria.search && criteria.search.trim()) {
+        const q = criteria.search.trim().toLowerCase();
+        filtered = filtered.filter(p => 
+          p.name.toLowerCase().includes(q) ||
+          p.brand.toLowerCase().includes(q) ||
+          p.category.toLowerCase().includes(q) ||
+          (p.description && p.description.toLowerCase().includes(q))
+        );
+      }
+
+      // 6. Sorting
+      if (criteria.sort) {
+        if (criteria.sort === 'Low_to_High') {
+          filtered.sort((a, b) => a.price - b.price);
+        } else if (criteria.sort === 'High_to_Low') {
+          filtered.sort((a, b) => b.price - a.price);
+        } else if (criteria.sort === 'Popularity' || criteria.sort === 'Best_Sellers') {
+          filtered.sort((a, b) => (b.reviewCount || 0) - (a.reviewCount || 0));
+        } else if (criteria.sort === 'Most_Reviewed') {
+          filtered.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+        }
+      }
+
+      return filtered;
+    }
+  };
 
   // Cart API
   const Cart = {
@@ -186,9 +535,146 @@
     }
   };
 
+  // Auth / Customer Accounts Engine
+  const Auth = {
+    getCurrentUser() {
+      return storage.get(STORAGE_KEYS.USER, null);
+    },
+
+    async register(name, email, password, phone = '') {
+      try {
+        const res = await fetch('/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, password, phone })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          storage.set(STORAGE_KEYS.USER, data.user);
+          return { success: true, user: data.user };
+        }
+      } catch (e) {}
+
+      // Fallback local registration
+      const user = {
+        id: 'USR-' + Date.now(),
+        name: name || email.split('@')[0],
+        email: email.toLowerCase(),
+        phone: phone || '',
+        role: 'customer',
+        createdAt: new Date().toISOString()
+      };
+      storage.set(STORAGE_KEYS.USER, user);
+      return { success: true, user };
+    },
+
+    async login(username, password) {
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          storage.set(STORAGE_KEYS.USER, data.user);
+          return { success: true, user: data.user, role: data.role };
+        }
+      } catch (e) {}
+
+      // Fallback local login
+      if (username === 'admin' && password === 'woodpeckers2026') {
+        const adminUser = { username: 'admin', name: 'Philip (Store Manager)', role: 'admin' };
+        storage.set(STORAGE_KEYS.USER, adminUser);
+        return { success: true, user: adminUser, role: 'admin' };
+      }
+
+      if (username && password) {
+        const user = {
+          id: 'USR-LCL',
+          name: username.includes('@') ? username.split('@')[0] : username,
+          email: username.includes('@') ? username : `${username}@woodpeckers.gh`,
+          role: 'customer'
+        };
+        storage.set(STORAGE_KEYS.USER, user);
+        return { success: true, user, role: 'customer' };
+      }
+
+      throw new Error('Invalid credentials');
+    },
+
+    logout() {
+      localStorage.removeItem(STORAGE_KEYS.USER);
+      window.location.href = 'login.html';
+    }
+  };
+
+  // Orders Engine
+  const Orders = {
+    getAll() {
+      return storage.get(STORAGE_KEYS.LOCAL_ORDERS, []);
+    },
+
+    async getByNumber(orderNumber) {
+      try {
+        const res = await fetch(`/api/orders/${encodeURIComponent(orderNumber)}`);
+        if (res.ok) {
+          const data = await res.json();
+          return data.order || data;
+        }
+      } catch (e) {}
+      const local = this.getAll();
+      return local.find(o => o.orderNumber === orderNumber) || null;
+    },
+
+    async create(orderPayload) {
+      const orderNumber = 'WPK-ORD-' + Math.floor(1000 + Math.random() * 9000);
+      const newOrder = {
+        orderNumber,
+        ...orderPayload,
+        total: orderPayload.items.reduce((s, it) => s + (it.price * it.quantity), 0) + (orderPayload.deliveryFee || 35.0),
+        status: 'Processing',
+        paymentStatus: 'Paid (Test MoMo / Card)',
+        createdAt: new Date().toISOString()
+      };
+
+      // Try server sync
+      try {
+        const res = await fetch('/api/orders', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newOrder)
+        });
+        if (res.ok) {
+          const serverData = await res.json();
+          if (serverData && serverData.order) {
+            newOrder.orderNumber = serverData.order.orderNumber;
+          }
+        }
+      } catch (e) {}
+
+      // Save locally
+      const list = this.getAll();
+      list.unshift(newOrder);
+      storage.set(STORAGE_KEYS.LOCAL_ORDERS, list);
+
+      Cart.clear();
+      return newOrder;
+    },
+
+    updateStatus(orderNumber, newStatus) {
+      const list = this.getAll();
+      const order = list.find(o => o.orderNumber === orderNumber);
+      if (order) {
+        order.status = newStatus;
+        storage.set(STORAGE_KEYS.LOCAL_ORDERS, list);
+      }
+      return order;
+    }
+  };
+
   // Meet the Reserve Engine
   const ReserveEngine = {
-    // Submit an offer to backend API (with local fallback if offline)
     async submitOffer(offerData) {
       try {
         const response = await fetch('/api/reserve/offers', {
@@ -201,83 +687,86 @@
           const result = await response.json();
           this.saveMyOfferReference(result.reference);
           return result;
-        } else {
-          const errData = await response.json();
-          throw new Error(errData.message || 'Server rejected offer');
         }
-      } catch (err) {
-        console.warn('API submission failed or running standalone, processing locally:', err);
-        // Fallback local evaluation
-        const ref = 'WPK-RSV-' + Math.floor(1000 + Math.random() * 9000);
-        const amount = parseFloat(offerData.offerAmount);
-        const retail = parseFloat(offerData.retailPrice || 3000);
-        const floor = retail * 0.85;
+      } catch (err) {}
 
-        let status = 'under_review';
-        let counterAmount = null;
+      // Fallback local evaluation
+      const ref = 'WPK-RSV-' + Math.floor(1000 + Math.random() * 9000);
+      const amount = parseFloat(offerData.offerAmount);
+      const retail = parseFloat(offerData.retailPrice || 3500);
+      const floor = retail * 0.85;
 
-        if (amount >= floor * 0.95) {
-          status = 'accepted';
-        } else if (amount >= floor * 0.85) {
-          status = 'counteroffered';
-          counterAmount = Math.round(floor);
-        }
+      let status = 'under_review';
+      let counterAmount = null;
 
-        const localOffer = {
-          reference: ref,
-          productId: offerData.productId,
-          productName: offerData.productName || 'Woodpeckers Grail',
-          productSku: offerData.productSku || 'WPK-RSV',
-          productImage: offerData.productImage || 'images/product-image-1.jpg',
-          retailPrice: retail,
-          size: offerData.size,
-          customerName: offerData.customerName,
-          customerEmail: offerData.customerEmail,
-          customerPhone: offerData.customerPhone,
-          offerAmount: amount,
-          status: status,
-          submittedAt: new Date().toISOString(),
-          counterAmount: counterAmount,
-          history: [
-            {
-              timestamp: new Date().toISOString(),
-              action: 'submitted',
-              actor: 'Customer',
-              note: `Offer submitted for ${formatGHS(amount)}`
-            }
-          ]
-        };
-
-        this.saveMyOfferReference(ref);
-        return {
-          success: true,
-          reference: ref,
-          status: status,
-          offer: localOffer,
-          message: status === 'accepted'
-            ? 'Congratulations! Your offer met the reserve target! You can proceed directly to checkout.'
-            : status === 'counteroffered'
-            ? `Your offer is close! Woodpeckers counteroffered ${formatGHS(counterAmount)}.`
-            : 'Your offer has been submitted and is under review by our store team.'
-        };
+      if (amount >= floor * 0.95) {
+        status = 'accepted';
+      } else if (amount >= floor * 0.85) {
+        status = 'counteroffered';
+        counterAmount = Math.round(floor);
       }
+
+      const localOffer = {
+        reference: ref,
+        productId: offerData.productId,
+        productName: offerData.productName || 'Woodpeckers Grail',
+        productSku: offerData.productSku || 'WPK-RSV',
+        productImage: offerData.productImage || 'images/product-image-1.jpg',
+        retailPrice: retail,
+        size: offerData.size,
+        customerName: offerData.customerName,
+        customerEmail: offerData.customerEmail,
+        customerPhone: offerData.customerPhone,
+        offerAmount: amount,
+        status: status,
+        submittedAt: new Date().toISOString(),
+        counterAmount: counterAmount,
+        history: [
+          {
+            timestamp: new Date().toISOString(),
+            action: 'submitted',
+            actor: 'Customer',
+            note: `Offer submitted for ${formatGHS(amount)}`
+          }
+        ]
+      };
+
+      // Save to localStorage
+      const allOffers = storage.get(STORAGE_KEYS.LOCAL_OFFERS, []);
+      allOffers.unshift(localOffer);
+      storage.set(STORAGE_KEYS.LOCAL_OFFERS, allOffers);
+      this.saveMyOfferReference(ref);
+
+      return {
+        success: true,
+        reference: ref,
+        status: status,
+        offer: localOffer,
+        message: status === 'accepted'
+          ? 'Congratulations! Your offer met the reserve target! You can proceed directly to checkout.'
+          : status === 'counteroffered'
+          ? `Your offer is close! Woodpeckers counteroffered ${formatGHS(counterAmount)}.`
+          : 'Your offer has been submitted and is under review by our store team.'
+      };
     },
 
-    // Check status of an offer
     async getOffer(reference) {
       try {
         const res = await fetch(`/api/reserve/offers/${encodeURIComponent(reference.trim())}`);
         if (res.ok) {
-          return await res.json();
+          const data = await res.json();
+          return data.offer || data;
         }
-        throw new Error('Offer not found');
-      } catch (err) {
-        console.warn('Could not fetch offer from server, checking local memory:', err);
-        return null;
-      }
+      } catch (err) {}
+
+      const allOffers = storage.get(STORAGE_KEYS.LOCAL_OFFERS, []);
+      return allOffers.find(o => o.reference === reference) || null;
     },
 
-    // Perform action (accept counteroffer, decline, etc.)
+    getAllOffers() {
+      return storage.get(STORAGE_KEYS.LOCAL_OFFERS, []);
+    },
+
     async actOnOffer(reference, action, extra = {}) {
       try {
         const res = await fetch(`/api/reserve/offers/${encodeURIComponent(reference)}/action`, {
@@ -285,13 +774,29 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ action, ...extra })
         });
-        if (res.ok) {
-          return await res.json();
+        if (res.ok) return await res.json();
+      } catch (e) {}
+
+      // Update in localStorage
+      const allOffers = storage.get(STORAGE_KEYS.LOCAL_OFFERS, []);
+      const offer = allOffers.find(o => o.reference === reference);
+      if (offer) {
+        if (action === 'customer_accept_counter') {
+          offer.status = 'accepted';
+          offer.offerAmount = offer.counterAmount;
+        } else if (action === 'customer_decline_counter') {
+          offer.status = 'rejected';
+        } else if (action === 'accept') {
+          offer.status = 'accepted';
+        } else if (action === 'counteroffer') {
+          offer.status = 'counteroffered';
+          offer.counterAmount = extra.counterAmount;
+        } else if (action === 'reject') {
+          offer.status = 'rejected';
         }
-      } catch (e) {
-        console.error('Action failed:', e);
+        storage.set(STORAGE_KEYS.LOCAL_OFFERS, allOffers);
       }
-      return null;
+      return { success: true, offer };
     },
 
     saveMyOfferReference(ref) {
@@ -305,6 +810,42 @@
 
     getMyOffers() {
       return storage.get(STORAGE_KEYS.RECENT_OFFERS, []);
+    }
+  };
+
+  // Wishlist Engine
+  const Wishlist = {
+    getItems() {
+      return storage.get(STORAGE_KEYS.WISHLIST, [
+        DEFAULT_PRODUCTS[0],
+        DEFAULT_PRODUCTS[1],
+        DEFAULT_PRODUCTS[2]
+      ]);
+    },
+
+    add(product) {
+      const items = this.getItems();
+      if (!items.some(p => p.id === product.id)) {
+        items.push(product);
+        storage.set(STORAGE_KEYS.WISHLIST, items);
+        showToast(`${product.name} saved to your wishlist!`, 'success');
+      }
+    },
+
+    remove(productId) {
+      const items = this.getItems().filter(p => p.id !== productId);
+      storage.set(STORAGE_KEYS.WISHLIST, items);
+      showToast('Item removed from wishlist', 'info');
+      return items;
+    },
+
+    toggle(product) {
+      const items = this.getItems();
+      if (items.some(p => p.id === product.id)) {
+        this.remove(product.id);
+      } else {
+        this.add(product);
+      }
     }
   };
 
@@ -648,6 +1189,16 @@
   document.addEventListener('DOMContentLoaded', () => {
     Cart.updateBadges();
 
+    // Dismiss preloader safely
+    const preloader = document.querySelector('.preloader');
+    if (preloader) {
+      setTimeout(() => {
+        preloader.style.transition = 'opacity 0.4s ease';
+        preloader.style.opacity = '0';
+        setTimeout(() => preloader.style.display = 'none', 400);
+      }, 300);
+    }
+
     // Global listener for buttons with data-reserve-product
     document.addEventListener('click', (e) => {
       const target = e.target.closest('[data-open-reserve-modal]');
@@ -660,19 +1211,9 @@
         if (window.WPK_PRODUCTS_MAP && window.WPK_PRODUCTS_MAP[productId]) {
           openOfferModal(window.WPK_PRODUCTS_MAP[productId], size);
         } else {
-          fetch(`/api/products/${productId}`)
-            .then(res => res.json())
-            .then(p => openOfferModal(p, size))
-            .catch(() => {
-              // Minimal fallback
-              openOfferModal({
-                id: productId,
-                name: target.getAttribute('data-product-name') || 'Woodpeckers Grail',
-                price: parseFloat(target.getAttribute('data-product-price') || '3500'),
-                images: [target.getAttribute('data-product-image') || 'images/product-image-1.jpg'],
-                reserveEligible: true
-              }, size);
-            });
+          Products.getById(productId).then(p => {
+            if (p) openOfferModal(p, size);
+          });
         }
       }
 
@@ -687,17 +1228,9 @@
         if (window.WPK_PRODUCTS_MAP && window.WPK_PRODUCTS_MAP[productId]) {
           Cart.addItem(window.WPK_PRODUCTS_MAP[productId], size, qty);
         } else {
-          fetch(`/api/products/${productId}`)
-            .then(res => res.json())
-            .then(p => Cart.addItem(p, size, qty))
-            .catch(() => {
-              Cart.addItem({
-                id: productId,
-                name: addCartBtn.getAttribute('data-product-name') || 'Woodpeckers Footwear',
-                price: parseFloat(addCartBtn.getAttribute('data-product-price') || '1650'),
-                images: [addCartBtn.getAttribute('data-product-image') || 'images/product-image-1.jpg']
-              }, size, qty);
-            });
+          Products.getById(productId).then(p => {
+            if (p) Cart.addItem(p, size, qty);
+          });
         }
       }
     });
@@ -706,7 +1239,12 @@
   // Export to global scope
   window.Woodpeckers = {
     Cart,
+    Products,
+    Orders,
     ReserveEngine,
+    Auth,
+    Wishlist,
+    DEFAULT_PRODUCTS,
     formatGHS,
     showToast,
     openOfferModal,

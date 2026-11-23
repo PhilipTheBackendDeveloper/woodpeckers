@@ -600,7 +600,48 @@ const server = http.createServer(async (req, res) => {
         });
       }
 
-      // 7. Auth login (Admin & Customer)
+      // 7A. Customer registration
+      if (pathname === '/api/auth/register' && method === 'POST') {
+        const body = await parseBody(req);
+        const { name, email, password, phone } = body;
+
+        if (!email || !password) {
+          return sendError(res, 400, 'Email and password are required');
+        }
+
+        store.users = store.users || [];
+        const existing = store.users.find(u => u.email && u.email.toLowerCase() === email.toLowerCase());
+        if (existing) {
+          return sendError(res, 400, 'An account with this email already exists.');
+        }
+
+        const newUser = {
+          id: 'USR-' + Date.now(),
+          name: name || email.split('@')[0],
+          email: email.toLowerCase(),
+          password: password,
+          phone: phone || '',
+          createdAt: new Date().toISOString()
+        };
+
+        store.users.push(newUser);
+        saveStore();
+
+        return sendJSON(res, 201, {
+          success: true,
+          message: 'Account created successfully',
+          user: {
+            id: newUser.id,
+            name: newUser.name,
+            email: newUser.email,
+            phone: newUser.phone,
+            role: 'customer'
+          },
+          token: 'wpk-cst-token-' + Date.now()
+        });
+      }
+
+      // 7B. Auth login (Admin & Customer)
       if (pathname === '/api/auth/login' && method === 'POST') {
         const body = await parseBody(req);
         const { username, password } = body;
@@ -622,7 +663,29 @@ const server = http.createServer(async (req, res) => {
           }
         }
 
-        // Customer login demo
+        // Check registered customers
+        store.users = store.users || [];
+        const registeredUser = store.users.find(u => u.email.toLowerCase() === (username || '').toLowerCase());
+        if (registeredUser) {
+          if (registeredUser.password === password) {
+            return sendJSON(res, 200, {
+              success: true,
+              role: 'customer',
+              user: {
+                id: registeredUser.id,
+                name: registeredUser.name,
+                email: registeredUser.email,
+                phone: registeredUser.phone,
+                role: 'customer'
+              },
+              token: 'wpk-cst-token-' + Date.now()
+            });
+          } else {
+            return sendError(res, 401, 'Invalid password.');
+          }
+        }
+
+        // Customer login fallback demo
         if (username && password) {
           return sendJSON(res, 200, {
             success: true,

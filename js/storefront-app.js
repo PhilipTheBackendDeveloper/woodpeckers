@@ -197,25 +197,40 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   function attachQuickCartListeners(container) {
     (container || document).querySelectorAll('.btn-quick-cart').forEach(btn => {
+      // Remove any previous listener by replacing with clone or checking flag
+      if (btn.dataset.quickCartBound === 'true') return;
+      btn.dataset.quickCartBound = 'true';
+
       btn.addEventListener('click', (e) => {
         e.preventDefault();
         const pId = btn.getAttribute('data-product-id');
-        const product = window.WPK_PRODUCTS_MAP && window.WPK_PRODUCTS_MAP[pId];
-        if (product) {
+        let product = (window.WPK_PRODUCTS_MAP && window.WPK_PRODUCTS_MAP[pId]);
+        if (!product && window.Woodpeckers && window.Woodpeckers.DEFAULT_PRODUCTS) {
+          product = window.Woodpeckers.DEFAULT_PRODUCTS.find(p => p.id === pId);
+        }
+        if (product && window.Woodpeckers && window.Woodpeckers.Cart) {
           const defaultSize = product.sizes && product.sizes[0] ? product.sizes[0].size : 'UK 8';
-          Woodpeckers.Cart.addItem(product, defaultSize, 1);
+          window.Woodpeckers.Cart.addItem(product, defaultSize, 1);
+        } else {
+          console.warn('Product not found for quick cart:', pId);
         }
       });
     });
 
     (container || document).querySelectorAll('[data-open-reserve-modal]').forEach(btn => {
+      if (btn.dataset.reserveModalBound === 'true') return;
+      btn.dataset.reserveModalBound = 'true';
+
       btn.addEventListener('click', (e) => {
         e.preventDefault();
         const pId = btn.getAttribute('data-product-id');
-        const product = window.WPK_PRODUCTS_MAP && window.WPK_PRODUCTS_MAP[pId];
+        let product = (window.WPK_PRODUCTS_MAP && window.WPK_PRODUCTS_MAP[pId]);
+        if (!product && window.Woodpeckers && window.Woodpeckers.DEFAULT_PRODUCTS) {
+          product = window.Woodpeckers.DEFAULT_PRODUCTS.find(p => p.id === pId);
+        }
         if (product && window.Woodpeckers && window.Woodpeckers.openOfferModal) {
           const defaultSize = product.sizes && product.sizes[0] ? product.sizes[0].size : 'UK 8';
-          Woodpeckers.openOfferModal(product, defaultSize);
+          window.Woodpeckers.openOfferModal(product, defaultSize);
         } else {
           window.location.href = `reserve.html?product=${pId}`;
         }
@@ -230,19 +245,249 @@ document.addEventListener('DOMContentLoaded', async () => {
     let allProducts = [];
     try {
       const res = await fetch('/api/products');
-      if (res.ok) allProducts = await res.json();
+      if (res.ok) {
+        const fetched = await res.json();
+        if (Array.isArray(fetched) && fetched.length > 0) {
+          allProducts = fetched;
+        }
+      }
     } catch (e) {
-      console.warn('API error in products.html');
+      console.warn('API error in products.html, falling back to local catalogue');
+    }
+
+    if (!Array.isArray(allProducts) || allProducts.length === 0) {
+      if (window.Woodpeckers && window.Woodpeckers.Products) {
+        try {
+          allProducts = await window.Woodpeckers.Products.getAll();
+        } catch (e) {
+          allProducts = window.Woodpeckers.DEFAULT_PRODUCTS || [];
+        }
+      } else if (window.Woodpeckers && window.Woodpeckers.DEFAULT_PRODUCTS) {
+        allProducts = window.Woodpeckers.DEFAULT_PRODUCTS;
+      }
+    }
+
+    if (!Array.isArray(allProducts) || allProducts.length === 0) {
+      if (window.Woodpeckers && window.Woodpeckers.DEFAULT_PRODUCTS) {
+        allProducts = window.Woodpeckers.DEFAULT_PRODUCTS;
+      }
     }
 
     window.WPK_PRODUCTS_MAP = window.WPK_PRODUCTS_MAP || {};
-    allProducts.forEach(p => { window.WPK_PRODUCTS_MAP[p.id] = p; });
+    if (Array.isArray(allProducts)) {
+      allProducts.forEach(p => { window.WPK_PRODUCTS_MAP[p.id] = p; });
+    }
 
     const grid = document.querySelector('.product-item-list');
-    if (grid && allProducts.length > 0) {
-      grid.innerHTML = allProducts.map(p => renderStorefrontCard(p)).join('');
-      attachQuickCartListeners(grid);
+    const resultCountHeader = document.querySelector('.product-item-list-box .product-category-filter-header .product-category-filter-title h2') ||
+                              document.querySelector('.product-category-filter-title h2');
+
+    // Parse URL Query Parameters on load
+    const params = new URLSearchParams(window.location.search);
+    const catParam = params.get('category');
+    const reserveParam = params.get('reserve');
+    const searchParam = params.get('search');
+
+    const catAll = document.getElementById('cat_all');
+    const catExclusive = document.getElementById('cat_exclusive');
+    const catRunners = document.getElementById('cat_runners');
+    const catStreetwear = document.getElementById('cat_streetwear');
+    const catReserve = document.getElementById('cat_reserve');
+
+    if (catParam) {
+      const cLower = catParam.toLowerCase();
+      if (catAll) catAll.checked = false;
+      if (cLower.includes('streetwear') && catStreetwear) {
+        catStreetwear.checked = true;
+      } else if ((cLower.includes('exclusive') || cLower.includes('grail') || cLower.includes('jordan') || cLower.includes('sneaker')) && catExclusive) {
+        catExclusive.checked = true;
+      } else if ((cLower.includes('runner') || cLower.includes('lifestyle')) && catRunners) {
+        catRunners.checked = true;
+      }
     }
+
+    if (reserveParam === 'true' && catReserve) {
+      if (catAll) catAll.checked = false;
+      catReserve.checked = true;
+    }
+
+    function applyFilters() {
+      if (!grid) return;
+
+      const isAll = catAll ? catAll.checked : true;
+      const isExclusive = catExclusive ? catExclusive.checked : false;
+      const isRunners = catRunners ? catRunners.checked : false;
+      const isStreetwear = catStreetwear ? catStreetwear.checked : false;
+      const isReserveOnly = catReserve ? catReserve.checked : false;
+
+      const checkedSizes = Array.from(document.querySelectorAll('input[name="Size"]:checked')).map(el => el.value);
+      const checkedBrands = Array.from(document.querySelectorAll('input[name="Brand"]:checked')).map(el => el.value.toLowerCase());
+      const checkedMaterials = Array.from(document.querySelectorAll('input[name="Material"]:checked')).map(el => el.value.toLowerCase());
+      const sortSelect = document.getElementById('sorting_list');
+      const sortVal = sortSelect ? sortSelect.value : '';
+
+      let filtered = allProducts.slice();
+
+      // Search Query
+      if (searchParam) {
+        const q = searchParam.toLowerCase();
+        filtered = filtered.filter(p => p.name.toLowerCase().includes(q) || (p.brand && p.brand.toLowerCase().includes(q)));
+      }
+
+      // Categories
+      if (!isAll) {
+        const allowedCats = [];
+        if (isExclusive) allowedCats.push('Exclusive Sneakers');
+        if (isRunners) allowedCats.push('Lifestyle Runners');
+        if (isStreetwear) allowedCats.push('Streetwear');
+
+        if (allowedCats.length > 0) {
+          filtered = filtered.filter(p => allowedCats.some(c => (p.category || '').toLowerCase().includes(c.toLowerCase())));
+        }
+      }
+
+      // Reserve Eligible filter
+      if (isReserveOnly) {
+        filtered = filtered.filter(p => p.reserveEligible === true);
+      }
+
+      // Sizes filter
+      if (checkedSizes.length > 0) {
+        filtered = filtered.filter(p => {
+          if (!p.sizes || !Array.isArray(p.sizes)) return false;
+          return p.sizes.some(s => checkedSizes.includes(s.size));
+        });
+      }
+
+      // Brands filter
+      if (checkedBrands.length > 0) {
+        filtered = filtered.filter(p => {
+          const pb = (p.brand || '').toLowerCase();
+          return checkedBrands.some(b => pb.includes(b));
+        });
+      }
+
+      // Material filter
+      if (checkedMaterials.length > 0) {
+        filtered = filtered.filter(p => {
+          const pm = (p.material || '').toLowerCase();
+          return checkedMaterials.some(m => pm.includes(m));
+        });
+      }
+
+      // Sorting
+      if (sortVal === 'Low_to_High') {
+        filtered.sort((a, b) => a.price - b.price);
+      } else if (sortVal === 'High_to_Low') {
+        filtered.sort((a, b) => b.price - a.price);
+      } else if (sortVal === 'Popularity' || sortVal === 'Trending') {
+        filtered.sort((a, b) => (b.reviewsCount || 0) - (a.reviewsCount || 0));
+      } else if (sortVal === 'Best_Sellers') {
+        filtered.sort((a, b) => (b.soldCount || 0) - (a.soldCount || 0));
+      }
+
+      // Render
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-12 text-center py-5" style="width:100%;grid-column:1/-1;">
+            <i class="fa-solid fa-filter-circle-xmark fa-3x text-muted mb-3"></i>
+            <h3 style="font-weight:800;color:#111;">No Grails Match Your Selected Filters</h3>
+            <p style="color:#777;max-width:400px;margin:8px auto 20px;">
+              Try clearing specific size or brand criteria to see available authenticated deadstock.
+            </p>
+            <button id="btn-reset-filters" class="btn btn-dark" style="padding:10px 24px;font-weight:700;">
+              Reset All Filters
+            </button>
+          </div>
+        `;
+        const resetBtn = document.getElementById('btn-reset-filters');
+        if (resetBtn) {
+          resetBtn.addEventListener('click', () => {
+            clearAllFilters();
+          });
+        }
+      } else {
+        grid.innerHTML = filtered.map(p => renderStorefrontCard(p)).join('');
+        attachQuickCartListeners(grid);
+      }
+
+      // Update Result Count
+      if (resultCountHeader) {
+        resultCountHeader.textContent = `Showing ${filtered.length} of ${allProducts.length} results`;
+      }
+    }
+
+    function clearAllFilters() {
+      if (catAll) catAll.checked = true;
+      if (catExclusive) catExclusive.checked = false;
+      if (catRunners) catRunners.checked = false;
+      if (catStreetwear) catStreetwear.checked = false;
+      if (catReserve) catReserve.checked = false;
+
+      document.querySelectorAll('input[name="Size"]').forEach(el => el.checked = false);
+      document.querySelectorAll('input[name="Brand"]').forEach(el => el.checked = false);
+      document.querySelectorAll('input[name="Material"]').forEach(el => el.checked = false);
+
+      const sortSelect = document.getElementById('sorting_list');
+      if (sortSelect) sortSelect.selectedIndex = 0;
+
+      applyFilters();
+    }
+
+    // Bind Category Listeners
+    if (catAll) {
+      const handleAll = () => {
+        if (catAll.checked) {
+          if (catExclusive) catExclusive.checked = false;
+          if (catRunners) catRunners.checked = false;
+          if (catStreetwear) catStreetwear.checked = false;
+          if (catReserve) catReserve.checked = false;
+        }
+        applyFilters();
+      };
+      catAll.addEventListener('change', handleAll);
+      catAll.addEventListener('click', handleAll);
+    }
+
+    [catExclusive, catRunners, catStreetwear, catReserve].forEach(cb => {
+      if (cb) {
+        const handleCat = () => {
+          if (cb.checked && catAll) {
+            catAll.checked = false;
+          } else if (!catExclusive?.checked && !catRunners?.checked && !catStreetwear?.checked && !catReserve?.checked && catAll) {
+            catAll.checked = true;
+          }
+          applyFilters();
+        };
+        cb.addEventListener('change', handleCat);
+        cb.addEventListener('click', handleCat);
+      }
+    });
+
+    // Bind Size, Brand, Material listeners
+    document.querySelectorAll('input[name="Size"], input[name="Brand"], input[name="Material"]').forEach(cb => {
+      cb.addEventListener('change', applyFilters);
+      cb.addEventListener('click', applyFilters);
+    });
+
+    // Bind Sorting listener
+    const sortSelect = document.getElementById('sorting_list');
+    if (sortSelect) {
+      sortSelect.addEventListener('change', applyFilters);
+      sortSelect.addEventListener('input', applyFilters);
+    }
+
+    // Bind Clear All button
+    const clearBtn = document.querySelector('.product-category-filter-clear-btn a');
+    if (clearBtn) {
+      clearBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        clearAllFilters();
+      });
+    }
+
+    // Initial render with URL params respected
+    applyFilters();
   }
 
   // -------------------------------------------------------------
@@ -283,9 +528,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   // 3. CART PAGE (cart.html)
   // -------------------------------------------------------------
   if (page === 'cart.html') {
+    let appliedDiscountPct = 0;
+
     function renderCartTable() {
       const items = Woodpeckers.Cart.getItems();
       const tableBox = document.querySelector('.cart-item-table-box');
+      const checkoutBtn = document.querySelector('.order-checkout-button a');
+
       if (!tableBox) return;
 
       if (items.length === 0) {
@@ -303,10 +552,26 @@ document.addEventListener('DOMContentLoaded', async () => {
           </div>
         `;
 
-        // Hide checkout sidebar totals if empty
-        const sidebar = document.querySelector('.cart-sidebar-box');
-        if (sidebar) sidebar.style.display = 'none';
+        // Update Order Summary to zero and disable checkout
+        document.querySelectorAll('.cart-subtotal-val').forEach(el => el.textContent = 'GH₵ 0.00');
+        document.querySelectorAll('.cart-total-val').forEach(el => el.textContent = 'GH₵ 0.00');
+
+        if (checkoutBtn) {
+          checkoutBtn.style.pointerEvents = 'none';
+          checkoutBtn.style.opacity = '0.5';
+          checkoutBtn.style.background = '#888';
+          checkoutBtn.style.cursor = 'not-allowed';
+          checkoutBtn.textContent = 'Your Shopping Bag is Empty';
+        }
         return;
+      }
+
+      if (checkoutBtn) {
+        checkoutBtn.style.pointerEvents = 'auto';
+        checkoutBtn.style.opacity = '1';
+        checkoutBtn.style.background = '#008751';
+        checkoutBtn.style.cursor = 'pointer';
+        checkoutBtn.textContent = 'Proceed To Checkout';
       }
 
       let subtotal = 0;
@@ -369,11 +634,41 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     function updateTotals(subtotal) {
-      const deliveryFee = 35.0; // Accra Metro Default
-      const total = subtotal + deliveryFee;
+      const selectedRadio = document.querySelector('input[name="delivery_choice"]:checked');
+      const deliveryFee = selectedRadio ? parseFloat(selectedRadio.value) : 35.0;
+      const discount = subtotal * (appliedDiscountPct / 100);
+      const total = Math.max(0, subtotal - discount + deliveryFee);
 
       document.querySelectorAll('.cart-subtotal-val').forEach(el => el.textContent = Woodpeckers.formatGHS(subtotal));
       document.querySelectorAll('.cart-total-val').forEach(el => el.textContent = Woodpeckers.formatGHS(total));
+    }
+
+    // Delivery radio change listener
+    document.querySelectorAll('input[name="delivery_choice"]').forEach(radio => {
+      radio.addEventListener('change', () => {
+        const items = Woodpeckers.Cart.getItems();
+        const subtotal = items.reduce((s, it) => s + (it.price * it.quantity), 0);
+        updateTotals(subtotal);
+      });
+    });
+
+    // Promo code form listener
+    const promoForm = document.getElementById('promocodeForm');
+    if (promoForm) {
+      promoForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const codeInput = document.getElementById('promo');
+        const code = codeInput ? codeInput.value.trim().toUpperCase() : '';
+        if (code === 'WOODPECKERS10' || code === 'WOODPECKER10') {
+          appliedDiscountPct = 10;
+          Woodpeckers.showToast('VIP Discount Code Applied: 10% Off your drop order!', 'success');
+          const items = Woodpeckers.Cart.getItems();
+          const subtotal = items.reduce((s, it) => s + (it.price * it.quantity), 0);
+          updateTotals(subtotal);
+        } else {
+          Woodpeckers.showToast('Invalid promo code. Try WOODPECKERS10 for 10% off.', 'error');
+        }
+      });
     }
 
     window.updateCartItemQty = function(idx, newQty) {
@@ -621,35 +916,166 @@ document.addEventListener('DOMContentLoaded', async () => {
   // -------------------------------------------------------------
   if (page === 'account-order.html') {
     const ordersTbody = document.getElementById('account-orders-body');
+    const offersTbody = document.getElementById('my-reserve-offers-body');
+    const user = (window.Woodpeckers && window.Woodpeckers.Auth) ? Woodpeckers.Auth.getUser() : null;
+
     if (ordersTbody) {
-      fetch('/api/orders')
-        .then(res => res.json())
-        .then(orders => {
-          if (orders && orders.length) {
-            ordersTbody.innerHTML = orders.map(ord => {
-              const dateStr = new Date(ord.createdAt || Date.now()).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
-              const itemsCount = ord.items ? ord.items.reduce((s, it) => s + (it.quantity || 1), 0) : 1;
-              const firstItem = ord.items && ord.items[0] ? ord.items[0].name : 'Sneakers';
-              const statusBadge = ord.status === 'Delivered' 
-                ? '<span class="badge" style="background:#f1f5f9;color:#334155;padding:4px 8px;border-radius:4px;"><i class="fa-solid fa-box"></i> Delivered</span>'
-                : (ord.status === 'Dispatched' || ord.status === 'In Transit')
-                ? '<span class="badge" style="background:#dcfce7;color:#15803d;padding:4px 8px;border-radius:4px;"><i class="fa-solid fa-truck-fast"></i> In Transit</span>'
-                : '<span class="badge" style="background:#e0f2fe;color:#0369a1;padding:4px 8px;border-radius:4px;"><i class="fa-solid fa-clock"></i> Processing</span>';
-              
-              return `
+      const ordersUrl = user && user.email ? `/api/orders?email=${encodeURIComponent(user.email)}` : null;
+      if (ordersUrl) {
+        fetch(ordersUrl)
+          .then(res => res.json())
+          .then(orders => {
+            if (orders && orders.length) {
+              ordersTbody.innerHTML = orders.map(ord => {
+                const dateStr = new Date(ord.createdAt || Date.now()).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+                const itemsCount = ord.items ? ord.items.reduce((s, it) => s + (it.quantity || 1), 0) : 1;
+                const firstItem = ord.items && ord.items[0] ? (ord.items[0].name || ord.items[0].productName) : 'Sneakers';
+                const statusBadge = ord.status === 'Delivered' || ord.fulfilmentStatus === 'delivered'
+                  ? '<span class="badge" style="background:#f1f5f9;color:#334155;padding:4px 8px;border-radius:4px;"><i class="fa-solid fa-box"></i> Delivered</span>'
+                  : (ord.status === 'Dispatched' || ord.status === 'In Transit' || ord.fulfilmentStatus === 'dispatched')
+                  ? '<span class="badge" style="background:#dcfce7;color:#15803d;padding:4px 8px;border-radius:4px;"><i class="fa-solid fa-truck-fast"></i> In Transit</span>'
+                  : '<span class="badge" style="background:#e0f2fe;color:#0369a1;padding:4px 8px;border-radius:4px;"><i class="fa-solid fa-clock"></i> Processing</span>';
+                
+                return `
+                  <tr>
+                    <td class="account-order-table-no" style="font-weight:700;color:#008751;">#${ord.orderNumber}</td>
+                    <td>${dateStr}</td>
+                    <td>${statusBadge}</td>
+                    <td>${itemsCount} item${itemsCount > 1 ? 's' : ''} (${firstItem})</td>
+                    <td><strong>${Woodpeckers.formatGHS(ord.total)}</strong></td>
+                    <td><a href="order-received.html?orderNumber=${encodeURIComponent(ord.orderNumber)}" class="btn-default btn-accent" style="padding:6px 14px;font-size:12px;">View</a></td>
+                  </tr>
+                `;
+              }).join('');
+            } else {
+              renderEmptyOrders();
+            }
+          })
+          .catch(() => renderEmptyOrders());
+      } else {
+        renderEmptyOrders();
+      }
+
+      function renderEmptyOrders() {
+        ordersTbody.innerHTML = `
+          <tr>
+            <td colspan="6" style="text-align:center;padding:50px 20px;color:#777;">
+              <i class="fa-solid fa-box-open" style="font-size:38px;color:#ccc;margin-bottom:12px;display:block;"></i>
+              <p style="font-size:16px;font-weight:700;color:#222;margin-bottom:6px;">No Orders Yet</p>
+              <p style="font-size:13px;color:#888;margin-bottom:20px;max-width:440px;margin-left:auto;margin-right:auto;">
+                You have not placed any orders with Woodpeckers yet. When you purchase drops or win a Meet the Reserve grail, your orders will appear here.
+              </p>
+              <a href="products.html" class="btn-default btn-accent" style="padding:10px 24px;font-size:13px;display:inline-block;">Explore Drops &amp; Grails</a>
+            </td>
+          </tr>
+        `;
+      }
+    }
+
+    if (offersTbody) {
+      const offersUrl = user && user.email ? `/api/reserve/offers?email=${encodeURIComponent(user.email)}` : null;
+      if (offersUrl) {
+        fetch(offersUrl)
+          .then(res => res.json())
+          .then(offers => {
+            const userOffers = (offers || []).filter(o => user ? (o.email && o.email.toLowerCase() === user.email.toLowerCase()) : false);
+            if (userOffers && userOffers.length) {
+              offersTbody.innerHTML = userOffers.map(o => `
                 <tr>
-                  <td class="account-order-table-no" style="font-weight:700;color:#008751;">#${ord.orderNumber}</td>
-                  <td>${dateStr}</td>
-                  <td>${statusBadge}</td>
-                  <td>${itemsCount} item${itemsCount > 1 ? 's' : ''} (${firstItem})</td>
-                  <td><strong>${Woodpeckers.formatGHS(ord.total)}</strong></td>
-                  <td><a href="order-received.html?orderNumber=${encodeURIComponent(ord.orderNumber)}" class="btn-default btn-accent" style="padding:6px 14px;font-size:12px;">View</a></td>
+                  <td><code style="color:#008751;font-weight:700;">${o.reference || o.id}</code></td>
+                  <td>${o.productName} (${o.size})</td>
+                  <td><strong>${Woodpeckers.formatGHS(o.offerAmount)}</strong></td>
+                  <td><span class="badge ${o.status === 'accepted' ? 'bg-success' : o.status === 'declined' ? 'bg-danger' : 'bg-warning text-dark'}">${o.status}</span></td>
+                  <td>${o.status === 'accepted' ? `<a href="checkout.html?reserveRef=${o.reference}" class="btn btn-sm btn-primary py-1 px-2" style="background:#008751;border-color:#008751;color:#111;font-weight:700;font-size:11px;">Checkout &rarr;</a>` : `<a href="reserve.html?track=${o.reference}" class="btn btn-sm btn-dark py-1 px-2" style="font-size:11px;">Track &rarr;</a>`}</td>
                 </tr>
-              `;
-            }).join('');
-          }
-        })
-        .catch(err => console.warn('Could not load dynamic orders:', err));
+              `).join('');
+            } else {
+              renderEmptyOffers();
+            }
+          })
+          .catch(() => renderEmptyOffers());
+      } else {
+        renderEmptyOffers();
+      }
+
+      function renderEmptyOffers() {
+        offersTbody.innerHTML = `
+          <tr>
+            <td colspan="5" style="text-align:center;padding:30px 15px;color:#888;">
+              <p style="margin:0;font-size:13px;">No active Meet the Reserve offers. <a href="reserve.html" style="color:#008751;font-weight:700;">Name your price on exclusive grails &rarr;</a></p>
+            </td>
+          </tr>
+        `;
+      }
+    }
+  }
+
+  // -------------------------------------------------------------
+  // 6b. ACCOUNT CERTIFICATES PAGE (account-download.html)
+  // -------------------------------------------------------------
+  if (page === 'account-download.html') {
+    const certsTbody = document.getElementById('certs-body');
+    if (certsTbody) {
+      const user = (window.Woodpeckers && window.Woodpeckers.Auth) ? Woodpeckers.Auth.getUser() : null;
+      const ordersUrl = user && user.email ? `/api/orders?email=${encodeURIComponent(user.email)}` : null;
+
+      if (ordersUrl) {
+        fetch(ordersUrl)
+          .then(res => res.json())
+          .then(orders => {
+            const deliveredOrders = (orders || []).filter(o => o.fulfilmentStatus === 'delivered' || o.status === 'Delivered');
+            if (deliveredOrders && deliveredOrders.length) {
+              let rows = '';
+              deliveredOrders.forEach(ord => {
+                (ord.items || []).forEach((item, idx) => {
+                  const authCode = `WPK-AUTH-${(ord.orderNumber || '').replace(/[^0-9]/g, '') || (1000 + idx)}`;
+                  const dateStr = new Date(ord.createdAt || Date.now()).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+                  rows += `
+                    <tr>
+                      <td>
+                        <div style="display:flex;align-items:center;gap:12px;">
+                          <img src="images/product-image-1.jpg" alt="" style="width:44px;height:44px;object-fit:contain;border:1px solid #eee;border-radius:4px;padding:2px;">
+                          <div>
+                            <strong style="display:block;font-size:13px;">${item.name || item.productName || 'Grail Deadstock'}</strong>
+                            <span style="font-size:11px;color:#888;">Size: ${item.size || 'Standard'} &bull; Verified Deadstock</span>
+                          </div>
+                        </div>
+                      </td>
+                      <td><code style="background:#f1f5f9;color:#008751;padding:3px 6px;border-radius:3px;font-weight:700;">${authCode}</code></td>
+                      <td>${dateStr}</td>
+                      <td><span style="background:#dcfce7;color:#15803d;font-size:11px;font-weight:800;padding:4px 8px;border-radius:4px;"><i class="fa-solid fa-check"></i> 100% Authentic</span></td>
+                      <td>
+                        <button type="button" class="btn btn-sm btn-dark" onclick="alert('Downloading Certificate of Authenticity (${authCode})...')" style="font-size:12px;padding:5px 10px;">
+                          <i class="fa-solid fa-file-pdf"></i> Certificate
+                        </button>
+                      </td>
+                    </tr>
+                  `;
+                });
+              });
+              certsTbody.innerHTML = rows;
+            } else {
+              renderEmptyCerts();
+            }
+          })
+          .catch(() => renderEmptyCerts());
+      } else {
+        renderEmptyCerts();
+      }
+
+      function renderEmptyCerts() {
+        certsTbody.innerHTML = `
+          <tr>
+            <td colspan="5" style="text-align:center;padding:50px 20px;color:#777;">
+              <i class="fa-solid fa-certificate" style="font-size:38px;color:#ccc;margin-bottom:12px;display:block;"></i>
+              <p style="font-size:16px;font-weight:700;color:#222;margin-bottom:6px;">No Certificates Yet</p>
+              <p style="font-size:13px;color:#888;margin-bottom:0;max-width:440px;margin-left:auto;margin-right:auto;">
+                Every pair of grail sneakers and luxury streetwear sold at Woodpeckers comes with an encrypted certificate of authenticity verified at our Dzorwulu showroom upon delivery.
+              </p>
+            </td>
+          </tr>
+        `;
+      }
     }
   }
 
@@ -713,33 +1139,283 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   });
 
+  // -------------------------------------------------------------
+  // 6B. AUTHENTICATION & LOGIN/SIGNUP (login.html)
+  // -------------------------------------------------------------
+  const loginForm = document.getElementById('LoginForm');
+  if (loginForm) {
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const userField = document.getElementById('name');
+      const passField = document.getElementById('loginpassword');
+      const username = userField ? userField.value.trim() : '';
+      const password = passField ? passField.value : '';
+
+      if (!username || !password) {
+        Woodpeckers.showToast('Please enter your username and password.', 'error');
+        return;
+      }
+
+      const res = await Woodpeckers.Auth.login(username, password);
+      if (res.success) {
+        Woodpeckers.showToast(`Welcome back, ${res.user.name}!`, 'success');
+        setTimeout(() => {
+          if (res.user.role === 'admin') {
+            window.location.href = 'admin.html';
+          } else {
+            window.location.href = 'account-dashboard.html';
+          }
+        }, 500);
+      } else {
+        Woodpeckers.showToast(res.message || 'Login failed. Check your credentials.', 'error');
+      }
+    });
+  }
+
+  const signupForm = document.getElementById('SignupForm');
+  if (signupForm) {
+    signupForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const nameField = document.getElementById('signupname');
+      const emailField = document.getElementById('email');
+      const passField = document.getElementById('signuppassword');
+
+      const name = nameField ? nameField.value.trim() : '';
+      const email = emailField ? emailField.value.trim() : '';
+      const password = passField ? passField.value : '';
+
+      if (!email || !password) {
+        Woodpeckers.showToast('Please enter your email and password.', 'error');
+        return;
+      }
+
+      const displayName = name || email.split('@')[0];
+      const res = await Woodpeckers.Auth.register(displayName, email, password);
+      if (res.success) {
+        Woodpeckers.showToast(`Account created! Welcome, ${displayName}.`, 'success');
+        setTimeout(() => {
+          window.location.href = 'account-dashboard.html';
+        }, 500);
+      } else {
+        Woodpeckers.showToast(res.message || 'Registration failed.', 'error');
+      }
+    });
+  }
+
+  // -------------------------------------------------------------
+  // 6C. ACCOUNT DASHBOARD (account-dashboard.html)
+  // -------------------------------------------------------------
+  if (page === 'account-dashboard.html') {
+    const user = Woodpeckers.Auth.getCurrentUser();
+    const displayName = user ? user.name : 'Valued Collector';
+
+    const nameEl = document.getElementById('user-display-name');
+    const nameSubEl = document.getElementById('user-display-name-sub');
+    if (nameEl) nameEl.textContent = displayName;
+    if (nameSubEl) nameSubEl.textContent = displayName;
+
+    // Load live orders count and table
+    const orders = Woodpeckers.Orders ? Woodpeckers.Orders.getAll() : [];
+    const wishlistItems = Woodpeckers.Wishlist ? Woodpeckers.Wishlist.getItems() : [];
+    const offers = (window.Woodpeckers && window.Woodpeckers.DB) ? (Woodpeckers.DB.get('offers') || []) : [];
+
+    const ordersCountEl = document.getElementById('dash-orders-count');
+    const wishCountEl = document.getElementById('dash-wishlist-count');
+    const reserveCountEl = document.getElementById('dash-reserve-count');
+
+    if (ordersCountEl) ordersCountEl.textContent = orders.length;
+    if (wishCountEl) wishCountEl.textContent = wishlistItems.length;
+    if (reserveCountEl) reserveCountEl.textContent = offers.length;
+
+    // Populate recent orders table
+    const recentTbody = document.getElementById('dash-recent-orders-body');
+    if (recentTbody) {
+      if (orders.length === 0) {
+        recentTbody.innerHTML = `
+          <tr>
+            <td colspan="6" class="text-center py-4">
+              <p class="text-muted mb-2">You haven't placed any orders yet.</p>
+              <a href="products.html" class="btn btn-dark btn-sm font-weight-bold">Shop Latest Drops</a>
+            </td>
+          </tr>
+        `;
+      } else {
+        recentTbody.innerHTML = orders.slice(0, 5).map(ord => {
+          const dateStr = new Date(ord.createdAt || Date.now()).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+          const itemsCount = ord.items ? ord.items.reduce((s, it) => s + (it.quantity || 1), 0) : 1;
+          const firstItem = ord.items && ord.items[0] ? ord.items[0].name : 'Sneakers';
+          const statusBadge = ord.status === 'Delivered' 
+            ? '<span class="badge" style="background:#f1f5f9;color:#334155;padding:4px 8px;border-radius:4px;"><i class="fa-solid fa-box"></i> Delivered</span>'
+            : (ord.status === 'Dispatched' || ord.status === 'In Transit')
+            ? '<span class="badge" style="background:#dcfce7;color:#15803d;padding:4px 8px;border-radius:4px;"><i class="fa-solid fa-truck-fast"></i> In Transit</span>'
+            : '<span class="badge" style="background:#e0f2fe;color:#0369a1;padding:4px 8px;border-radius:4px;"><i class="fa-solid fa-clock"></i> Processing</span>';
+
+          return `
+            <tr>
+              <td style="font-weight:700;color:#008751;">#${ord.orderNumber}</td>
+              <td>${dateStr}</td>
+              <td>${statusBadge}</td>
+              <td>${itemsCount} item${itemsCount > 1 ? 's' : ''} (${firstItem})</td>
+              <td><strong>${Woodpeckers.formatGHS(ord.total)}</strong></td>
+              <td><a href="order-received.html?orderNumber=${encodeURIComponent(ord.orderNumber)}" class="btn-default btn-accent" style="padding:4px 10px;font-size:11px;">View</a></td>
+            </tr>
+          `;
+        }).join('');
+      }
+    }
+  }
+
+  // -------------------------------------------------------------
+  // 6D. ACCOUNT WISHLIST (account-wishlist.html)
+  // -------------------------------------------------------------
+  if (page === 'account-wishlist.html') {
+    function renderWishlistTable() {
+      const items = Woodpeckers.Wishlist.getItems();
+      const tableBox = document.querySelector('.wishlist-content-box');
+      if (!tableBox) return;
+
+      if (items.length === 0) {
+        tableBox.innerHTML = `
+          <div style="text-align:center;padding:60px 20px;background:#fff;border-radius:8px;border:1px solid #eee;">
+            <i class="fa-solid fa-heart-crack fa-3x text-muted mb-3"></i>
+            <h3 style="font-size:22px;font-weight:800;color:#111;margin-bottom:8px;">No Saved Grails in Wishlist</h3>
+            <p style="font-size:14px;color:#777;max-width:440px;margin:0 auto 24px;">
+              Explore our deadstock sneakers and streetwear collections to save your favorite grails.
+            </p>
+            <a href="products.html" class="btn btn-dark" style="padding:12px 24px;font-weight:700;">Explore Drops</a>
+          </div>
+        `;
+        return;
+      }
+
+      const rowsHtml = items.map((p, idx) => {
+        return `
+          <div class="wishlist-item" style="display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid #eee;">
+            <div style="display:flex;align-items:center;gap:16px;">
+              <img src="${(p.images && p.images[0]) || p.image || 'images/product-image-1.jpg'}" alt="${p.name}" style="width:70px;height:70px;object-fit:contain;background:#f9f9f9;border-radius:4px;padding:4px;">
+              <div>
+                <a href="product-single.html?id=${p.id}" style="color:#111;font-weight:700;font-size:14px;display:block;margin-bottom:4px;">${p.name}</a>
+                <span style="font-size:12px;color:#888;">${p.brand || 'Woodpeckers'} &bull; ${p.category || 'Footwear'}</span>
+                <div style="font-weight:800;color:#008751;margin-top:4px;">${Woodpeckers.formatGHS(p.price)}</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <button class="btn btn-dark btn-sm btn-quick-cart" data-product-id="${p.id}" style="font-size:12px;font-weight:700;">
+                <i class="fa-solid fa-bag-shopping me-1"></i> Add to Bag
+              </button>
+              <button class="btn btn-sm btn-outline-danger" onclick="removeWishlistItem('${p.id}')" title="Remove">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      tableBox.innerHTML = `
+        <div class="wishlist-item-table wow fadeInUp">
+          <div style="border-bottom:2px solid #111;padding-bottom:10px;margin-bottom:10px;font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:1px;">
+            Saved Deadstock Grails (${items.length})
+          </div>
+          ${rowsHtml}
+        </div>
+      `;
+
+      attachQuickCartListeners(tableBox);
+    }
+
+    window.removeWishlistItem = function(productId) {
+      Woodpeckers.Wishlist.remove(productId);
+      renderWishlistTable();
+    };
+
+    renderWishlistTable();
+  }
+
+  // Global Logout buttons listener
+  document.querySelectorAll('.btn-woodpeckers-logout').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      Woodpeckers.Auth.logout();
+      Woodpeckers.showToast('You have been logged out.', 'info');
+      setTimeout(() => {
+        window.location.href = 'login.html';
+      }, 400);
+    });
+  });
+
   // Local Video Player Sound & Play/Pause Controller
   const localVideo = document.getElementById('woodpeckersLocalVideo');
   const soundBtn = document.getElementById('videoSoundBtn');
+  const videoContainer = document.getElementById('videoSectionContainer');
   const playIcon = document.getElementById('videoPlayIcon');
   const pauseIcon = document.getElementById('videoPauseIcon');
 
-  if (localVideo && soundBtn) {
-    soundBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-      if (localVideo.muted) {
-        localVideo.muted = false;
-        localVideo.play();
+  function toggleVideoAudioPlay(e) {
+    if (e) e.preventDefault();
+    if (!localVideo) return;
+
+    if (localVideo.muted) {
+      localVideo.muted = false;
+      localVideo.play().catch(() => {});
+      if (playIcon) playIcon.style.display = 'none';
+      if (pauseIcon) pauseIcon.style.display = 'block';
+      if (soundBtn) {
+        soundBtn.style.background = '#00a865';
+        soundBtn.setAttribute('title', 'Sound enabled. Click to pause');
+      }
+    } else {
+      if (localVideo.paused) {
+        localVideo.play().catch(() => {});
         if (playIcon) playIcon.style.display = 'none';
         if (pauseIcon) pauseIcon.style.display = 'block';
-        soundBtn.style.background = '#00a865';
-        soundBtn.setAttribute('title', 'Click to pause');
       } else {
-        if (localVideo.paused) {
-          localVideo.play();
-          if (playIcon) playIcon.style.display = 'none';
-          if (pauseIcon) pauseIcon.style.display = 'block';
-        } else {
-          localVideo.pause();
-          if (playIcon) playIcon.style.display = 'block';
-          if (pauseIcon) pauseIcon.style.display = 'none';
-        }
+        localVideo.pause();
+        if (playIcon) playIcon.style.display = 'block';
+        if (pauseIcon) pauseIcon.style.display = 'none';
+      }
+    }
+  }
+
+  if (soundBtn) {
+    soundBtn.addEventListener('click', toggleVideoAudioPlay);
+  }
+  if (videoContainer) {
+    videoContainer.addEventListener('click', (e) => {
+      // If clicking container but not button
+      if (e.target !== soundBtn && !soundBtn.contains(e.target)) {
+        toggleVideoAudioPlay(e);
       }
     });
+  }
+
+  // Dynamic Weekly Drop Countdown Timer
+  const timerEl = document.getElementById('dropCountdownTimer');
+  if (timerEl) {
+    function updateDropCountdown() {
+      // Calculate target: next Thursday at 10:00 AM UTC
+      const now = new Date();
+      let target = new Date();
+      target.setDate(now.getDate() + ((4 - now.getDay() + 7) % 7 || 7));
+      target.setHours(10, 0, 0, 0);
+
+      const diff = Math.max(0, target.getTime() - now.getTime());
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const m = Math.floor((diff / (1000 * 60)) % 60);
+      const s = Math.floor((diff / 1000) % 60);
+
+      const dEl = timerEl.querySelector('.days');
+      const hEl = timerEl.querySelector('.hours');
+      const mEl = timerEl.querySelector('.minutes');
+      const sEl = timerEl.querySelector('.seconds');
+
+      if (dEl) dEl.textContent = String(d).padStart(2, '0');
+      if (hEl) hEl.textContent = String(h).padStart(2, '0');
+      if (mEl) mEl.textContent = String(m).padStart(2, '0');
+      if (sEl) sEl.textContent = String(s).padStart(2, '0');
+    }
+
+    updateDropCountdown();
+    setInterval(updateDropCountdown, 1000);
   }
 });

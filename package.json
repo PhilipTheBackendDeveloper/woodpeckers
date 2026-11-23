@@ -2,7 +2,6 @@
   "name": "woodpeckers-ghana",
   "version": "1.0.0",
   "description": "Woodpeckers Sneakers & Streetwear — Premium eCommerce Storefront & Meet the Reserve Engine (Ghana)",
-  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",

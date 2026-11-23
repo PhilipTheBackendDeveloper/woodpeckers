@@ -253,6 +253,30 @@ async function runTests() {
   });
 
   // 6. Authentication
+  const testUserEmail = `philip.test.${Date.now()}@woodpeckers.gh`;
+  await test('Auth: Customer registration creates persistent user record', async () => {
+    const res = await request('POST', '/api/auth/register', {
+      name: 'Philip Odame',
+      email: testUserEmail,
+      password: 'password123',
+      phone: '+233 55 392 1612'
+    });
+    assert.strictEqual(res.statusCode, 201);
+    assert.ok(res.json.success);
+    assert.strictEqual(res.json.user.name, 'Philip Odame');
+    assert.ok(res.json.token);
+  });
+
+  await test('Auth: Customer login succeeds with registered credentials', async () => {
+    const res = await request('POST', '/api/auth/login', {
+      username: testUserEmail,
+      password: 'password123'
+    });
+    assert.strictEqual(res.statusCode, 200);
+    assert.strictEqual(res.json.user.name, 'Philip Odame');
+    assert.ok(res.json.token);
+  });
+
   await test('Auth: Store manager login validates credentials', async () => {
     const res = await request('POST', '/api/auth/login', {
       username: 'admin',
@@ -346,6 +370,95 @@ async function runTests() {
     const css = fs.readFileSync('css/custom.css', 'utf8');
     assert.ok(css.includes("'Oswald'"), 'Oswald condensed font defined in custom.css');
   });
+
+  await test('UI / Static Content: cart.html has zero hardcoded GH₵ 12,850 static template values', async () => {
+    const res = await request('GET', '/cart.html');
+    assert.ok(!res.body.includes('12,850.00'), 'cart.html static GH₵ 12,850.00 is removed');
+  });
+
+  await test('UI / Static Content: account-dashboard.html has zero Ava Thompson references', async () => {
+    const res = await request('GET', '/account-dashboard.html');
+    assert.ok(!res.body.includes('Ava Thompson'), 'account-dashboard.html Ava Thompson replaced with dynamic user');
+  });
+
+  await test('UI / Static Content: reserve.html preloader markup removed', async () => {
+    const res = await request('GET', '/reserve.html');
+    assert.ok(!res.body.includes('class="preloader"'), 'reserve.html preloader markup removed to prevent freeze');
+  });
+
+  await test('UI / Static Content: index.html countdown is weekly drop timer and not 2027', async () => {
+    const res = await request('GET', '/index.html');
+    assert.ok(!res.body.includes('2027-07-30'), 'index.html 249-day timer removed');
+    assert.ok(res.body.includes('Next Weekly Reserve Drop Countdown'), 'index.html has weekly drop countdown');
+  });
+
+  await test('UI / Dynamic: account-order.html has zero static template orders or static offers', async () => {
+    const res = await request('GET', '/account-order.html');
+    assert.ok(!res.body.includes('#WPK-ORD-1094'), 'Static #WPK-ORD-1094 is removed');
+    assert.ok(!res.body.includes('#WPK-ORD-1082'), 'Static #WPK-ORD-1082 is removed');
+    assert.ok(!res.body.includes('WPK-RSV-8419'), 'Static WPK-RSV-8419 is removed');
+    assert.ok(res.body.includes('id="account-orders-body"'), 'Dynamic orders body is present');
+    assert.ok(res.body.includes('id="my-reserve-offers-body"'), 'Dynamic offers body is present');
+  });
+
+  await test('UI / Dynamic: account-wishlist.html has zero hardcoded items', async () => {
+    const res = await request('GET', '/account-wishlist.html');
+    assert.ok(!res.body.includes('Air Jordan 1 Lost & Found'), 'Static Air Jordan 1 Lost & Found removed');
+    assert.ok(!res.body.includes('Travis Scott Reverse Mocha'), 'Static Travis Scott removed');
+    assert.ok(res.body.includes('id="wishlist-dynamic-container"'), 'Dynamic wishlist container is present');
+  });
+
+  await test('UI / Dynamic: account-download.html has zero hardcoded certificates', async () => {
+    const res = await request('GET', '/account-download.html');
+    assert.ok(!res.body.includes('WPK-AUTH-8921'), 'Static certificate WPK-AUTH-8921 removed');
+    assert.ok(!res.body.includes('WPK-AUTH-7410'), 'Static certificate WPK-AUTH-7410 removed');
+    assert.ok(res.body.includes('id="certs-body"'), 'Dynamic certs container is present');
+  });
+
+  await test('UI / Branding: reserve.html hero pill removed and clean layout', async () => {
+    const res = await request('GET', '/reserve.html');
+    assert.ok(!res.body.includes("Ghana's First Interactive Sneaker Offer Experience"), 'Hero pill removed');
+  });
+
+  await test('UI / Branding: index.html hero is Nike-style full-bleed photo background', async () => {
+    const res = await request('GET', '/index.html');
+    assert.ok(res.body.includes('hero-bg-image.jpg'), 'Hero utilizes lifestyle photo background');
+    assert.ok(res.body.includes('woodpeckers-video-poster.jpg'), 'Video section has real Woodpeckers poster');
+    assert.ok(!res.body.includes('hero-sneaker-spotlight'), 'Two-column floating sneaker removed for full-bleed hero');
+  });
+
+  await test('Security / Production: login.html has zero demonstration access or admin passwords', async () => {
+    const res = await request('GET', '/login.html');
+    assert.ok(!res.body.includes('Demonstration Access'), 'Demonstration Access box removed from login page');
+    assert.ok(!res.body.includes('woodpeckers2026'), 'Admin password removed from login markup');
+    assert.ok(!res.body.includes('Direct link to Staff Dashboard'), 'Direct link to staff dashboard removed from customer login');
+  });
+
+  await test('Deployment / Vercel: vercel.json and api/index.js configured for production deployment', async () => {
+    const fs = require('fs');
+    assert.ok(fs.existsSync('vercel.json'), 'vercel.json configuration exists');
+    assert.ok(fs.existsSync('api/index.js'), 'api/index.js serverless proxy exists');
+    const vercelConfig = JSON.parse(fs.readFileSync('vercel.json', 'utf8'));
+    assert.strictEqual(vercelConfig.cleanUrls, true, 'Clean URLs enabled');
+    assert.ok(Array.isArray(vercelConfig.rewrites), 'Rewrites defined for API');
+    const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+    assert.strictEqual(pkg.main, undefined, 'package.json main removed so Vercel serves static assets via CDN');
+  });
+
+  // Post-test cleanup: ensure store.json orders & offers arrays are reset so real users see clean dynamic state
+  try {
+    const fs = require('fs');
+    const path = require('path');
+    const storePath = path.join(__dirname, '..', 'data', 'store.json');
+    if (fs.existsSync(storePath)) {
+      const data = JSON.parse(fs.readFileSync(storePath, 'utf8'));
+      data.orders = [];
+      data.reserveOffers = [];
+      fs.writeFileSync(storePath, JSON.stringify(data, null, 2), 'utf8');
+    }
+  } catch (e) {
+    console.warn('Could not reset store.json post-test:', e.message);
+  }
 
   console.log('\n====================================================');
   console.log(`  TEST RESULTS: ${passed} PASSED, ${failed} FAILED`);

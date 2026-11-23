@@ -196,19 +196,6 @@
                                             <a href="forgot-password.html">Forgot your password?</a>
                                         </div>
                                         <!-- Login Content Form Button End -->
-
-                                        <!-- Demo Credentials Helper Start -->
-                                        <div style="background:#161616;border:1px solid #008751;border-radius:6px;padding:14px 18px;margin-top:24px;font-size:13px;color:#ddd;text-align:left;">
-                                            <div style="color:#008751;font-weight:800;font-size:12px;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">
-                                                <i class="fa-solid fa-key me-1"></i> Demonstration Access
-                                            </div>
-                                            <div style="margin-bottom:6px;font-size:12px;">
-                                                <strong>Store Manager / Staff:</strong><br>
-                                                Username: <code style="color:#008751;background:#222;padding:2px 5px;">admin</code> &bull; Password: <code style="color:#008751;background:#222;padding:2px 5px;">woodpeckers2026</code>
-                                                <div class="mt-1"><a href="admin.html" style="color:#008751;font-weight:700;font-size:12px;">Direct link to Staff Dashboard &rarr;</a></div>
-                                            </div>
-                                        </div>
-                                        <!-- Demo Credentials Helper End -->
                                     </div>
                                     <!-- Checkout Login Form End -->
                                 </div>
@@ -231,6 +218,12 @@
     
                                     <!-- Checkout Login Form Start -->
                                     <div class="checkout-login-form wow fadeInUp" data-wow-delay="0.2s">
+                                        <div class="form-group">
+                                            <label>Full Name *</label>
+                                            <input type="text" name="signupname" class="form-control" id="signupname" placeholder="Enter your full name" required>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+
                                         <div class="form-group">
                                             <label>Email address *</label>
                                             <input type="email" name="email" class="form-control" id="email" placeholder="Enter your e-mail" required>

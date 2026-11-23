@@ -162,7 +162,7 @@
                                 <li><a href="account-address.html"><img src="images/icon-location-primary.svg" alt="">Addresses</a></li>
                                 <li><a href="account-details.html"><img src="images/icon-user-primary.svg" alt="">Account details</a></li>
                                 <li><a href="account-wishlist.html"><img src="images/icon-wishlist-primary.svg" alt="">Wishlist</a></li>
-                                <li><a href="index-2.html"><img src="images/icon-logout-primary.svg" alt="">Logout</a></li>
+                                <li><a href="login.html" class="btn-woodpeckers-logout"><img src="images/icon-logout-primary.svg" alt="">Logout</a></li>
                             </ul>
                         </div>
                         <!-- My Account Sidebar Item End -->
@@ -173,8 +173,58 @@
                 <div class="col-xl-8 col-lg-7">
                     <!-- Account Dashboard Detail Box Start -->
                     <div class="account-dashboard-detail-box wow fadeInUp" data-wow-delay="0.2s">
-                        <p class="account-dashboard-detail-title">Hello <b>Ava Thompson</b> (not Ava Thompson? <a href="index-2.html">Log out</a>)</p>
-                        <p>From your account dashboard you can view your <a href="account-order.html">recent orders</a>, manage your <a href="account-address.html">shipping & billing addresses</a>, and <a href="account-details.html">edit your password and account details.</a></p>
+                        <p class="account-dashboard-detail-title" id="account-greeting">
+                            Hello <b id="user-display-name">Philip Odame</b> (not <span id="user-display-name-sub">Philip Odame</span>? <a href="#" class="btn-woodpeckers-logout">Log out</a>)
+                        </p>
+                        <p>From your account dashboard you can view your <a href="account-order.html">recent orders</a>, manage your delivery addresses, and track your active grail reserve bids.</p>
+
+                        <!-- Dashboard KPI Summary Cards Start -->
+                        <div class="row g-3 my-4">
+                            <div class="col-sm-4 col-12">
+                                <div style="background:#f9f9f9;border:1px solid #eee;border-radius:6px;padding:18px;text-align:center;">
+                                    <div style="font-size:28px;font-weight:900;color:#008751;" id="dash-orders-count">0</div>
+                                    <div style="font-size:12px;color:#777;text-transform:uppercase;letter-spacing:1px;font-weight:700;">Drop Orders</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-12">
+                                <div style="background:#f9f9f9;border:1px solid #eee;border-radius:6px;padding:18px;text-align:center;">
+                                    <div style="font-size:28px;font-weight:900;color:#111;" id="dash-wishlist-count">0</div>
+                                    <div style="font-size:12px;color:#777;text-transform:uppercase;letter-spacing:1px;font-weight:700;">Saved Grails</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-12">
+                                <div style="background:#f9f9f9;border:1px solid #eee;border-radius:6px;padding:18px;text-align:center;">
+                                    <div style="font-size:28px;font-weight:900;color:#008751;" id="dash-reserve-count">0</div>
+                                    <div style="font-size:12px;color:#777;text-transform:uppercase;letter-spacing:1px;font-weight:700;">Reserve Offers</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Dashboard KPI Summary Cards End -->
+
+                        <!-- Recent Orders Table Start -->
+                        <div class="mt-4">
+                            <h4 style="font-size:18px;font-weight:800;color:#111;margin-bottom:14px;">Recent Drop Orders</h4>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped" style="font-size:13px;">
+                                    <thead style="background:#111;color:#fff;">
+                                        <tr>
+                                            <th>Order #</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                            <th>Items</th>
+                                            <th>Total</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="dash-recent-orders-body">
+                                        <tr>
+                                            <td colspan="6" class="text-center py-3 text-muted">Loading your orders...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- Recent Orders Table End -->
                     </div>
                     <!-- Account Dashboard Detail Box End -->
                 </div>
