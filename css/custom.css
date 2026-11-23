@@ -550,44 +550,48 @@ a:focus{
 	max-width: 20px;
 }
 
-/* ===== GLASSMORPHISM STICKY NAV ===== */
+/* ===== ULTRA-PREMIUM LIQUID GLASS STICKY NAV ===== */
 header.main-header{
-	position: fixed;
+	position: sticky;
 	top: 0;
 	left: 0;
 	right: 0;
+	width: 100%;
 	z-index: 9999;
-	/* liquid glass look on load — slightly opaque */
-	background: rgba(255, 255, 255, 0.72);
-	backdrop-filter: saturate(180%) blur(22px);
-	-webkit-backdrop-filter: saturate(180%) blur(22px);
-	border-bottom: 1px solid rgba(255, 255, 255, 0.35);
-	box-shadow: 0 2px 32px rgba(0,0,0,0.08);
-	transition: background 0.35s ease, box-shadow 0.35s ease;
+	/* Frosted liquid glass base */
+	background: rgba(255, 255, 255, 0.78);
+	backdrop-filter: blur(24px) saturate(190%);
+	-webkit-backdrop-filter: blur(24px) saturate(190%);
+	border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+	box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+	transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
-/* When user has scrolled — deeper glass */
+/* Deepened frosted glass on scroll */
 header.main-header.scrolled{
-	background: rgba(255, 255, 255, 0.88);
-	box-shadow: 0 4px 40px rgba(0,0,0,0.13);
+	background: rgba(255, 255, 255, 0.90);
+	backdrop-filter: blur(28px) saturate(200%);
+	-webkit-backdrop-filter: blur(28px) saturate(200%);
+	box-shadow: 0 6px 36px rgba(0, 0, 0, 0.08);
+	border-bottom-color: rgba(0, 0, 0, 0.1);
 }
 
 header.main-header .header-sticky{
 	position: relative;
 	top: 0;
-	background: transparent;
-	box-shadow: none;
+	background: transparent !important;
+	box-shadow: none !important;
 	z-index: 100;
 }
 
 header.main-header .header-sticky.hide{
-	/* Keep hidden class only for JS compat but do NOT hide the header */
-	transform: none;
+	transform: none !important; /* Never hide! Stays stationary so content smoothly passes under */
 }
 
 header.main-header .header-sticky.active{
-	position: relative;
+	position: relative !important;
 	top: 0;
+	background: transparent !important;
 }
 
 .navbar{
@@ -2494,8 +2498,7 @@ header.main-header .header-sticky.active{
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-size: cover;
-	/* Extra top padding to clear the fixed glass nav */
-	padding: 155px 0 100px;
+	padding: 110px 0 90px;
 	overflow: hidden;
 }
 
@@ -9229,137 +9232,186 @@ h1, h2, h3, h4, h5, h6,
 
 
 /* ================================================================
-   WOODPECKERS — GLASSMORPHISM NAV & MOBILE HERO FIX
+   WOODPECKERS — LIQUID GLASS STICKY NAV & NIKE-STYLE MOBILE HERO
    ================================================================ */
 
-/* Body offset so fixed header doesn't cover page content */
+/* Body offset */
 body {
-    padding-top: 0 !important; /* topbar + hero padding handle clearance */
+    padding-top: 0 !important;
 }
 
-/* Topbar is in normal flow — it scrolls away first; nav sticks above */
+/* Topbar sits naturally in document flow above header; scrolls off smoothly */
 .topbar {
-    position: sticky;
-    top: 0;
-    z-index: 9998; /* just below header */
+    position: relative !important;
+    z-index: 999;
 }
 
-/* ---- Glassmorphism nav colour tokens ---- */
-/* On the homepage hero (dark bg), nav text should stay legible */
-header.main-header .navbar-brand img,
-header.main-header .header-action-details ul li a img,
-header.main-header .header-action-details ul li button img {
-    filter: none;
+/* Header is sticky at top: 0 — stationary on scroll, everything scrolls UNDER it */
+header.main-header {
+    position: sticky !important;
+    top: 0 !important;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 10000;
+    background: rgba(255, 255, 255, 0.78) !important;
+    backdrop-filter: blur(24px) saturate(190%) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(190%) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04) !important;
+    transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
-/* When scrolled (JS adds .scrolled class): slightly more solid so text remains crisp */
-header.main-header.scrolled .main-menu ul#menu > li > a {
-    color: #111111;
+/* Deepened liquid glass on scroll */
+header.main-header.scrolled {
+    background: rgba(255, 255, 255, 0.90) !important;
+    backdrop-filter: blur(28px) saturate(200%) !important;
+    -webkit-backdrop-filter: blur(28px) saturate(200%) !important;
+    box-shadow: 0 6px 36px rgba(0, 0, 0, 0.09) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
 }
 
-/* Nav text colour on glass (light glass default) */
+header.main-header .header-sticky {
+    position: relative !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+header.main-header .header-sticky.hide {
+    transform: none !important; /* Never hide! Stays stationary at top so content goes under */
+}
+
+header.main-header .header-sticky.active {
+    position: relative !important;
+    top: 0 !important;
+    background: transparent !important;
+}
+
+/* Nav links on light liquid glass */
 .main-menu ul#menu > li > a {
     color: #111111 !important;
 }
 
-/* ---- Mobile SlickNav — glass dark variant ---- */
+/* Mobile SlickNav — frosted dark glass */
 @media (max-width: 991px) {
-    /* Glass overlay on mobile menu */
     .slicknav_menu {
-        background: rgba(10, 10, 10, 0.92) !important;
-        backdrop-filter: blur(20px) !important;
-        -webkit-backdrop-filter: blur(20px) !important;
-        border-top: 1px solid rgba(255,255,255,0.08) !important;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.5) !important;
+        background: rgba(14, 16, 15, 0.94) !important;
+        backdrop-filter: blur(24px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6) !important;
     }
 
-    /* Keep hamburger button visible on glass header */
     .slicknav_btn {
         background: transparent !important;
     }
+
     .slicknav_icon-bar {
         background-color: #111111 !important;
     }
 }
 
-/* ---- Hero Section: Body padding to clear fixed topbar + header ---- */
-/* The hero has its own top-padding — boost it to clear the navbar */
-.hero.parallaxie,
-.hero {
-    padding-top: 130px !important;
-}
-
-/* ---- MOBILE HERO FIX: brighter, cleaner image ---- */
-/* On tablet and below the dark overlay was 70% — way too heavy */
-@media only screen and (max-width: 1024px) {
-    .hero::before {
-        /* Lighter vignette — image is vivid, text still readable */
-        background: linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 0.18) 0%,
-            rgba(0, 0, 0, 0.30) 60%,
-            rgba(0, 0, 0, 0.72) 100%
-        ) !important;
-        opacity: 1 !important;
-    }
-
-    /* Inline style gradient override for the Nike-style hero div */
-    .hero.parallaxie {
-        background-image:
-            linear-gradient(
-                180deg,
-                rgba(14,16,15,0.12) 0%,
-                rgba(14,16,15,0.22) 50%,
-                rgba(14,16,15,0.78) 100%
-            ),
-            url('../images/hero-bg-image.jpg') !important;
-        background-size: cover !important;
-        background-position: center center !important;
-    }
-}
-
-@media only screen and (max-width: 767px) {
-    /* Even lighter on small phones so the sneaker is vivid */
-    .hero::before {
-        background: linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 0.08) 0%,
-            rgba(0, 0, 0, 0.22) 55%,
-            rgba(0, 0, 0, 0.78) 100%
-        ) !important;
-        opacity: 1 !important;
-    }
-
-    .hero.parallaxie {
-        min-height: 580px !important;
-        padding-top: 110px !important;
-        background-image:
-            linear-gradient(
-                180deg,
-                rgba(14,16,15,0.08) 0%,
-                rgba(14,16,15,0.18) 48%,
-                rgba(14,16,15,0.82) 100%
-            ),
-            url('../images/hero-bg-image.jpg') !important;
-        /* On mobile show the subject centred */
-        background-position: 60% center !important;
-    }
-
-    /* Slightly smaller hero heading on small phones */
-    .hero-content h1,
-    .hero h1 {
-        font-size: clamp(36px, 9vw, 52px) !important;
-        line-height: 0.98 !important;
-    }
-}
-
-/* ---- Header icon tint adjustment on glass ---- */
-/* Ensure icons stay crisp & dark against light glass header */
+/* Header icon contrast on liquid glass */
 header.main-header .header-action-details img {
-    filter: brightness(0) saturate(100%); /* force black icons */
+    filter: brightness(0) saturate(100%);
 }
 
-/* Reserve badge stays white-on-green */
 header.main-header .reserve-badge-link img {
     filter: none;
+}
+
+/* ================================================================
+   NIKE-STYLE MOBILE HERO: VIVID, CRISP, UN-FADED SNEAKER IMAGE
+   ================================================================ */
+
+/* Total elimination of dark grey overlay masks that caused the faded-out look */
+.hero::before {
+    display: none !important;
+}
+
+/* Desktop Hero */
+@media only screen and (min-width: 992px) {
+    .hero.parallaxie,
+    .hero {
+        min-height: 720px !important;
+        padding: 130px 0 100px !important;
+        display: flex !important;
+        align-items: center !important;
+        background-image:
+            linear-gradient(
+                180deg,
+                rgba(14, 16, 15, 0.05) 0%,
+                rgba(14, 16, 15, 0.18) 55%,
+                rgba(14, 16, 15, 0.82) 100%
+            ),
+            url('../images/hero-bg-image.jpg') !important;
+        background-position: right center !important;
+        background-size: cover !important;
+    }
+}
+
+/* Mobile & Tablet Hero — Nike-style presentation */
+@media only screen and (max-width: 991px) {
+    .hero.parallaxie,
+    .hero {
+        min-height: 640px !important;
+        padding: 60px 0 50px !important;
+        display: flex !important;
+        align-items: flex-end !important; /* Bottom-anchored typography like Nike */
+        /* Crystal-clear top/mid section so sneaker is 100% vivid and NOT faded out */
+        background-image:
+            linear-gradient(
+                180deg,
+                rgba(0, 0, 0, 0.0) 0%,
+                rgba(0, 0, 0, 0.04) 30%,
+                rgba(10, 14, 12, 0.72) 82%,
+                rgba(10, 14, 12, 0.92) 100%
+            ),
+            url('../images/hero-bg-image.jpg') !important;
+        background-position: 72% center !important; /* Centers the Air Jordan 1 on phone */
+        background-size: cover !important;
+        background-repeat: no-repeat !important;
+    }
+
+    .hero-content {
+        width: 100%;
+        margin-top: auto;
+    }
+
+    .hero-content .section-title {
+        margin-bottom: 16px !important;
+    }
+
+    .hero-content h1 {
+        font-size: clamp(36px, 9.5vw, 54px) !important;
+        line-height: 0.94 !important;
+        letter-spacing: 0.01em !important;
+        color: #ffffff !important;
+        text-shadow: 0 4px 22px rgba(0, 0, 0, 0.95), 0 2px 4px rgba(0, 0, 0, 0.9) !important;
+    }
+
+    .hero-content h1 span {
+        color: #008751 !important;
+    }
+
+    .hero-content p {
+        font-size: 15px !important;
+        line-height: 1.45 !important;
+        color: #f2f2f2 !important;
+        max-width: 480px !important;
+        margin-bottom: 22px !important;
+        text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95), 0 1px 4px rgba(0, 0, 0, 0.9) !important;
+    }
+
+    .hero-content-btn {
+        margin-top: 18px !important;
+        display: flex !important;
+        gap: 12px !important;
+        flex-wrap: wrap !important;
+    }
+
+    .hero-content-btn .btn-default {
+        padding: 13px 26px !important;
+        font-size: 13px !important;
+    }
 }
