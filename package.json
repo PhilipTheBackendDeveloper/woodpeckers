@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Woodpeckers Sneakers & Streetwear — Premium eCommerce Storefront & Meet the Reserve Engine (Ghana)",
   "scripts": {
+    "build": "echo 'Deploying Woodpeckers Static Storefront'",
     "start": "node server/server.js",
     "dev": "node server/server.js",
     "test": "node test/suite.js"

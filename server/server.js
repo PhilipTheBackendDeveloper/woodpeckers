@@ -83,6 +83,14 @@ function sendError(res, status, message) {
 
 function parseBody(req) {
   return new Promise((resolve, reject) => {
+    if (req.body) {
+      if (typeof req.body === 'object') return resolve(req.body);
+      try {
+        return resolve(JSON.parse(req.body));
+      } catch (err) {
+        return reject(err);
+      }
+    }
     let body = '';
     req.on('data', chunk => {
       body += chunk.toString();

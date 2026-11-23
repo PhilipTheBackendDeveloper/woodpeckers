@@ -22,7 +22,7 @@
         },
         {
           "size": "UK 8",
-          "stock": 1
+          "stock": 3
         },
         {
           "size": "UK 8.5",
@@ -444,38 +444,5 @@
     "password": "woodpeckers2026",
     "name": "Philip / Woodpeckers Admin"
   },
-  "users": [
-    {
-      "id": "USR-1795441030097",
-      "name": "Philip Odame",
-      "email": "philip.test@woodpeckers.gh",
-      "password": "password123",
-      "phone": "+233 55 392 1612",
-      "createdAt": "2026-11-23T13:37:10.097Z"
-    },
-    {
-      "id": "USR-1795442848677",
-      "name": "Philip Odame",
-      "email": "philip.test.1795442848677@woodpeckers.gh",
-      "password": "password123",
-      "phone": "+233 55 392 1612",
-      "createdAt": "2026-11-23T14:07:28.677Z"
-    },
-    {
-      "id": "USR-1795444034523",
-      "name": "Philip Odame",
-      "email": "philip.test.1795444034522@woodpeckers.gh",
-      "password": "password123",
-      "phone": "+233 55 392 1612",
-      "createdAt": "2026-11-23T14:27:14.523Z"
-    },
-    {
-      "id": "USR-1795445430578",
-      "name": "Philip Odame",
-      "email": "philip.test.1795445430578@woodpeckers.gh",
-      "password": "password123",
-      "phone": "+233 55 392 1612",
-      "createdAt": "2026-11-23T14:50:30.578Z"
-    }
-  ]
+  "users": []
 }
