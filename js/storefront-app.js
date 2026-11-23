@@ -395,7 +395,31 @@ document.addEventListener('DOMContentLoaded', async () => {
     const params = new URLSearchParams(window.location.search);
     const catParam = params.get('category');
     const reserveParam = params.get('reserve');
-    const searchParam = params.get('search');
+    let currentSearch = (params.get('search') || '').trim();
+
+    // Sync search input if present
+    const modalSearchInput = document.getElementById('search');
+    if (modalSearchInput && currentSearch) {
+      modalSearchInput.value = currentSearch;
+    }
+
+    // Expose search API for in-page updates
+    window.WPK_SET_SEARCH = function(query) {
+      currentSearch = (query || '').trim();
+      const url = new URL(window.location.href);
+      if (currentSearch) {
+        url.searchParams.set('search', currentSearch);
+      } else {
+        url.searchParams.delete('search');
+      }
+      window.history.pushState(null, '', url.toString());
+      if (modalSearchInput) modalSearchInput.value = currentSearch;
+      applyFilters();
+      const targetHeader = document.querySelector('.product-category-filter-header') || document.querySelector('.product-item-list-box');
+      if (targetHeader) {
+        targetHeader.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    };
 
     const catAll = document.getElementById('cat_all');
     const catExclusive = document.getElementById('cat_exclusive');
@@ -438,9 +462,17 @@ document.addEventListener('DOMContentLoaded', async () => {
       let filtered = allProducts.slice();
 
       // Search Query
-      if (searchParam) {
-        const q = searchParam.toLowerCase();
-        filtered = filtered.filter(p => p.name.toLowerCase().includes(q) || (p.brand && p.brand.toLowerCase().includes(q)));
+      if (currentSearch) {
+        const q = currentSearch.toLowerCase();
+        filtered = filtered.filter(p => {
+          const name = (p.name || '').toLowerCase();
+          const brand = (p.brand || '').toLowerCase();
+          const cat = (p.category || '').toLowerCase();
+          const desc = (p.description || '').toLowerCase();
+          const tags = Array.isArray(p.tags) ? p.tags.map(t => t.toLowerCase()).join(' ') : '';
+          const sku = (p.sku || '').toLowerCase();
+          return name.includes(q) || brand.includes(q) || cat.includes(q) || desc.includes(q) || tags.includes(q) || sku.includes(q);
+        });
       }
 
       // Categories
@@ -497,12 +529,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       // Render
       if (filtered.length === 0) {
+        const queryText = currentSearch ? `matching "${currentSearch.replace(/"/g, '&quot;')}"` : 'matching your selected filters';
         grid.innerHTML = `
           <div class="col-12 text-center py-5" style="width:100%;grid-column:1/-1;">
-            <i class="fa-solid fa-filter-circle-xmark fa-3x text-muted mb-3"></i>
-            <h3 style="font-weight:800;color:#111;">No Grails Match Your Selected Filters</h3>
-            <p style="color:#777;max-width:400px;margin:8px auto 20px;">
-              Try clearing specific size or brand criteria to see available authenticated deadstock.
+            <i class="fa-solid fa-magnifying-glass fa-3x text-muted mb-3" style="color:#008751 !important;"></i>
+            <h3 style="font-weight:800;color:#111;">No Grails Found</h3>
+            <p style="color:#777;max-width:440px;margin:8px auto 20px;">
+              No sneakers or streetwear found ${queryText}. Try a different search term or reset filters to explore our full deadstock collection.
             </p>
             <button id="btn-reset-filters" class="btn btn-dark" style="padding:10px 24px;font-weight:700;">
               Reset All Filters
@@ -522,11 +555,29 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       // Update Result Count
       if (resultCountHeader) {
-        resultCountHeader.textContent = `Showing ${filtered.length} of ${allProducts.length} results`;
+        if (currentSearch) {
+          const safeQ = currentSearch.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+          resultCountHeader.innerHTML = `Showing results for <span style="color:#008751;font-weight:700;">"${safeQ}"</span> (${filtered.length} items) <button type="button" id="btnClearSearch" class="btn btn-sm btn-outline-secondary ms-2" style="font-size:11px;padding:2px 8px;border-radius:12px;vertical-align:middle;cursor:pointer;">Clear ×</button>`;
+          const btnClear = document.getElementById('btnClearSearch');
+          if (btnClear) {
+            btnClear.addEventListener('click', (e) => {
+              e.preventDefault();
+              window.WPK_SET_SEARCH('');
+            });
+          }
+        } else {
+          resultCountHeader.textContent = `Showing ${filtered.length} of ${allProducts.length} results`;
+        }
       }
     }
 
     function clearAllFilters() {
+      currentSearch = '';
+      const url = new URL(window.location.href);
+      url.searchParams.delete('search');
+      window.history.pushState(null, '', url.toString());
+      if (modalSearchInput) modalSearchInput.value = '';
+
       if (catAll) catAll.checked = true;
       if (catExclusive) catExclusive.checked = false;
       if (catRunners) catRunners.checked = false;
@@ -1526,5 +1577,80 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     updateDropCountdown();
     setInterval(updateDropCountdown, 1000);
+  }
+
+  // -------------------------------------------------------------
+  // UNIVERSAL SEARCH MODAL & GLOBAL SEARCH
+  // -------------------------------------------------------------
+  function closeSearchModal() {
+    const modalEl = document.getElementById('exampleModal');
+    if (modalEl) {
+      if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+        const inst = bootstrap.Modal.getInstance(modalEl);
+        if (inst) {
+          inst.hide();
+        }
+      } else if (typeof $ !== 'undefined' && $.fn && $.fn.modal) {
+        $('#exampleModal').modal('hide');
+      }
+      modalEl.classList.remove('show');
+      modalEl.style.display = 'none';
+      document.body.classList.remove('modal-open');
+      const backdrop = document.querySelector('.modal-backdrop');
+      if (backdrop) backdrop.remove();
+    }
+  }
+
+  function executeGlobalSearch(query) {
+    const q = (query || '').trim();
+    if (!q) return;
+
+    closeSearchModal();
+
+    if (isPage('products.html', '.product-item-list')) {
+      if (typeof window.WPK_SET_SEARCH === 'function') {
+        window.WPK_SET_SEARCH(q);
+      } else {
+        window.location.href = `products.html?search=${encodeURIComponent(q)}`;
+      }
+    } else {
+      window.location.href = `products.html?search=${encodeURIComponent(q)}`;
+    }
+  }
+
+  // Intercept all modal search forms and inputs
+  document.querySelectorAll('.modal-search-form').forEach(form => {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const input = form.querySelector('input[name="search"]') || document.getElementById('search');
+      executeGlobalSearch(input ? input.value : '');
+    });
+  });
+
+  document.querySelectorAll('.modal-search-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const parent = btn.closest('.modal-search-form') || btn.closest('.modal-content') || document;
+      const input = parent.querySelector('input[name="search"]') || document.getElementById('search');
+      executeGlobalSearch(input ? input.value : '');
+    });
+  });
+
+  document.querySelectorAll('#search, .modal-search-form input[name="search"]').forEach(input => {
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        executeGlobalSearch(input.value);
+      }
+    });
+  });
+
+  // Auto-focus search input when modal opens
+  const searchModalEl = document.getElementById('exampleModal');
+  if (searchModalEl) {
+    searchModalEl.addEventListener('shown.bs.modal', () => {
+      const input = searchModalEl.querySelector('input[name="search"]') || document.getElementById('search');
+      if (input) input.focus();
+    });
   }
 });

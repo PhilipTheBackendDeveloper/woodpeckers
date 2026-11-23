@@ -460,6 +460,42 @@ async function runTests() {
     assert.strictEqual(pkg.main, undefined, 'package.json main removed so Vercel serves static assets via CDN');
   });
 
+  await test('Favicon & Assets: root favicon.ico, apple-touch-icon, and HTML links are properly configured', async () => {
+    const fs = require('fs');
+    assert.ok(fs.existsSync('favicon.ico'), 'Root favicon.ico exists for standard browser requests');
+    assert.ok(fs.existsSync('apple-touch-icon.png'), 'Root apple-touch-icon.png exists for mobile iOS devices');
+    assert.ok(fs.existsSync('images/favicon.svg'), 'Vector SVG favicon exists');
+    assert.ok(fs.existsSync('images/favicon.png'), 'PNG favicon exists');
+    const indexHtml = fs.readFileSync('index.html', 'utf8');
+    assert.ok(indexHtml.includes('rel="shortcut icon" href="favicon.ico"'), 'index.html links to root favicon.ico');
+    assert.ok(indexHtml.includes('rel="apple-touch-icon"'), 'index.html links to apple-touch-icon');
+  });
+
+  await test('Social Share / WhatsApp Previews: index.html has complete Open Graph and Twitter Card tags', async () => {
+    const fs = require('fs');
+    const indexHtml = fs.readFileSync('index.html', 'utf8');
+    assert.ok(indexHtml.includes('property="og:image" content="https://woodpeckers-five.vercel.app/images/og-share-preview.jpg"'), 'Absolute HTTPS og:image configured for WhatsApp crawler');
+    assert.ok(indexHtml.includes('property="og:image:width" content="1280"'), 'og:image:width configured');
+    assert.ok(indexHtml.includes('property="og:image:height" content="720"'), 'og:image:height configured');
+    assert.ok(indexHtml.includes('property="og:description"'), 'og:description configured');
+    assert.ok(indexHtml.includes('name="twitter:card" content="summary_large_image"'), 'Twitter summary_large_image card configured');
+    assert.ok(fs.existsSync('images/og-share-preview.jpg'), 'og-share-preview image file exists in images/');
+  });
+
+  await test('Universal Search: modal search forms use form element and storefront-app implements dynamic search', async () => {
+    const fs = require('fs');
+    const indexHtml = fs.readFileSync('index.html', 'utf8');
+    const productsHtml = fs.readFileSync('products.html', 'utf8');
+    const cartHtml = fs.readFileSync('cart.html', 'utf8');
+    assert.ok(indexHtml.includes('<form class="modal-search-form" action="products.html" method="GET">'), 'index.html search is a functional form');
+    assert.ok(productsHtml.includes('<form class="modal-search-form" action="products.html" method="GET">'), 'products.html search is a functional form');
+    assert.ok(cartHtml.includes('<form class="modal-search-form" action="products.html" method="GET">'), 'cart.html search is a functional form');
+
+    const appJs = fs.readFileSync('js/storefront-app.js', 'utf8');
+    assert.ok(appJs.includes('executeGlobalSearch'), 'Global search handler implemented in JS');
+    assert.ok(appJs.includes('WPK_SET_SEARCH'), 'Dynamic in-page catalogue search updater implemented');
+  });
+
   // Post-test cleanup: ensure store.json orders & offers arrays are reset so real users see clean dynamic state
   try {
     const fs = require('fs');

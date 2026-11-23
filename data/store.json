@@ -22,7 +22,7 @@
         },
         {
           "size": "UK 8",
-          "stock": 3
+          "stock": 4
         },
         {
           "size": "UK 8.5",
@@ -39,7 +39,7 @@
       ],
       "reserveEligible": true,
       "reserveFloor": 3200,
-      "reserveGuidance": "Estimated Reserve: ~GH₵ 3,200 - GH₵ 3,500. Submit your best offer to secure.",
+      "reserveGuidance": "Estimated Reserve: ~GH\u20b5 3,200 - GH\u20b5 3,500. Submit your best offer to secure.",
       "tags": [
         "Grail",
         "Hype",
@@ -84,7 +84,7 @@
       ],
       "reserveEligible": true,
       "reserveFloor": 4400,
-      "reserveGuidance": "Estimated Reserve: ~GH₵ 4,400 - GH₵ 4,800. Fast manual or rule-based review.",
+      "reserveGuidance": "Estimated Reserve: ~GH\u20b5 4,400 - GH\u20b5 4,800. Fast manual or rule-based review.",
       "tags": [
         "Collab",
         "Ultra Rare",
@@ -175,7 +175,7 @@
       ],
       "reserveEligible": true,
       "reserveFloor": 1850,
-      "reserveGuidance": "Estimated Reserve: ~GH₵ 1,850 - GH₵ 2,000. Open for competitive buyer offers.",
+      "reserveGuidance": "Estimated Reserve: ~GH\u20b5 1,850 - GH\u20b5 2,000. Open for competitive buyer offers.",
       "tags": [
         "Comfort",
         "Trending",
@@ -218,7 +218,7 @@
       ],
       "reserveEligible": true,
       "reserveFloor": 2400,
-      "reserveGuidance": "Estimated Reserve: ~GH₵ 2,400 - GH₵ 2,650. Verified authentics only.",
+      "reserveGuidance": "Estimated Reserve: ~GH\u20b5 2,400 - GH\u20b5 2,650. Verified authentics only.",
       "tags": [
         "Boost",
         "Limited",
@@ -304,7 +304,7 @@
       ],
       "reserveEligible": true,
       "reserveFloor": 700,
-      "reserveGuidance": "Estimated Reserve: ~GH₵ 700 - GH₵ 780. Premium tailored cut.",
+      "reserveGuidance": "Estimated Reserve: ~GH\u20b5 700 - GH\u20b5 780. Premium tailored cut.",
       "tags": [
         "Technical",
         "Cargo",
@@ -347,7 +347,7 @@
       ],
       "reserveEligible": true,
       "reserveFloor": 780,
-      "reserveGuidance": "Estimated Reserve: ~GH₵ 780 - GH₵ 880. Ultra-heavy French Terry.",
+      "reserveGuidance": "Estimated Reserve: ~GH\u20b5 780 - GH\u20b5 880. Ultra-heavy French Terry.",
       "tags": [
         "Heavyweight",
         "Luxury Terry",
@@ -406,7 +406,7 @@
     "storeName": "Woodpeckers",
     "businessTitle": "Woodpeckers Sneakers and Streetwear",
     "tagline": "Affordable Luxury, Bold & Innovative",
-    "currency": "GH₵",
+    "currency": "GH\u20b5",
     "currencyCode": "GHS",
     "location": "24 Blohum Road, near Fidelity Bank, Dzorwulu, Accra, Ghana",
     "phone": "+233 55 392 1612",
