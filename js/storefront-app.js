@@ -18,6 +18,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     return false;
   }
 
+  // If someone lands on root or index.html with ?search=..., forward directly to products.html?search=...
+  const rootSearchParams = new URLSearchParams(window.location.search);
+  const rootSearchQ = (rootSearchParams.get('search') || '').trim();
+  if (rootSearchQ && (page === 'index.html' || !page)) {
+    window.location.replace(`products.html?search=${encodeURIComponent(rootSearchQ)}`);
+    return;
+  }
+
   // -------------------------------------------------------------
   // 1. PRODUCT SINGLE PAGE (product-single.html)
   // -------------------------------------------------------------
