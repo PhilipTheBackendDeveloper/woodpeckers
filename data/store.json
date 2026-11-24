@@ -476,6 +476,38 @@
       "password": "password123",
       "phone": "+233 55 392 1612",
       "createdAt": "2026-11-24T17:31:10.828Z"
+    },
+    {
+      "id": "USR-1795545782999",
+      "name": "Philip Odame",
+      "email": "philip.test.1795545782999@woodpeckers.gh",
+      "password": "password123",
+      "phone": "+233 55 392 1612",
+      "createdAt": "2026-11-24T18:43:02.999Z"
+    },
+    {
+      "id": "USR-1795546098387",
+      "name": "Philip Odame",
+      "email": "philip.test.1795546098387@woodpeckers.gh",
+      "password": "password123",
+      "phone": "+233 55 392 1612",
+      "createdAt": "2026-11-24T18:48:18.387Z"
+    },
+    {
+      "id": "USR-1795546134844",
+      "name": "Philip Odame",
+      "email": "philip.test.1795546134844@woodpeckers.gh",
+      "password": "password123",
+      "phone": "+233 55 392 1612",
+      "createdAt": "2026-11-24T18:48:54.844Z"
+    },
+    {
+      "id": "USR-1795548470985",
+      "name": "Philip Odame",
+      "email": "philip.test.1795548470985@woodpeckers.gh",
+      "password": "password123",
+      "phone": "+233 55 392 1612",
+      "createdAt": "2026-11-24T19:27:50.985Z"
     }
   ],
   "articles": [

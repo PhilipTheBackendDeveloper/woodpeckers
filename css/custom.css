@@ -2328,19 +2328,7 @@ header.main-header .header-sticky.active{
 }
 
 .badge-verified-buyer{
-	display: inline-flex;
-	align-items: center;
-	gap: 5px;
-	font-size: 11px;
-	font-weight: 700;
-	text-transform: uppercase;
-	letter-spacing: 0.5px;
-	color: #008751;
-	background: rgba(0, 135, 81, 0.08);
-	border: 1px solid rgba(0, 135, 81, 0.22);
-	padding: 3px 10px;
-	border-radius: 999px;
-	margin-top: 6px;
+	display: none !important;
 }
 
 .testimonial-item::before,
@@ -8308,19 +8296,46 @@ ul.view-order-product-info-list li span{
 
 	.featured-collection-item{
 		width: 100%;
+		flex-direction: column;
+	}
+
+	.featured-collection-item-body{
+		width: 100%;
+		order: 2;
+	}
+
+	.featured-collection-item-image{
+		width: 100%;
+		order: 1;
+		height: 220px;
+	}
+
+	.featured-collection-item-image figure{
+		height: 220px;
+	}
+
+	.featured-collection-item-image figure img{
+		aspect-ratio: unset;
+		height: 220px;
+		object-fit: cover;
 	}
 
 	.featured-collection-item-content{
-        padding: 15px 15px 10px;
+        padding: 18px 20px 12px;
     }
 
 	.featured-collection-item-content h2{
-		font-size: 26px;
+		font-size: 24px;
 	}
 
 	.featured-collection-item-content h2 span{
-        font-size: 20px;
+        font-size: 18px;
     }
+
+	.featured-collection-item-content p{
+		margin-top: 6px;
+		font-size: 13px;
+	}
 
 	.intro-video-bg-video{
 		height: 350px;

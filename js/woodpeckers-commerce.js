@@ -347,6 +347,83 @@
       tags: ['Hoodie', 'Fleece', 'Luxury Streetwear', 'Reserve Eligible'],
       rating: 5,
       reviewCount: 22
+    },
+    {
+      id: 'SNK-007',
+      sku: 'WPK-SNK-AF1-WHT',
+      name: "Nike Air Force 1 '07 'Triple White'",
+      category: 'Exclusive Sneakers',
+      brand: 'Nike',
+      brandKey: 'Nike',
+      material: 'Leather',
+      price: 1450,
+      originalPrice: 1650,
+      description: "The classic that never goes out of style. Full-grain leather upper with the iconic AF1 cupsole. A foundational grail for every Accra sneakerhead — clean, versatile, and always authentic.",
+      images: [
+        'images/product-image-3.jpg'
+      ],
+      sizes: [
+        { size: 'UK7', stock: 3 },
+        { size: 'UK8', stock: 4 },
+        { size: 'UK8.5', stock: 3 },
+        { size: 'UK9', stock: 2 },
+        { size: 'UK10', stock: 2 }
+      ],
+      reserveEligible: false,
+      tags: ['Nike', 'Air Force 1', 'Classic', 'Lifestyle'],
+      rating: 4.8,
+      reviewCount: 34
+    },
+    {
+      id: 'SNK-008',
+      sku: 'WPK-SNK-ADS-SMB',
+      name: "Adidas Samba OG 'Core Black & White'",
+      category: 'Lifestyle Runners',
+      brand: 'Adidas',
+      brandKey: 'Adidas',
+      material: 'Leather',
+      price: 1680,
+      originalPrice: 1900,
+      description: "The Adidas Samba OG — the shoe that took over the world. Low-profile silhouette with gum sole, suede T-toe, and premium leather upper. Dzorwulu approved, globally recognised.",
+      images: [
+        'images/product-image-4.jpg'
+      ],
+      sizes: [
+        { size: 'UK7', stock: 4 },
+        { size: 'UK8', stock: 5 },
+        { size: 'UK8.5', stock: 3 },
+        { size: 'UK9', stock: 3 },
+        { size: 'UK10', stock: 1 }
+      ],
+      reserveEligible: false,
+      tags: ['Adidas', 'Samba', 'Lifestyle', 'Trending'],
+      rating: 4.9,
+      reviewCount: 28
+    },
+    {
+      id: 'STR-004',
+      sku: 'WPK-STR-SHT-BLK',
+      name: "Woodpeckers Utility Shorts 'Stealth Black'",
+      category: 'Streetwear',
+      brand: 'Woodpeckers Original',
+      brandKey: 'Woodpeckers',
+      material: 'Canvas',
+      price: 380,
+      originalPrice: 450,
+      description: "Relaxed-fit utility shorts with zip pockets and tonal embroidery. Cut from heavyweight canvas for a premium drape. The perfect pair for the Accra heat with a streetwear edge.",
+      images: [
+        'images/product-image-8.jpg'
+      ],
+      sizes: [
+        { size: 'S', stock: 5 },
+        { size: 'M', stock: 7 },
+        { size: 'L', stock: 6 },
+        { size: 'XL', stock: 4 }
+      ],
+      reserveEligible: false,
+      tags: ['Shorts', 'Streetwear', 'Utility', 'Woodpeckers Original'],
+      rating: 4.7,
+      reviewCount: 11
     }
   ];
 
