@@ -220,18 +220,18 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (bodyContent) {
           const reserveCard = document.createElement('div');
           reserveCard.className = 'reserve-single-box mb-4';
-          reserveCard.style.cssText = 'background:#141414;color:#fff;border:1px solid #008751;border-radius:6px;padding:18px;margin-bottom:24px;';
+          reserveCard.style.cssText = 'background:#F4FBF7;color:#111111;border:1.5px solid #008751;border-radius:8px;padding:20px;margin-bottom:24px;box-shadow:0 4px 16px rgba(0,135,81,0.08);';
           reserveCard.innerHTML = `
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-              <span style="background:#008751;color:#fff;font-size:11px;font-weight:800;padding:3px 8px;border-radius:2px;letter-spacing:1px;text-transform:uppercase;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+              <span style="background:#008751;color:#fff;font-size:11px;font-weight:800;padding:4px 10px;border-radius:4px;letter-spacing:1px;text-transform:uppercase;">
                 Meet The Reserve Eligible
               </span>
-              <span style="font-size:12px;color:#aaa;">Reserve Floor: ~${Woodpeckers.formatGHS(product.reserveFloor || product.price * 0.85)}</span>
+              <span style="font-size:12px;color:#333;font-weight:700;">Reserve Floor: ~${Woodpeckers.formatGHS(product.reserveFloor || product.price * 0.85)}</span>
             </div>
-            <p style="font-size:13px;color:#ccc;margin-bottom:12px;line-height:1.5;">
+            <p style="font-size:13px;color:#444;margin-bottom:14px;line-height:1.5;">
               Looking to name your price? Make a competitive offer on this grail. Our store team reviews bids promptly.
             </p>
-            <button id="btn-trigger-reserve" class="btn btn-warning w-100" style="background:#008751;border-color:#008751;color:#fff;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:12px;border-radius:4px;">
+            <button id="btn-trigger-reserve" class="btn w-100" style="background:#008751;border:none;color:#fff;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:14px;border-radius:4px;box-shadow:0 4px 14px rgba(0,135,81,0.25);">
               <i class="fa-solid fa-gavel me-2"></i> Name Your Price / Make An Offer
             </button>
           `;

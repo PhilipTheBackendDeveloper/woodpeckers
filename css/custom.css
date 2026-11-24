@@ -79,7 +79,7 @@
 html{
 	width: 100%;
 	overflow-x: clip;
-	background-color: #252E38 !important;
+	background-color: #ffffff !important;
 }
 
 body{
@@ -93,7 +93,7 @@ body{
 	font-weight: 400;
 	line-height: 1em;
 	color: var(--text-color);
-	background-color: var(--bg-color);
+	background-color: #ffffff !important;
 }
 
 ::-webkit-scrollbar-track{
@@ -9653,28 +9653,59 @@ header.main-header .reserve-badge-link img {
     display: none !important;
 }
 
-/* Eliminate mobile Safari / Chrome bottom overscroll gap */
-html, body {
+/* Eliminate mobile Safari / Chrome bottom overscroll gap without darkening pages */
+html,
+body,
+.page-products,
+.page-product-single,
+.page-blog,
+.page-single-post,
+.our-category,
+.featured-products,
+.our-testimonial,
+.related-products,
+.our-blog,
+.product-single-info-box,
+.product-single-info-content,
+.product-single-sidebar,
+.product-category-filter {
+    background-color: #ffffff !important;
+    color: #111111;
+}
+
+/* Ensure text on light sections remains clean and readable */
+.page-products .product-category-filter-title h2,
+.page-products .product-category-item-title,
+.page-products .product-category-item ul li label,
+.page-products .product-category-filter-clear-btn a,
+.product-single-title h1,
+.product-single-price h2,
+.product-single-item-size h3,
+.product-single-item-color h3,
+.product-single-description p,
+.product-single-details-list ul li,
+.product-single-details-list ul li span {
+    color: #111111 !important;
+}
+
+.product-single-payment-method {
+    background-color: #fafafa !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 8px !important;
+    color: #111111 !important;
+}
+
+footer.main-footer {
     background-color: #0E100F !important;
+    padding-bottom: max(30px, env(safe-area-inset-bottom)) !important;
 }
 
-/* On mobile / touch devices, completely suppress floating magic cursor dots */
-@media (hover: none) and (pointer: coarse), (max-width: 991px) {
-    .cb-cursor,
-    .cb-cursor:before,
-    .cb-cursor-text {
-        display: none !important;
-        opacity: 0 !important;
-        visibility: hidden !important;
-        pointer-events: none !important;
-    }
-}
-
-/* Ensure desktop magic cursor never stays stuck as a rogue static green dot */
-.cb-cursor {
-    opacity: 0;
-    transition: opacity 0.25s ease;
-}
-.cb-cursor.-visible {
-    opacity: 1;
+/* Permanently suppress floating magic cursor green dots across all devices */
+.cb-cursor,
+.cb-cursor:before,
+.cb-cursor-text {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
 }
