@@ -7043,20 +7043,19 @@ ul.view-order-product-info-list li span{
 	}
 
 	.btn-default{
-		padding: 15px 51px 15px 14px;
+		padding: 12px 24px;
 	}
 
 	.btn-default:hover{
-		padding: 15px 53px 15px 12px;
+		padding: 12px 24px;
 	}
 
 	.btn-default::before{
-		width: 36px;
-		height: 36px;
+		display: none !important;
 	}
 
 	.btn-default:hover::before{
-		width: 42px;
+		display: none !important;
 	}
 
 	.btn-default::after{
