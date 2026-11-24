@@ -38,6 +38,7 @@ const MIME_TYPES = {
 // In-memory data store with disk persistence
 let store = {
   products: [],
+  articles: [],
   reserveOffers: [],
   orders: [],
   settings: {},
@@ -248,6 +249,25 @@ const server = http.createServer(async (req, res) => {
           const deleted = store.products.splice(productIndex, 1);
           saveStore();
           return sendJSON(res, 200, { success: true, deleted: deleted[0] });
+        }
+      }
+
+      // Articles / Blog
+      if (pathname === '/api/articles') {
+        if (method === 'GET') {
+          return sendJSON(res, 200, store.articles || []);
+        }
+      }
+
+      const articleMatch = pathname.match(/^\/api\/articles\/([A-Za-z0-9_-]+)$/);
+      if (articleMatch) {
+        const id = articleMatch[1];
+        const article = (store.articles || []).find(a => a.id === id || a.slug === id);
+        if (!article) {
+          return sendError(res, 404, 'Article not found.');
+        }
+        if (method === 'GET') {
+          return sendJSON(res, 200, article);
         }
       }
 

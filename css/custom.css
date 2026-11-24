@@ -9644,3 +9644,37 @@ header.main-header .reserve-badge-link img {
     color: #ffffff !important;
     outline: none !important;
 }
+
+/* ==========================================================================
+   Pill Purge, Mobile Safe Area & Magic Cursor Polish
+   ========================================================================== */
+.hero-live-pill,
+.reserve-badge-pill {
+    display: none !important;
+}
+
+/* Eliminate mobile Safari / Chrome bottom overscroll gap */
+html, body {
+    background-color: #0E100F !important;
+}
+
+/* On mobile / touch devices, completely suppress floating magic cursor dots */
+@media (hover: none) and (pointer: coarse), (max-width: 991px) {
+    .cb-cursor,
+    .cb-cursor:before,
+    .cb-cursor-text {
+        display: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+    }
+}
+
+/* Ensure desktop magic cursor never stays stuck as a rogue static green dot */
+.cb-cursor {
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+.cb-cursor.-visible {
+    opacity: 1;
+}

@@ -5,7 +5,8 @@
 
 document.addEventListener('DOMContentLoaded', async () => {
   const path = window.location.pathname.replace(/\/$/, '');
-  let rawPage = path.split('/').pop() || 'index.html';
+  let rawPage = path ? path.split('/').pop() : 'index.html';
+  if (!rawPage) rawPage = 'index.html';
   if (!rawPage.includes('.')) {
     rawPage = rawPage + '.html';
   }
@@ -34,13 +35,21 @@ document.addEventListener('DOMContentLoaded', async () => {
     const productId = params.get('id') || 'SNK-001';
 
     let product = null;
-    try {
-      const res = await fetch(`/api/products/${productId}`);
-      if (res.ok) {
-        product = await res.json();
+    if (window.Woodpeckers && window.Woodpeckers.Products) {
+      try {
+        product = await window.Woodpeckers.Products.getById(productId);
+      } catch (e) {
+        console.warn('Error loading product via Products API:', e);
       }
-    } catch (e) {
-      console.warn('Could not fetch product from API, using fallback data');
+    }
+    if (!product) {
+      try {
+        const res = await fetch(`/api/products/${encodeURIComponent(productId)}`);
+        if (res.ok) product = await res.json();
+      } catch (e) {}
+    }
+    if (!product && window.Woodpeckers && window.Woodpeckers.DEFAULT_PRODUCTS) {
+      product = window.Woodpeckers.DEFAULT_PRODUCTS.find(p => p.id === productId) || window.Woodpeckers.DEFAULT_PRODUCTS[0];
     }
 
     if (product) {
@@ -71,17 +80,51 @@ document.addEventListener('DOMContentLoaded', async () => {
           <li><span>Brand:</span> ${product.brand || 'Woodpeckers'}</li>
           <li><span>Category:</span> ${product.category}</li>
           <li><span>Condition:</span> Brand New &bull; Verified Authentic Deadstock</li>
-          <li><span>Location:</span> Woodpeckers Showroom, 24 Blohum Rd, Dzorwulu, Accra</li>
+          <li><span>Showroom:</span> Woodpeckers, 24 Blohum Rd, Dzorwulu, Accra</li>
         `;
       }
 
-      // Update Images
-      if (product.images && product.images.length) {
-        const mainThumbs = document.querySelectorAll('.product-single-slider .swiper-slide img, .product-single-image-slider .swiper-slide img');
-        mainThumbs.forEach((img, i) => {
-          img.src = product.images[i % product.images.length];
-        });
+      // Update Images & Sliders
+      const images = (product.images && product.images.length) ? product.images : ['images/product-image-1.jpg'];
+      const mainWrapper = document.querySelector('.product-single-image-item .swiper-wrapper');
+      if (mainWrapper) {
+        mainWrapper.innerHTML = images.map(img => `
+          <div class="swiper-slide zoom-box">
+            <figure>
+              <img class="zoom-img" src="${img}" alt="${product.name}">
+            </figure>
+          </div>
+        `).join('');
       }
+
+      const thumbWrapper = document.querySelector('.product-single-image-slider .swiper-wrapper');
+      if (thumbWrapper) {
+        thumbWrapper.innerHTML = images.map(img => `
+          <div class="swiper-slide" style="cursor:pointer;">
+            <figure>
+              <img src="${img}" alt="${product.name}">
+            </figure>
+          </div>
+        `).join('');
+      }
+
+      // Allow clicking any thumbnail to switch the active main image
+      document.querySelectorAll('.product-single-image-slider .swiper-slide').forEach((thumb, idx) => {
+        thumb.addEventListener('click', () => {
+          const mainSlides = document.querySelectorAll('.product-single-image-item .swiper-slide');
+          if (mainSlides[idx]) {
+            mainSlides.forEach(s => s.classList.remove('swiper-slide-active'));
+            mainSlides[idx].classList.add('swiper-slide-active');
+            const swiperMain = document.querySelector('.product-single-image-item')?.swiper;
+            if (swiperMain && typeof swiperMain.slideTo === 'function') {
+              swiperMain.slideTo(idx);
+            } else {
+              const zoomImg = document.querySelector('.product-single-image-item .zoom-img');
+              if (zoomImg && images[idx]) zoomImg.src = images[idx];
+            }
+          }
+        });
+      });
 
       // Update Sizes
       const sizeContainer = document.querySelector('.product-single-item-size ul');
@@ -95,11 +138,80 @@ document.addEventListener('DOMContentLoaded', async () => {
             <li>
               <input type="radio" id="${sizeId}" name="Size" value="${s.size}" ${checked} ${disabled}>
               <label for="${sizeId}" style="${!isAvailable ? 'text-decoration:line-through;opacity:0.4;cursor:not-allowed;' : ''}">
-                ${s.size} ${!isAvailable ? '(Sold)' : ''}
+                ${s.size} ${!isAvailable ? '(Sold)' : `(${s.stock} left)`}
               </label>
             </li>
           `;
         }).join('');
+      }
+
+      // Update Tab 1 (Product Description)
+      const tabFirst = document.querySelector('#first .product-tab-item-content');
+      if (tabFirst) {
+        tabFirst.innerHTML = `
+          <p style="font-size:16px;line-height:1.75;color:#222;">${product.description}</p>
+          <p style="line-height:1.7;color:#444;">Every pair sold at Woodpeckers Ghana undergoes our verified multi-point authentication check at our 24 Blohum Road showroom in Dzorwulu, Accra. We verify stitching tolerances, blacklight glow, leather density, and accessories so you can buy with 100% confidence.</p>
+          <ul style="line-height:1.8;padding-left:20px;color:#333;">
+            <li>100% Deadstock verified authentic condition with original box & accessories</li>
+            <li>${product.reserveEligible ? 'Participating in Woodpeckers "Meet the Reserve" campaign &mdash; name your price and make an offer' : 'Instant showroom dispatch or express nationwide delivery across Ghana'}</li>
+            <li>Available for in-person pickup in Dzorwulu, Accra or express nationwide delivery across Ghana</li>
+          </ul>
+        `;
+      }
+
+      // Update Tab 2 (Additional Information)
+      const tabSecond = document.querySelector('#second .product-tab-item-content');
+      if (tabSecond) {
+        tabSecond.innerHTML = `
+          <div style="background:#fafafa;border:1px solid #eee;border-radius:6px;padding:22px;">
+            <h4 style="font-size:16px;font-weight:800;margin-bottom:14px;text-transform:uppercase;">Authentication &amp; Specifications</h4>
+            <table class="table table-bordered mb-0" style="background:#fff;">
+              <tbody>
+                <tr><th style="width:25%;">SKU</th><td>${product.sku || product.id}</td></tr>
+                <tr><th>Brand</th><td>${product.brand || 'Woodpeckers'}</td></tr>
+                <tr><th>Category</th><td>${product.category}</td></tr>
+                <tr><th>Condition</th><td>Brand New &bull; 100% Deadstock Verified</td></tr>
+                <tr><th>Verification</th><td>12-Point Inspection at 24 Blohum Road, Dzorwulu, Accra</td></tr>
+                <tr><th>Packaging</th><td>Original Brand Box with all factory inserts & verification tags</td></tr>
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      // Update Tab 3 (Reviews)
+      const tabThird = document.querySelector('#third .customer-review-list');
+      if (tabThird) {
+        tabThird.innerHTML = `
+          <div class="customer-review-item">
+            <div class="icon-box">
+              <img src="images/author-4.jpg" alt="Nana Yaw Boateng" style="border-radius:50%;width:50px;height:50px;object-fit:cover;">
+            </div>
+            <div class="customer-review-item-body">
+              <div class="customer-review-item-content">
+                <p><span>Nana Yaw Boateng</span> - Fashion Stylist &bull; Osu</p>
+                <p>Secured this grail through Woodpeckers. Flawless leather, deadstock condition, and verified blacklight check right at the Dzorwulu showroom. 100% authentic.</p>
+              </div>
+              <div class="customer-review-item-rating">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+            </div>
+          </div>
+          <div class="customer-review-item">
+            <div class="icon-box">
+              <img src="images/author-1.jpg" alt="Kweku A." style="border-radius:50%;width:50px;height:50px;object-fit:cover;">
+            </div>
+            <div class="customer-review-item-body">
+              <div class="customer-review-item-content">
+                <p><span>Kweku A.</span> - Airport Residential &bull; Accra</p>
+                <p>Fast nationwide delivery across Ghana and pristine packaging. Fits true to size and looks even better in hand.</p>
+              </div>
+              <div class="customer-review-item-rating">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+            </div>
+          </div>
+        `;
       }
 
       // If Reserve Eligible, insert prominent "Meet the Reserve" card
@@ -162,6 +274,18 @@ document.addEventListener('DOMContentLoaded', async () => {
 
           Woodpeckers.Cart.addItem(product, selectedSize, qty);
         });
+      }
+
+      // Dynamic Related Products
+      const relatedGrid = document.querySelector('.related-products .product-item-list');
+      if (relatedGrid && window.Woodpeckers && window.Woodpeckers.Products) {
+        try {
+          const allProds = await window.Woodpeckers.Products.getAll();
+          const others = allProds.filter(p => p.id !== product.id).slice(0, 4);
+          relatedGrid.innerHTML = others.map(p => renderStorefrontCard(p)).join('');
+        } catch (e) {
+          console.warn('Error rendering related products:', e);
+        }
       }
     }
   }
@@ -1606,6 +1730,86 @@ document.addEventListener('DOMContentLoaded', async () => {
       document.body.classList.remove('modal-open');
       const backdrop = document.querySelector('.modal-backdrop');
       if (backdrop) backdrop.remove();
+    }
+  }
+
+  // -------------------------------------------------------------
+  // BLOG LIST PAGE (blog.html)
+  // -------------------------------------------------------------
+  if (isPage('blog.html', '.page-blog .post-item-list')) {
+    const postList = document.querySelector('.page-blog .post-item-list');
+    if (postList && window.Woodpeckers && window.Woodpeckers.Articles) {
+      window.Woodpeckers.Articles.getAll().then(articles => {
+        if (Array.isArray(articles) && articles.length > 0) {
+          postList.innerHTML = articles.map((post, idx) => `
+            <div class="post-item wow fadeInUp" data-wow-delay="${(idx * 0.15).toFixed(2)}s">
+              <div class="post-item-image">
+                <a href="blog-single.html?id=${post.id}" data-cursor-text="Read">
+                  <figure class="image-anime">
+                    <img src="${post.image}" alt="${post.title}" style="height:260px;width:100%;object-fit:cover;">
+                  </figure>
+                </a>
+              </div>
+              <div class="post-item-body">
+                <div style="font-size:12px;color:#008751;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">
+                  ${post.category} &bull; ${post.date}
+                </div>
+                <div class="post-item-content">
+                  <h2><a href="blog-single.html?id=${post.id}">${post.title}</a></h2>
+                  <p style="font-size:14px;color:#666;line-height:1.6;margin-top:8px;">${post.excerpt}</p>
+                </div>
+                <div class="post-item-btn" style="margin-top:14px;">
+                  <a href="blog-single.html?id=${post.id}" class="readmore-btn">Read Article &rarr;</a>
+                </div>
+              </div>
+            </div>
+          `).join('');
+        }
+      });
+    }
+  }
+
+  // -------------------------------------------------------------
+  // BLOG SINGLE PAGE (blog-single.html)
+  // -------------------------------------------------------------
+  if (isPage('blog-single.html', '.page-single-post')) {
+    const params = new URLSearchParams(window.location.search);
+    const postId = params.get('id') || 'blog-1';
+
+    if (window.Woodpeckers && window.Woodpeckers.Articles) {
+      window.Woodpeckers.Articles.getById(postId).then(post => {
+        if (post) {
+          document.title = `${post.title} | Woodpeckers Ghana`;
+
+          const headerTitle = document.querySelector('.page-header-box h1');
+          if (headerTitle) headerTitle.textContent = post.title;
+
+          const metaList = document.querySelector('.post-single-meta ol.breadcrumb');
+          if (metaList) {
+            metaList.innerHTML = `
+              <li><i class="fa-regular fa-user"></i> ${post.author}</li>
+              <li><i class="fa-regular fa-clock"></i> ${post.date} &bull; ${post.readTime}</li>
+              <li><span style="background:#008751;color:#fff;padding:2px 8px;border-radius:2px;font-size:11px;font-weight:700;text-transform:uppercase;">${post.category}</span></li>
+            `;
+          }
+
+          const featImg = document.querySelector('.post-image img');
+          if (featImg) {
+            featImg.src = post.image;
+            featImg.alt = post.title;
+          }
+
+          const postEntry = document.querySelector('.post-entry');
+          if (postEntry) {
+            postEntry.innerHTML = post.content;
+          }
+
+          const tagLinks = document.querySelector('.post-tags .tag-links');
+          if (tagLinks && post.tags) {
+            tagLinks.innerHTML = 'Tags: ' + post.tags.map(t => `<a href="blog.html" style="margin-right:6px;">${t}</a>`).join('');
+          }
+        }
+      });
     }
   }
 

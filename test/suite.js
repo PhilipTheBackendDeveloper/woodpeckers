@@ -496,6 +496,34 @@ async function runTests() {
     assert.ok(appJs.includes('WPK_SET_SEARCH'), 'Dynamic in-page catalogue search updater implemented');
   });
 
+  await test('Dynamic Articles API: /api/articles and /api/articles/blog-1 return rich content', async () => {
+    const listRes = await request('GET', '/api/articles');
+    assert.strictEqual(listRes.statusCode, 200, 'Returns 200 OK');
+    const articles = JSON.parse(listRes.body);
+    assert.ok(Array.isArray(articles) && articles.length >= 6, 'Contains at least 6 blog articles');
+
+    const singleRes = await request('GET', '/api/articles/blog-1');
+    assert.strictEqual(singleRes.statusCode, 200, 'Returns 200 OK for single article');
+    const single = JSON.parse(singleRes.body);
+    assert.strictEqual(single.id, 'blog-1', 'Article id matches');
+    assert.ok(single.title.includes('Meet the Reserve'), 'Article title matches');
+    assert.ok(single.content.includes('Dzorwulu'), 'Article content references showroom');
+  });
+
+  await test('Dynamic Routing & Media: blog links have ?id= and zero hero-live-pill in DOM', async () => {
+    const fs = require('fs');
+    const indexHtml = fs.readFileSync('index.html', 'utf8');
+    const blogHtml = fs.readFileSync('blog.html', 'utf8');
+    assert.ok(!indexHtml.includes('hero-live-pill'), 'hero-live-pill completely purged from index.html');
+    assert.ok(indexHtml.includes('blog-single.html?id=blog-1'), 'index.html links to dynamic blog-1');
+    assert.ok(blogHtml.includes('blog-single.html?id=blog-1'), 'blog.html links to dynamic blog-1');
+    assert.ok(blogHtml.includes('blog-single.html?id=blog-6'), 'blog.html links to dynamic blog-6');
+
+    const appJs = fs.readFileSync('js/storefront-app.js', 'utf8');
+    assert.ok(appJs.includes("isPage('blog.html'"), 'storefront-app handles dynamic blog list');
+    assert.ok(appJs.includes("isPage('blog-single.html'"), 'storefront-app handles dynamic blog single');
+  });
+
   // Post-test cleanup: ensure store.json orders & offers arrays are reset so real users see clean dynamic state
   try {
     const fs = require('fs');
