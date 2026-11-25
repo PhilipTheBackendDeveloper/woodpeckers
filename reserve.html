@@ -76,10 +76,10 @@
         background-color: #0b0f0d;
         background-image: 
           linear-gradient(
-            180deg,
-            rgba(10, 14, 12, 0.72) 0%,
-            rgba(10, 14, 12, 0.82) 50%,
-            rgba(10, 14, 12, 0.95) 100%
+            90deg,
+            rgba(10, 14, 12, 0.75) 0%,
+            rgba(10, 14, 12, 0.55) 45%,
+            rgba(10, 14, 12, 0.20) 100%
           ),
           url('images/reserve-hero-bg.jpg');
         background-repeat: no-repeat;
@@ -92,20 +92,31 @@
         position: relative;
         z-index: 2;
       }
-      @media (max-width: 767px) {
+      @media (max-width: 991px) {
         .reserve-hero {
-          padding: 65px 0 50px;
-          background-position: center top;
+          padding: 65px 0 55px;
+          background-image: 
+            linear-gradient(
+              180deg,
+              rgba(10, 14, 12, 0.40) 0%,
+              rgba(10, 14, 12, 0.50) 45%,
+              rgba(10, 14, 12, 0.80) 100%
+            ),
+            url('images/reserve-hero-mobile.jpg') !important;
+          background-position: center center !important;
+          background-size: cover !important;
         }
         .reserve-hero h1 {
-          font-size: 32px !important;
+          font-size: 34px !important;
+          font-weight: 900 !important;
           line-height: 1.15 !important;
-          text-shadow: 0 3px 18px rgba(0, 0, 0, 0.95);
+          text-shadow: 0 4px 20px rgba(0, 0, 0, 0.95), 0 2px 6px rgba(0, 0, 0, 0.9);
         }
         .reserve-hero p {
           font-size: 14px !important;
-          line-height: 1.55 !important;
-          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+          line-height: 1.6 !important;
+          color: #f0f0f0 !important;
+          text-shadow: 0 2px 12px rgba(0, 0, 0, 0.95);
         }
       }
       .reserve-hero::before {
