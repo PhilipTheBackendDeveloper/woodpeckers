@@ -22,7 +22,7 @@
         },
         {
           "size": "UK 8",
-          "stock": 1
+          "stock": 4
         },
         {
           "size": "UK 8.5",
@@ -678,6 +678,14 @@
       "password": "password123",
       "phone": "+233 55 392 1612",
       "createdAt": "2026-11-25T00:55:26.242Z"
+    },
+    {
+      "id": "USR-1795568761663",
+      "name": "Philip Odame",
+      "email": "philip.test.1795568761663@woodpeckers.gh",
+      "password": "password123",
+      "phone": "+233 55 392 1612",
+      "createdAt": "2026-11-25T01:06:01.663Z"
     }
   ],
   "articles": [

@@ -459,7 +459,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (!a.querySelector('.header-wishlist-badge')) {
       const badge = document.createElement('span');
       badge.className = 'header-wishlist-badge';
-      badge.style.cssText = 'display:none;position:absolute;top:-6px;right:-8px;background:#008751;color:#fff;font-size:10px;font-weight:800;border-radius:50%;width:18px;height:18px;text-align:center;line-height:18px;';
+      badge.style.cssText = 'display:none;position:absolute;top:-4px;right:-4px;background:#008751;color:#ffffff;font-size:9px;font-weight:800;border-radius:50%;width:16px;height:16px;text-align:center;line-height:16px;box-shadow:0 2px 4px rgba(0,0,0,0.25);';
       badge.textContent = '0';
       a.appendChild(badge);
     }
@@ -470,7 +470,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (!a.querySelector('.header-cart-badge')) {
       const badge = document.createElement('span');
       badge.className = 'header-cart-badge';
-      badge.style.cssText = 'display:none;position:absolute;top:-6px;right:-8px;background:#008751;color:#111;font-size:10px;font-weight:800;border-radius:50%;width:18px;height:18px;text-align:center;line-height:18px;';
+      badge.style.cssText = 'display:none;position:absolute;top:-4px;right:-4px;background:#008751;color:#ffffff;font-size:9px;font-weight:800;border-radius:50%;width:16px;height:16px;text-align:center;line-height:16px;box-shadow:0 2px 4px rgba(0,0,0,0.25);';
       badge.textContent = '0';
       a.appendChild(badge);
     }

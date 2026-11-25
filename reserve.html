@@ -71,15 +71,15 @@
     <style>
       .reserve-hero {
         position: relative;
-        padding: 95px 0 75px;
+        padding: 85px 0 75px;
         color: #fff;
         background-color: #0b0f0d;
         background-image: 
           linear-gradient(
             90deg,
-            rgba(10, 14, 12, 0.75) 0%,
-            rgba(10, 14, 12, 0.55) 45%,
-            rgba(10, 14, 12, 0.20) 100%
+            rgba(10, 14, 12, 0.65) 0%,
+            rgba(10, 14, 12, 0.45) 50%,
+            rgba(10, 14, 12, 0.15) 100%
           ),
           url('images/reserve-hero-bg.jpg');
         background-repeat: no-repeat;
@@ -92,31 +92,39 @@
         position: relative;
         z-index: 2;
       }
+      .reserve-hero-glass-card {
+        background: rgba(12, 16, 14, 0.70);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 14px;
+        padding: clamp(24px, 4vw, 40px);
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      }
       @media (max-width: 991px) {
         .reserve-hero {
-          padding: 65px 0 55px;
+          padding: 35px 0 35px !important;
           background-image: 
             linear-gradient(
               180deg,
-              rgba(10, 14, 12, 0.40) 0%,
-              rgba(10, 14, 12, 0.50) 45%,
-              rgba(10, 14, 12, 0.80) 100%
+              rgba(10, 14, 12, 0.25) 0%,
+              rgba(10, 14, 12, 0.45) 50%,
+              rgba(10, 14, 12, 0.75) 100%
             ),
             url('images/reserve-hero-mobile.jpg') !important;
-          background-position: center center !important;
+          background-position: center top !important;
           background-size: cover !important;
         }
-        .reserve-hero h1 {
-          font-size: 34px !important;
-          font-weight: 900 !important;
-          line-height: 1.15 !important;
-          text-shadow: 0 4px 20px rgba(0, 0, 0, 0.95), 0 2px 6px rgba(0, 0, 0, 0.9);
+        .reserve-hero-glass-card {
+          padding: 24px 18px !important;
+          border-radius: 12px !important;
+          background: rgba(12, 16, 14, 0.76) !important;
+          backdrop-filter: blur(12px) !important;
+          -webkit-backdrop-filter: blur(12px) !important;
         }
-        .reserve-hero p {
-          font-size: 14px !important;
-          line-height: 1.6 !important;
-          color: #f0f0f0 !important;
-          text-shadow: 0 2px 12px rgba(0, 0, 0, 0.95);
+        .reserve-hero-btn-group a {
+          width: 100% !important;
+          justify-content: center !important;
         }
       }
       .reserve-hero::before {
@@ -225,18 +233,19 @@
       }
       .header-cart-badge {
         position: absolute;
-        top: -6px;
-        right: -8px;
+        top: -4px;
+        right: -4px;
         background: #008751;
-        color: #111;
-        font-size: 10px;
+        color: #ffffff;
+        font-size: 9px;
         font-weight: 800;
         border-radius: 50%;
-        width: 18px;
-        height: 18px;
+        width: 16px;
+        height: 16px;
         display: flex;
         align-items: center;
         justify-content: center;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.25);
       }
       .preloader {
         display: none !important;
@@ -382,20 +391,21 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-8">
-
-                    <h1 style="font-size:clamp(36px, 5vw, 56px);font-weight:900;line-height:1.1;letter-spacing:-1px;margin-bottom:18px;">
-                        NAME YOUR PRICE.<br><span style="color:#008751;">MEET THE RESERVE.</span>
-                    </h1>
-                    <p style="font-size:16px;color:#bbb;max-width:620px;line-height:1.6;margin-bottom:28px;">
-                        Why pay fixed retail when you can negotiate like an insider? Discover rare grails, limited deadstock Jordans, and archival streetwear. Make your serious offer. When your offer meets our reserve target, the pair is yours.
-                    </p>
-                    <div style="display:flex;gap:14px;flex-wrap:wrap;">
-                        <a href="#reserve-catalog" class="btn btn-primary" style="background:#008751;border-color:#008751;color:#fff;font-weight:800;padding:14px 28px;text-transform:uppercase;letter-spacing:1px;border-radius:4px;">
-                            <i class="fa-solid fa-fire me-2"></i> Browse Eligible Grails
-                        </a>
-                        <a href="#offer-tracker" class="btn btn-outline-light" style="font-weight:700;padding:14px 28px;text-transform:uppercase;letter-spacing:1px;border-radius:4px;border-color:#444;">
-                            <i class="fa-solid fa-magnifying-glass me-2"></i> Track Your Offer
-                        </a>
+                    <div class="reserve-hero-glass-card">
+                        <h1 style="font-family:var(--accent-font);color:#FFFFFF !important;font-size:clamp(36px, 5.5vw, 60px);font-weight:900;line-height:1.04;letter-spacing:0.02em;margin-bottom:18px;text-transform:uppercase;text-shadow:0 4px 24px rgba(0,0,0,0.95), 0 2px 6px rgba(0,0,0,0.85);">
+                            NAME YOUR PRICE.<br><span style="color:#00D084;text-shadow:0 4px 24px rgba(0,208,132,0.4), 0 2px 8px rgba(0,0,0,0.9);">MEET THE RESERVE.</span>
+                        </h1>
+                        <p style="font-size:clamp(14px, 1.3vw, 16px);color:#E2E8F0 !important;max-width:580px;line-height:1.6;margin-bottom:26px;text-shadow:0 2px 10px rgba(0,0,0,0.95);">
+                            Why pay fixed retail when you can negotiate like an insider? Discover rare grails, limited deadstock Jordans, and archival streetwear. Make your serious offer. When your offer meets our reserve target, the pair is yours.
+                        </p>
+                        <div class="reserve-hero-btn-group" style="display:flex;gap:14px;flex-wrap:wrap;">
+                            <a href="#reserve-catalog" class="btn btn-primary" style="background:#008751;border:none;color:#ffffff;font-weight:800;padding:14px 28px;text-transform:uppercase;letter-spacing:1px;border-radius:6px;box-shadow:0 4px 18px rgba(0,135,81,0.5);display:inline-flex;align-items:center;gap:8px;font-size:13px;transition:all 0.25s ease;">
+                                <i class="fa-solid fa-fire me-1"></i> Browse Eligible Grails
+                            </a>
+                            <a href="#offer-tracker" class="btn" style="background:rgba(20,24,22,0.78);border:1.5px solid rgba(255,255,255,0.25);color:#ffffff;font-weight:700;padding:14px 28px;text-transform:uppercase;letter-spacing:1px;border-radius:6px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:inline-flex;align-items:center;gap:8px;font-size:13px;transition:all 0.25s ease;box-shadow:0 4px 14px rgba(0,0,0,0.3);">
+                                <i class="fa-solid fa-magnifying-glass me-1"></i> Track Your Offer
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-4 d-none d-lg-block text-center">
